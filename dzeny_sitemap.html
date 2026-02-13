@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dzeny.com - Визуальная карта сайта</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .level {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .level:hover {
+            transform: translateY(-5px);
+        }
+        
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+        
+        .level-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .level-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .level-subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-left: 65px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .category-card {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-card.trigger {
+            border-color: #48bb78;
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+        }
+        
+        .category-card.solution {
+            border-color: #4299e1;
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+        }
+        
+        .category-card.service {
+            border-color: #ed8936;
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+        }
+        
+        .category-card.audience {
+            border-color: #9f7aea;
+            background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%);
+        }
+        
+        .category-card.technical {
+            border-color: #718096;
+            background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+        }
+        
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .trigger .category-icon { background: #48bb78; }
+        .solution .category-icon { background: #4299e1; }
+        .service .category-icon { background: #ed8936; }
+        .audience .category-icon { background: #9f7aea; }
+        .technical .category-icon { background: #718096; }
+        
+        .category-description {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .subcategories {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #cbd5e0;
+            display: none;
+        }
+        
+        .subcategories.active {
+            display: block;
+        }
+        
+        .subcategory-item {
+            font-size: 12px;
+            color: #4a5568;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .subcategory-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #a0aec0;
+        }
+        
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0 20px 0;
+        }
+        
+        .section-divider-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+        }
+        
+        .section-divider-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .legend {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-top: 30px;
+        }
+        
+        .legend-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-label {
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .expand-hint {
+            font-size: 12px;
+            color: #a0aec0;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Dzeny.com</h1>
+            <p>Визуальная карта структуры сайта</p>
+        </div>
+        
+        <div class="funnel">
+            <!-- Level 1: Блоги -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">1</div>
+                    <div class="level-title">📝 БЛОГИ</div>
+                </div>
+                <div class="level-subtitle">Основной источник органического трафика • 2 направления контента</div>
+                
+                <div class="section-divider">
+                    <div class="section-divider-line"></div>
+                    <div class="section-divider-text">🟢 Триггеры стресса и тревоги</div>
+                    <div class="section-divider-line"></div>
+                </div>
+                
+                <div class="categories-grid">
+                    <div class="category-card trigger" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Health & Body
+                        </div>
+                        <div class="category-description">Здоровье, физическое состояние, болезни</div>
+                        <div class="expand-hint">Нажмите для примеров подкатегорий ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Chronic illness stress</div>
+                            <div class="subcategory-item">Body image issues</div>
+                            <div class="subcategory-item">Sleep disorders</div>
+                            <div class="subcategory-item">Pain management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card trigger" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Relationship
+                        </div>
+                        <div class="category-description">Отношения, конфликты, разрыв связей</div>
+                        <div class="expand-hint">Нажмите для примеров подкатегорий ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Divorce and separation</div>
+                            <div class="subcategory-item">Jealousy and trust issues</div>
+                            <div class="subcategory-item">Communication conflicts</div>
+                            <div class="subcategory-item">New parent relationship crisis</div>
+                            <div class="subcategory-item">Long-distance challenges</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card trigger" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Work
+                        </div>
+                        <div class="category-description">Карьера, выгорание, конфликты на работе</div>
+                        <div class="expand-hint">Нажмите для примеров подкатегорий ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Burnout syndrome</div>
+                            <div class="subcategory-item">Workplace conflicts</div>
+                            <div class="subcategory-item">Job loss anxiety</div>
+                            <div class="subcategory-item">Career change stress</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Self-Esteem & Identity
+                        </div>
+                        <div class="category-description">Самооценка, кризис идентичности</div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Money & Career
+                        </div>
+                        <div class="category-description">Финансовые проблемы, долги, карьерные цели</div>
+                    </div>
+                    
+                    <div class="category-card trigger" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Family & Parenting
+                        </div>
+                        <div class="category-description">Семейные конфликты, воспитание детей</div>
+                        <div class="expand-hint">Нажмите для примеров подкатегорий ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Parenting stress</div>
+                            <div class="subcategory-item">Teenage children challenges</div>
+                            <div class="subcategory-item">Family conflicts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Social Life & Communication
+                        </div>
+                        <div class="category-description">Социальная изоляция, коммуникация</div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Life Changes & Uncertainty
+                        </div>
+                        <div class="category-description">Переезд, потери, неопределенность</div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Digital & Information Overload
+                        </div>
+                        <div class="category-description">Цифровая перегрузка, зависимость от соцсетей</div>
+                    </div>
+                    
+                    <div class="category-card trigger">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Personal Habits & Lifestyle
+                        </div>
+                        <div class="category-description">Вредные привычки, образ жизни</div>
+                    </div>
+                </div>
+                
+                <div class="section-divider">
+                    <div class="section-divider-line"></div>
+                    <div class="section-divider-text">🔵 Способы борьбы со стрессом</div>
+                    <div class="section-divider-line"></div>
+                </div>
+                
+                <div class="categories-grid">
+                    <div class="category-card solution" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Breathing Exercises
+                        </div>
+                        <div class="category-description">Дыхательные практики для успокоения</div>
+                        <div class="expand-hint">Нажмите для примеров техник ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Box breathing (4-4-4-4)</div>
+                            <div class="subcategory-item">4-7-8 technique</div>
+                            <div class="subcategory-item">Diaphragmatic breathing</div>
+                            <div class="subcategory-item">Alternate nostril breathing</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card solution" onclick="toggleSubcategories(this)">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Meditation
+                        </div>
+                        <div class="category-description">Медитативные практики</div>
+                        <div class="expand-hint">Нажмите для примеров техник ↓</div>
+                        <div class="subcategories">
+                            <div class="subcategory-item">Guided meditation</div>
+                            <div class="subcategory-item">Mindfulness meditation</div>
+                            <div class="subcategory-item">Body scan meditation</div>
+                            <div class="subcategory-item">Loving-kindness meditation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Aromatherapy
+                        </div>
+                        <div class="category-description">Ароматерапия для релаксации</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Tests
+                        </div>
+                        <div class="category-description">Психологические тесты и опросники</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Body Relaxation
+                        </div>
+                        <div class="category-description">Техники расслабления тела</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Mindfulness
+                        </div>
+                        <div class="category-description">Практики осознанности</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Journaling
+                        </div>
+                        <div class="category-description">Ведение дневника эмоций</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Cognitive Tools
+                        </div>
+                        <div class="category-description">Когнитивные техники (КПТ)</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Action Planning
+                        </div>
+                        <div class="category-description">Планирование действий и целей</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Communication Skills
+                        </div>
+                        <div class="category-description">Навыки коммуникации</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Creative Relief
+                        </div>
+                        <div class="category-description">Творческие методы снятия стресса</div>
+                    </div>
+                    
+                    <div class="category-card solution">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Self-Care Routines
+                        </div>
+                        <div class="category-description">Рутины заботы о себе</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 2: Сервисы -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number" style="background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);">2</div>
+                    <div class="level-title">🛠️ СЕРВИСЫ (Продукты)</div>
+                </div>
+                <div class="level-subtitle">Инструменты для продления подписки и повышения вовлеченности</div>
+                
+                <div class="categories-grid">
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Трекеры ментального здоровья
+                        </div>
+                        <div class="category-description">Контроль сна, спорта, общения, границ</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Планировщик маленьких шагов
+                        </div>
+                        <div class="category-description">Разбивка больших целей на шаги</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Приложение для детей/подростков
+                        </div>
+                        <div class="category-description">Управление эмоциями + игровой момент</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            7/14-дневные программы
+                        </div>
+                        <div class="category-description">"Перестать откладывать", "Говорить нет", "Сон и тревога"</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Эмоциональный дневник
+                        </div>
+                        <div class="category-description">Быстрый лог с аналитикой + контекст</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Аудио-рутины для сна
+                        </div>
+                        <div class="category-description">Night support от AI-бота</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Навыки общения и границ
+                        </div>
+                        <div class="category-description">Интерактивные скрипты, тренажёры диалогов</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Анти-прокрастинация
+                        </div>
+                        <div class="category-description">Планер с ботом, Pomodoro, напоминания</div>
+                    </div>
+                    
+                    <div class="category-card service">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Сообщество / Peer-support
+                        </div>
+                        <div class="category-description">Анонимные истории + Q&A от психологов</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 3: Целевая аудитория -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number" style="background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);">3</div>
+                    <div class="level-title">👥 ЦЕЛЕВАЯ АУДИТОРИЯ</div>
+                </div>
+                <div class="level-subtitle">Специализированные страницы под разные сегменты пользователей</div>
+                
+                <div class="categories-grid">
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Teens
+                        </div>
+                        <div class="category-description">Подростки: школьные проблемы, буллинг, самоидентификация</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Women
+                        </div>
+                        <div class="category-description">Женщины: материнство, карьера, баланс</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Men
+                        </div>
+                        <div class="category-description">Мужчины: карьера, эмоции, отцовство</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Military
+                        </div>
+                        <div class="category-description">Военные: ПТСР, адаптация, травмы</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Christian
+                        </div>
+                        <div class="category-description">Христиане: духовный кризис, вера и психология</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            LGBT
+                        </div>
+                        <div class="category-description">ЛГБТ+: принятие себя, coming out, дискриминация</div>
+                    </div>
+                    
+                    <div class="category-card audience">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Seniors
+                        </div>
+                        <div class="category-description">Пожилые: одиночество, здоровье, потеря близких</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 4: Технические страницы -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number" style="background: linear-gradient(135deg, #718096 0%, #4a5568 100%);">4</div>
+                    <div class="level-title">⚙️ ТЕХНИЧЕСКИЕ СТРАНИЦЫ</div>
+                </div>
+                <div class="level-subtitle">Служебные и информационные разделы сайта</div>
+                
+                <div class="categories-grid">
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Pricing
+                        </div>
+                        <div class="category-description">Тарифы и подписки</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Privacy Policy
+                        </div>
+                        <div class="category-description">Политика конфиденциальности</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Terms and Conditions
+                        </div>
+                        <div class="category-description">Условия использования</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            About Dzeny AI Therapist
+                        </div>
+                        <div class="category-description">О платформе и технологии</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            How It Works
+                        </div>
+                        <div class="category-description">Как работает сервис</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Crisis Resources
+                        </div>
+                        <div class="category-description">Экстренная помощь</div>
+                    </div>
+                    
+                    <div class="category-card technical">
+                        <div class="category-title">
+                            <span class="category-icon"></span>
+                            Authors
+                        </div>
+                        <div class="category-description">Авторы и эксперты</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">Легенда категорий</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%); border: 2px solid #48bb78;"></div>
+                    <div class="legend-label">Триггеры (зеленый) - проблемы вызывающие стресс</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%); border: 2px solid #4299e1;"></div>
+                    <div class="legend-label">Решения (синий) - способы борьбы со стрессом</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%); border: 2px solid #ed8936;"></div>
+                    <div class="legend-label">Сервисы (оранжевый) - продукты платформы</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%); border: 2px solid #9f7aea;"></div>
+                    <div class="legend-label">Аудитория (фиолетовый) - сегменты пользователей</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%); border: 2px solid #718096;"></div>
+                    <div class="legend-label">Техническое (серый) - служебные страницы</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSubcategories(element) {
+            const subcategories = element.querySelector('.subcategories');
+            const hint = element.querySelector('.expand-hint');
+            
+            if (subcategories) {
+                subcategories.classList.toggle('active');
+                if (subcategories.classList.contains('active')) {
+                    hint.textContent = 'Нажмите чтобы скрыть ↑';
+                } else {
+                    hint.textContent = 'Нажмите для примеров подкатегорий ↓';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
