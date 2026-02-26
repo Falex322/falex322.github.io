@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dzeny — Mood Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #C8E8F5;
+    --sky-light: #E8F5FC;
+    --sky-pale: #F2F9FD;
+    --charcoal: #1E1E1E;
+    --charcoal-2: #2D2D2D;
+    --charcoal-3: #3A3A3A;
+    --mid: #6B7280;
+    --soft: #9CA3AF;
+    --blue-accent: #4BA3D3;
+    --blue-dark: #2B6CB0;
+    --white: #FFFFFF;
+    --off-white: #F8FAFB;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 40px rgba(0,0,0,0.10);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--charcoal); font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; position: sticky; top: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; color: var(--charcoal); text-decoration: none; }
+  .nav-logo-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #6EC6F0 0%, #3A8FD6 100%); display: flex; align-items: center; justify-content: center; }
+  .nav-logo-dot::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: white; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--charcoal-3); text-decoration: none; font-size: 15px; font-weight: 400; transition: color 0.2s; }
+  .nav-links a.active { color: var(--blue-accent); font-weight: 500; }
+  .nav-links a:hover { color: var(--blue-accent); }
+  .nav-cta { background: var(--charcoal); color: white; border: none; padding: 12px 28px; border-radius: 100px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* BREADCRUMB */
+  .breadcrumb { padding: 16px 60px; font-size: 13px; color: var(--soft); background: var(--off-white); }
+  .breadcrumb a { color: var(--mid); text-decoration: none; }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* HERO */
+  .hero { background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 40%, var(--white) 100%); padding: 80px 60px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; overflow: hidden; position: relative; }
+  .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(74,163,211,0.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,163,211,0.12); color: var(--blue-dark); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+  .hero-tag::before { content: '●'; font-size: 8px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1.15; color: var(--charcoal); margin-bottom: 20px; font-weight: 400; }
+  .hero h1 em { font-style: italic; color: var(--blue-accent); }
+  .hero-sub { font-size: 17px; color: var(--mid); line-height: 1.7; margin-bottom: 36px; max-width: 480px; font-weight: 300; }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--charcoal); color: white; border: none; padding: 16px 36px; border-radius: 100px; font-size: 16px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-ghost { background: transparent; color: var(--charcoal-3); border: 1.5px solid rgba(0,0,0,0.15); padding: 15px 32px; border-radius: 100px; font-size: 16px; font-weight: 400; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
+  .btn-ghost:hover { border-color: var(--charcoal); }
+
+  /* HERO VISUAL — mood tracker UI */
+  .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+  .hero-phone { width: 240px; height: 440px; background: var(--charcoal-2); border-radius: 36px; padding: 14px; box-shadow: var(--shadow-md); position: relative; z-index: 2; }
+  .phone-screen { background: var(--off-white); border-radius: 26px; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+  .phone-header { background: white; padding: 14px 16px 10px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .phone-header-left { display: flex; align-items: center; gap: 8px; }
+  .phone-avatar { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #6EC6F0, #3A8FD6); }
+  .phone-header-text { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .phone-date { font-size: 11px; color: var(--soft); }
+  .phone-body { flex: 1; padding: 16px 14px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+  .mood-question { font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+  .mood-emojis { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .mood-emoji { font-size: 22px; padding: 6px; border-radius: 10px; cursor: pointer; transition: background 0.15s; }
+  .mood-emoji.selected { background: rgba(74,163,211,0.15); }
+  .mood-divider { height: 1px; background: rgba(0,0,0,0.06); }
+  .mood-label { font-size: 11px; font-weight: 600; color: var(--mid); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .mood-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .mood-bar-label { font-size: 11px; color: var(--mid); width: 52px; flex-shrink: 0; }
+  .mood-bar-track { flex: 1; height: 6px; border-radius: 10px; background: rgba(0,0,0,0.07); overflow: hidden; }
+  .mood-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #6EC6F0, #3A8FD6); }
+  .mood-streak { display: flex; align-items: center; gap: 6px; background: rgba(74,163,211,0.1); border-radius: 10px; padding: 8px 10px; }
+  .mood-streak-icon { font-size: 14px; }
+  .mood-streak-text { font-size: 11px; color: var(--blue-dark); font-weight: 500; }
+
+  .hero-float-1 { position: absolute; top: 20px; right: -36px; background: white; border-radius: var(--radius-sm); padding: 12px 16px; box-shadow: var(--shadow-md); font-size: 12px; color: var(--charcoal); z-index: 3; }
+  .hero-float-1 strong { font-weight: 600; display: block; margin-bottom: 2px; font-size: 13px; }
+  .hero-float-2 { position: absolute; bottom: 50px; left: -36px; background: white; border-radius: var(--radius-sm); padding: 10px 14px; box-shadow: var(--shadow-md); font-size: 12px; z-index: 3; display: flex; align-items: center; gap: 8px; }
+  .float-badge { width: 8px; height: 8px; border-radius: 50%; background: #6EC6F0; flex-shrink: 0; }
+
+  /* SECTIONS COMMON */
+  section { padding: 80px 60px; }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 14px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 40px; color: var(--charcoal); line-height: 1.2; margin-bottom: 16px; font-weight: 400; }
+  .section-sub { font-size: 17px; color: var(--mid); line-height: 1.7; max-width: 580px; font-weight: 300; margin-bottom: 50px; }
+
+  /* BLOCK 2: WHAT IS */
+  .what-is { background: var(--off-white); }
+  .what-is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .what-is-text p { color: var(--charcoal-3); line-height: 1.8; margin-bottom: 20px; font-size: 16px; font-weight: 300; }
+  .what-is-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card { background: white; border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--charcoal); font-weight: 400; margin-bottom: 6px; }
+  .stat-label { font-size: 13px; color: var(--mid); font-weight: 400; }
+  .stat-card-accent { background: var(--charcoal); color: white; grid-column: span 2; }
+  .stat-card-accent .stat-num { color: white; font-size: 22px; line-height: 1.3; }
+  .stat-card-accent .stat-label { color: rgba(255,255,255,0.65); }
+
+  /* BLOCK 3: HELPS WITH */
+  .helps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .help-card { background: var(--sky-pale); border-radius: var(--radius); padding: 28px 22px; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(74,163,211,0.08); }
+  .help-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .help-icon { font-size: 28px; margin-bottom: 14px; }
+  .help-title { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
+  .help-desc { font-size: 13px; color: var(--mid); line-height: 1.6; font-weight: 300; }
+
+  /* BLOCK 4: GOALS + PROCESS */
+  .goals-process { background: var(--charcoal); color: white; }
+  .goals-process .section-label { color: rgba(74,163,211,0.8); }
+  .goals-process .section-title { color: white; }
+  .goals-process .section-sub { color: rgba(255,255,255,0.55); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .col-card { background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 36px; border: 1px solid rgba(255,255,255,0.08); }
+  .col-card h3 { font-size: 20px; font-weight: 500; margin-bottom: 24px; color: white; }
+  .goal-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+  .goal-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(74,163,211,0.2); color: var(--sky); font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .goal-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; font-weight: 300; }
+  .step-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; position: relative; }
+  .step-item:not(:last-child)::before { content: ''; position: absolute; left: 13px; top: 30px; width: 2px; height: calc(100% + 2px); background: rgba(255,255,255,0.08); }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; background: rgba(74,163,211,0.15); border: 1.5px solid rgba(74,163,211,0.4); flex-shrink: 0; margin-top: 1px; }
+  .step-label { font-size: 12px; color: var(--blue-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .step-text { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 300; }
+
+  /* BLOCK 5: CTA BANNER */
+  .cta-banner { background: linear-gradient(120deg, var(--sky-light) 0%, rgba(74,163,211,0.15) 100%); display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 60px; }
+  .cta-banner-text h2 { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--charcoal); margin-bottom: 10px; font-weight: 400; }
+  .cta-banner-text p { font-size: 16px; color: var(--mid); font-weight: 300; }
+  .cta-banner-right { flex-shrink: 0; text-align: right; }
+  .cta-microcopy { font-size: 12px; color: var(--soft); margin-top: 10px; }
+
+  /* BLOCK 6: FEATURES */
+  .techniques { background: var(--off-white); }
+  .techniques-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tech-card { background: white; border-radius: var(--radius); padding: 30px 26px; box-shadow: var(--shadow); transition: transform 0.2s; }
+  .tech-card:hover { transform: translateY(-3px); }
+  .tech-icon { width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--sky-pale); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 18px; }
+  .tech-title { font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+  .tech-desc { font-size: 14px; color: var(--mid); line-height: 1.65; font-weight: 300; }
+
+  /* BLOCK 7: BENEFITS */
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit-card { display: flex; gap: 16px; align-items: flex-start; padding: 24px; border-radius: var(--radius); background: var(--off-white); }
+  .benefit-check { width: 36px; height: 36px; border-radius: 50%; background: rgba(74,163,211,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+  .benefit-text { font-size: 15px; color: var(--charcoal-3); line-height: 1.5; font-weight: 400; }
+
+  /* BLOCK 8: HOW LONG + DISCLAIMER */
+  .duration-block { background: var(--charcoal-2); color: white; }
+  .duration-block .section-title { color: white; }
+  .duration-block .section-label { color: rgba(74,163,211,0.8); }
+  .dur-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .dur-card { background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 36px; border: 1px solid rgba(255,255,255,0.07); }
+  .dur-card h3 { font-size: 18px; font-weight: 500; color: white; margin-bottom: 20px; }
+  .dur-row { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+  .dur-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent); flex-shrink: 0; margin-top: 8px; }
+  .dur-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; font-weight: 300; }
+  .disclaimer-card { background: rgba(74,163,211,0.08); border: 1px solid rgba(74,163,211,0.2); border-radius: var(--radius); padding: 36px; }
+  .disclaimer-card h3 { font-size: 18px; font-weight: 500; color: var(--sky); margin-bottom: 20px; }
+  .disclaimer-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 14px; font-weight: 300; }
+
+  /* BLOCK 9: OTHER SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .service-card { background: var(--off-white); border-radius: var(--radius); padding: 28px 20px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; border: 1.5px solid transparent; cursor: pointer; }
+  .service-card.current { border-color: var(--blue-accent); background: white; box-shadow: var(--shadow); }
+  .service-card.current .service-name { color: var(--blue-dark); }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(74,163,211,0.2); background: white; }
+  .service-icon { font-size: 32px; margin-bottom: 14px; }
+  .service-name { font-size: 14px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
+  .service-desc { font-size: 12px; color: var(--mid); line-height: 1.5; font-weight: 300; margin-bottom: 16px; }
+  .service-btn { background: var(--charcoal); color: white; border: none; padding: 8px 20px; border-radius: 100px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
+  .service-btn:hover { opacity: 0.8; }
+  .service-tag { background: rgba(74,163,211,0.12); color: var(--blue-dark); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; display: inline-block; }
+
+  /* BLOCK 10: EXPLORE */
+  .explore { background: var(--off-white); }
+  .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .explore-card { background: white; border-radius: var(--radius); padding: 24px 22px; border: 1.5px solid rgba(0,0,0,0.06); transition: border-color 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+  .explore-card:hover { border-color: var(--blue-accent); transform: translateY(-2px); }
+  .explore-left h4 { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+  .explore-left p { font-size: 13px; color: var(--mid); font-weight: 300; }
+  .explore-arrow { color: var(--soft); font-size: 18px; }
+
+  /* BLOCK 11: FINAL CTA */
+  .final-cta { background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 100%); text-align: center; padding: 100px 60px; }
+  .final-cta .section-title { font-size: 48px; margin-bottom: 16px; max-width: 700px; margin-inline: auto; }
+  .final-cta .section-sub { margin-inline: auto; max-width: 500px; }
+  .final-cta-badges { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+  .badge { background: rgba(74,163,211,0.1); color: var(--blue-dark); font-size: 13px; padding: 6px 16px; border-radius: 100px; font-weight: 500; }
+  .social-proof { margin-top: 28px; font-size: 14px; color: var(--mid); font-weight: 300; }
+  .social-proof strong { color: var(--charcoal); font-weight: 600; }
+  .reviews { display: flex; gap: 16px; justify-content: center; margin-top: 40px; }
+  .review-card { background: white; border-radius: var(--radius); padding: 24px 22px; max-width: 280px; text-align: left; box-shadow: var(--shadow); }
+  .review-stars { color: #FBBF24; font-size: 14px; margin-bottom: 10px; }
+  .review-text { font-size: 14px; color: var(--charcoal-3); line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .review-author { font-size: 13px; font-weight: 600; color: var(--mid); }
+
+  footer { background: var(--charcoal); color: rgba(255,255,255,0.5); text-align: center; padding: 30px 60px; font-size: 13px; font-weight: 300; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    Dzeny
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Services</a></li>
+    <li><a href="#">Therapy Types</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Home</a><span>›</span>
+  <a href="#">Services</a><span>›</span>
+  Mood Tracker
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Mood Tracker</div>
+    <h1>Understand your emotions,<br><em>day by day</em></h1>
+    <p class="hero-sub">Log how you feel, spot hidden patterns, and get AI-powered insights that help you take better care of your mental health — starting today.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Start Tracking Free</button>
+      <button class="btn-ghost">See how it works ↓</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-phone">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <div class="phone-header-left">
+            <div class="phone-avatar"></div>
+            <span class="phone-header-text">Mood Tracker</span>
+          </div>
+          <span class="phone-date">Friday, 9</span>
+        </div>
+        <div class="phone-body">
+          <div class="mood-question">How are you feeling today?</div>
+          <div class="mood-emojis">
+            <div class="mood-emoji">😞</div>
+            <div class="mood-emoji">😕</div>
+            <div class="mood-emoji selected">😐</div>
+            <div class="mood-emoji">😊</div>
+            <div class="mood-emoji">😄</div>
+          </div>
+          <div class="mood-divider"></div>
+          <div class="mood-label">This week</div>
+          <div class="mood-bar-row">
+            <div class="mood-bar-label" style="font-size:11px;color:var(--mid);">Mon</div>
+            <div class="mood-bar-track"><div class="mood-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="mood-bar-row">
+            <div class="mood-bar-label" style="font-size:11px;color:var(--mid);">Tue</div>
+            <div class="mood-bar-track"><div class="mood-bar-fill" style="width:55%"></div></div>
+          </div>
+          <div class="mood-bar-row">
+            <div class="mood-bar-label" style="font-size:11px;color:var(--mid);">Wed</div>
+            <div class="mood-bar-track"><div class="mood-bar-fill" style="width:40%"></div></div>
+          </div>
+          <div class="mood-bar-row">
+            <div class="mood-bar-label" style="font-size:11px;color:var(--mid);">Thu</div>
+            <div class="mood-bar-track"><div class="mood-bar-fill" style="width:70%"></div></div>
+          </div>
+          <div class="mood-bar-row">
+            <div class="mood-bar-label" style="font-size:11px;color:var(--mid);">Fri</div>
+            <div class="mood-bar-track"><div class="mood-bar-fill" style="width:60%"></div></div>
+          </div>
+          <div class="mood-divider"></div>
+          <div class="mood-streak">
+            <div class="mood-streak-icon">🔥</div>
+            <div class="mood-streak-text">7-day tracking streak!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-float-1">
+      <strong>Good mood · Today</strong>
+      Had a great night's sleep
+    </div>
+    <div class="hero-float-2">
+      <div class="float-badge"></div>
+      Insight ready to review
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 2: WHAT IS MOOD TRACKING -->
+<section class="what-is">
+  <div class="what-is-grid">
+    <div class="what-is-text">
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">What Is Mood Tracking?</h2>
+      <p>Mood tracking is the practice of regularly logging how you feel — and the thoughts, events, or habits connected to those feelings. Over time, it reveals patterns you'd never notice in the moment.</p>
+      <p>When you can see your emotional history clearly, you gain real power: you start to understand what lifts your mood, what drains it, and how to make small daily choices that add up to meaningful change.</p>
+      <p>Dzeny's AI-powered Mood Tracker goes beyond simple logging — it analyzes your data, surfaces hidden connections, and delivers personalized insights after every check-in.</p>
+    </div>
+    <div class="what-is-stats">
+      <div class="stat-card">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">more likely to spot emotional triggers with regular tracking</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">21 days</div>
+        <div class="stat-label">average time to build a consistent mood tracking habit</div>
+      </div>
+      <div class="stat-card stat-card-accent">
+        <div class="stat-num">Built by industry experts,<br>designed for your everyday</div>
+        <div class="stat-label">Dzeny's AI is shaped by insights from thousands of therapy sessions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 3: WHAT CAN IT HELP WITH -->
+<section>
+  <div class="section-label">What It Helps With</div>
+  <h2 class="section-title">What can Mood Tracker help with?</h2>
+  <p class="section-sub">From understanding daily stress to recognizing the early signs of burnout — Mood Tracker gives you data that leads to real self-awareness.</p>
+  <div class="helps-grid">
+    <div class="help-card">
+      <div class="help-icon">😰</div>
+      <div class="help-title">Anxiety</div>
+      <div class="help-desc">Identify what triggers anxious feelings and when they tend to peak during the day or week.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">😔</div>
+      <div class="help-title">Low Mood</div>
+      <div class="help-desc">Spot the patterns behind low mood days before they turn into longer episodes.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">🔥</div>
+      <div class="help-title">Burnout</div>
+      <div class="help-desc">Catch the early warning signs — declining energy, motivation, and emotional resilience.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">💤</div>
+      <div class="help-title">Sleep & Energy</div>
+      <div class="help-desc">Understand the link between your sleep quality and how you feel the next day.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">📈</div>
+      <div class="help-title">Progress Awareness</div>
+      <div class="help-desc">See how your emotional wellbeing changes over weeks and months with visual charts.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">💭</div>
+      <div class="help-title">Negative Thought Loops</div>
+      <div class="help-desc">Recognize recurring thoughts that pull your mood down and learn to interrupt them.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">🧘</div>
+      <div class="help-title">Stress Management</div>
+      <div class="help-desc">Connect stressful events to your emotional state and find what helps you recover fastest.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">🤝</div>
+      <div class="help-title">Therapy Support</div>
+      <div class="help-desc">Share mood history with your therapist for richer, more productive sessions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 4: GOALS + HOW IT WORKS -->
+<section class="goals-process">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Simple habit. Powerful insights.</h2>
+  <p class="section-sub">Two questions every user asks: "What will I get out of this?" and "How does it actually work?" Here's both.</p>
+  <div class="two-col">
+    <div class="col-card">
+      <h3>Goals of Mood Tracking</h3>
+      <div class="goal-item">
+        <div class="goal-num">1</div>
+        <div class="goal-text">Build awareness of your emotional patterns over time</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">2</div>
+        <div class="goal-text">Identify the specific triggers that affect your mood most</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">3</div>
+        <div class="goal-text">Make more intentional choices about habits, sleep, and stress</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">4</div>
+        <div class="goal-text">Catch early warning signs of anxiety or low mood before they escalate</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">5</div>
+        <div class="goal-text">Track your wellbeing progress with clear, visual data</div>
+      </div>
+    </div>
+    <div class="col-card">
+      <h3>How a Check-In Works</h3>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 1</div>
+          <div class="step-text">Rate your mood — pick an emoji or score from 1 to 10</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 2</div>
+          <div class="step-text">Add context — log sleep, energy, key events, or a quick note</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 3</div>
+          <div class="step-text">Get an AI insight — receive a personalized observation after each entry</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 4</div>
+          <div class="step-text">Review your trends — weekly summaries show patterns across your entries</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 5</div>
+          <div class="step-text">Take action — get suggested tools from Dzeny based on your data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 5: CTA #1 -->
+<div class="cta-banner">
+  <div>
+    <div class="cta-banner-text">
+      <h2>See what your mood data reveals</h2>
+      <p>Start tracking today — your first insight arrives after just one check-in.</p>
+    </div>
+  </div>
+  <div class="cta-banner-right">
+    <button class="btn-primary">Start for Free →</button>
+    <div class="cta-microcopy">No credit card required · Cancel anytime</div>
+  </div>
+</div>
+
+<!-- BLOCK 6: KEY FEATURES -->
+<section class="techniques">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything inside Mood Tracker</h2>
+  <p class="section-sub">A set of tools designed to turn your daily check-ins into meaningful self-knowledge.</p>
+  <div class="techniques-grid">
+    <div class="tech-card">
+      <div class="tech-icon">😊</div>
+      <div class="tech-title">Daily Check-Ins</div>
+      <div class="tech-desc">A quick, frictionless log — rate your mood, add context, and you're done in under a minute.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">📊</div>
+      <div class="tech-title">Visual Trend Charts</div>
+      <div class="tech-desc">Weekly and monthly views show your emotional patterns at a glance — clear, beautiful, and easy to read.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🤖</div>
+      <div class="tech-title">AI-Powered Insights</div>
+      <div class="tech-desc">After each entry, Dzeny's AI surfaces a personalized observation about your emotional state and possible triggers.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🔔</div>
+      <div class="tech-title">Smart Reminders</div>
+      <div class="tech-desc">Gentle, customizable nudges that help you build a consistent tracking habit without feeling intrusive.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🏷️</div>
+      <div class="tech-title">Custom Tags & Factors</div>
+      <div class="tech-desc">Tag your entries with sleep quality, exercise, social events, or any custom factor that matters to you.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🔒</div>
+      <div class="tech-title">Private & Secure</div>
+      <div class="tech-desc">Your mood data is encrypted and fully private — only you can see it. Anonymous, judgment-free.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 7: BENEFITS -->
+<section>
+  <div class="section-label">What You Can Expect</div>
+  <h2 class="section-title">Real results, lasting self-awareness</h2>
+  <p class="section-sub">Mental well-being is the foundation of a fulfilling life. Here's what a consistent tracking habit can bring.</p>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">A clear picture of what affects your mood most</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">Early detection of stress, anxiety, or low mood trends</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">More intentional daily choices backed by your own data</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">A growing record of your emotional wellbeing over time</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">Deeper, more productive conversations with your therapist</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">A simple daily ritual that builds lasting self-awareness</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 8: HOW LONG + DISCLAIMER -->
+<section class="duration-block">
+  <div class="section-label">Getting Started</div>
+  <h2 class="section-title">How quickly will you see results?</h2>
+  <div class="dur-grid">
+    <div class="dur-card">
+      <h3>📅 Your First Month</h3>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Day 1: Complete your first check-in and receive your first AI insight immediately.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Week 1: Your first weekly summary appears — early patterns start to emerge.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Week 2–3: You begin to notice recurring triggers and emotional rhythms in your data.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Month 1+: Monthly trends show meaningful change — your data becomes a real resource.</div></div>
+    </div>
+    <div class="disclaimer-card">
+      <h3>ℹ️ A Note on AI-Assisted Tools</h3>
+      <p>Dzeny's Mood Tracker is designed to support your mental wellness journey — not to replace professional care.</p>
+      <p>If you're experiencing severe or persistent symptoms, please reach out to a licensed therapist or crisis service.</p>
+      <p>Our AI-powered insights are based on evidence-backed approaches and work best alongside, or as a first step toward, professional support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 9: OTHER DZENY SERVICES -->
+<section>
+  <div class="section-label">Our AI-Powered Tools</div>
+  <h2 class="section-title">Pair Mood Tracker with other tools</h2>
+  <p class="section-sub">Each Dzeny service works on its own — and even better together.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌬️</div>
+      <div class="service-name">Breathing Exercises</div>
+      <div class="service-desc">Calm your nervous system when your mood dips</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧘</div>
+      <div class="service-name">Guided Meditation</div>
+      <div class="service-desc">Build present-moment awareness through structured sessions</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📓</div>
+      <div class="service-name">Journaling</div>
+      <div class="service-desc">Dig deeper into mood entries with AI-guided prompts</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card current">
+      <div class="service-icon">📊</div>
+      <div class="service-name">Mood Tracking</div>
+      <div class="service-desc">You're here — log daily moods and uncover your patterns</div>
+      <span class="service-tag">Current page</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🙏</div>
+      <div class="service-name">Gratitude Practice</div>
+      <div class="service-desc">Build a daily habit that shifts focus to what's going well</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 10: EXPLORE THERAPY TYPES -->
+<section class="explore">
+  <div class="section-label">Related Resources</div>
+  <h2 class="section-title">Explore therapy types that pair well</h2>
+  <p class="section-sub">Mood tracking works alongside evidence-based therapy approaches. Discover which one fits you.</p>
+  <div class="explore-grid">
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Cognitive Behavioral Therapy (CBT)</h4>
+        <p>Reframe the thought patterns behind your low mood entries</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Mindfulness-Based Therapy</h4>
+        <p>Develop present-moment awareness that deepens your check-ins</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Dialectical Behavior Therapy (DBT)</h4>
+        <p>Build emotional regulation skills your mood data will reflect</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Acceptance & Commitment (ACT)</h4>
+        <p>Learn to accept difficult feelings you're tracking without judgment</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Somatic Therapy</h4>
+        <p>Explore the physical sensations behind your emotional patterns</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Psychodynamic Therapy</h4>
+        <p>Understand how past experiences shape the moods you log today</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 11: FINAL CTA -->
+<section class="final-cta">
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Start understanding yourself today</h2>
+  <p class="section-sub">AI mental health for support and lifelong wellbeing — free to join, available 24/7.</p>
+  <div class="final-cta-badges">
+    <span class="badge">✓ Free to start</span>
+    <span class="badge">✓ AI-powered insights</span>
+    <span class="badge">✓ Available 24/7</span>
+    <span class="badge">✓ Anonymous & private</span>
+  </div>
+  <button class="btn-primary" style="font-size: 18px; padding: 18px 48px;">Start Tracking Free</button>
+  <div class="social-proof">Join <strong>10,000+</strong> people already taking steps toward better mental health</div>
+  <div class="reviews">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"After two weeks of tracking I finally understood why Mondays hit so differently. The weekly summary was eye-opening."</div>
+      <div class="review-author">Anna, 31</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"I shared my mood charts with my therapist and she said it was the most useful thing I'd brought to a session."</div>
+      <div class="review-author">Marcus, 28</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"I didn't realize how much sleep affected my mood until I saw it in the data. A total game-changer."</div>
+      <div class="review-author">Sofia, 25</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Dzeny is not a medical service and does not replace a professional psychologist, therapist or healthcare provider. &nbsp;·&nbsp; dzeny.com/services/mood-tracker
+</footer>
+
+</body>
+</html>

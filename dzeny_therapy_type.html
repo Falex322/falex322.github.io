@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dzeny — CBT Page Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #C8E8F5;
+    --sky-light: #E8F5FC;
+    --sky-pale: #F2F9FD;
+    --charcoal: #1E1E1E;
+    --charcoal-2: #2D2D2D;
+    --charcoal-3: #3A3A3A;
+    --mid: #6B7280;
+    --soft: #9CA3AF;
+    --blue-accent: #4BA3D3;
+    --blue-dark: #2B6CB0;
+    --white: #FFFFFF;
+    --off-white: #F8FAFB;
+    --tag-bg: #EEF7FC;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 40px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 60px;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6EC6F0 0%, #3A8FD6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo-dot::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--charcoal-3);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue-accent); }
+  .nav-cta {
+    background: var(--charcoal);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    padding: 16px 60px;
+    font-size: 13px;
+    color: var(--soft);
+    background: var(--off-white);
+  }
+  .breadcrumb a { color: var(--mid); text-decoration: none; }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 40%, var(--white) 100%);
+    padding: 80px 60px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,163,211,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74,163,211,0.12);
+    color: var(--blue-dark);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero-tag::before { content: '●'; font-size: 8px; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue-accent);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
+    font-weight: 300;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--charcoal);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--charcoal-3);
+    border: 1.5px solid rgba(0,0,0,0.15);
+    padding: 15px 32px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--charcoal); }
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-phone {
+    width: 240px;
+    height: 420px;
+    background: var(--charcoal-2);
+    border-radius: 36px;
+    padding: 16px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 2;
+  }
+  .phone-screen {
+    background: var(--off-white);
+    border-radius: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .phone-header {
+    background: white;
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .phone-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6EC6F0, #3A8FD6);
+  }
+  .phone-header-text { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .phone-messages {
+    flex: 1;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg {
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 85%;
+  }
+  .msg-user {
+    background: var(--charcoal);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-bot {
+    background: white;
+    color: var(--charcoal);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .hero-float-1 {
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    box-shadow: var(--shadow-md);
+    font-size: 12px;
+    color: var(--charcoal);
+    z-index: 3;
+  }
+  .hero-float-1 strong { font-weight: 600; display: block; margin-bottom: 2px; font-size: 13px; }
+  .hero-float-2 {
+    position: absolute;
+    bottom: 60px;
+    left: -30px;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    box-shadow: var(--shadow-md);
+    font-size: 12px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .float-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6EC6F0;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 80px 60px; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-accent);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .section-sub {
+    font-size: 17px;
+    color: var(--mid);
+    line-height: 1.7;
+    max-width: 580px;
+    font-weight: 300;
+    margin-bottom: 50px;
+  }
+
+  /* ── BLOCK 2: WHAT IS ── */
+  .what-is {
+    background: var(--off-white);
+  }
+  .what-is-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .what-is-text p {
+    color: var(--charcoal-3);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .what-is-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--mid); font-weight: 400; }
+  .stat-card-accent {
+    background: var(--charcoal);
+    color: white;
+    grid-column: span 2;
+  }
+  .stat-card-accent .stat-num { color: white; }
+  .stat-card-accent .stat-label { color: rgba(255,255,255,0.65); }
+
+  /* ── BLOCK 3: HELPS WITH ── */
+  .helps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .help-card {
+    background: var(--sky-pale);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(74,163,211,0.08);
+  }
+  .help-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .help-icon { font-size: 28px; margin-bottom: 14px; }
+  .help-title { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
+  .help-desc { font-size: 13px; color: var(--mid); line-height: 1.6; font-weight: 300; }
+
+  /* ── BLOCK 4: GOALS + PROCESS ── */
+  .goals-process {
+    background: var(--charcoal);
+    color: white;
+  }
+  .goals-process .section-label { color: rgba(74,163,211,0.8); }
+  .goals-process .section-title { color: white; }
+  .goals-process .section-sub { color: rgba(255,255,255,0.55); }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .col-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    padding: 36px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .col-card h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: white;
+  }
+  .goal-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+  .goal-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(74,163,211,0.2);
+    color: var(--sky);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .goal-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; font-weight: 300; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+    position: relative;
+  }
+  .step-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 30px;
+    width: 2px;
+    height: calc(100% + 2px);
+    background: rgba(255,255,255,0.08);
+  }
+  .step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(74,163,211,0.15);
+    border: 1.5px solid rgba(74,163,211,0.4);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-label { font-size: 12px; color: var(--blue-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .step-text { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 300; }
+
+  /* ── BLOCK 5: CTA 1 ── */
+  .cta-banner {
+    background: linear-gradient(120deg, var(--sky-light) 0%, rgba(74,163,211,0.15) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px;
+    border-radius: 0;
+  }
+  .cta-banner-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .cta-banner-text p { font-size: 16px; color: var(--mid); font-weight: 300; }
+  .cta-banner-right { flex-shrink: 0; text-align: right; }
+  .cta-microcopy { font-size: 12px; color: var(--soft); margin-top: 10px; }
+
+  /* ── BLOCK 6: TECHNIQUES ── */
+  .techniques { background: var(--off-white); }
+  .techniques-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .tech-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 30px 26px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .tech-card:hover { transform: translateY(-3px); }
+  .tech-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--sky-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .tech-title { font-size: 16px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+  .tech-desc { font-size: 14px; color: var(--mid); line-height: 1.65; font-weight: 300; }
+
+  /* ── BLOCK 7: BENEFITS ── */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .benefit-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: var(--off-white);
+  }
+  .benefit-check {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(74,163,211,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .benefit-text { font-size: 15px; color: var(--charcoal-3); line-height: 1.5; font-weight: 400; }
+
+  /* ── BLOCK 8: DURATION + DISCLAIMER ── */
+  .duration-block {
+    background: var(--charcoal-2);
+    color: white;
+  }
+  .duration-block .section-title { color: white; }
+  .duration-block .section-label { color: rgba(74,163,211,0.8); }
+  .dur-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .dur-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    padding: 36px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .dur-card h3 { font-size: 18px; font-weight: 500; color: white; margin-bottom: 20px; }
+  .dur-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .dur-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue-accent);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .dur-text { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; font-weight: 300; }
+  .disclaimer-card {
+    background: rgba(74,163,211,0.08);
+    border: 1px solid rgba(74,163,211,0.2);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+  .disclaimer-card h3 { font-size: 18px; font-weight: 500; color: var(--sky); margin-bottom: 20px; }
+  .disclaimer-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 14px; font-weight: 300; }
+
+  /* ── BLOCK 9: SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .service-card {
+    background: var(--off-white);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(74,163,211,0.2);
+    background: white;
+  }
+  .service-icon { font-size: 32px; margin-bottom: 14px; }
+  .service-name { font-size: 14px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
+  .service-desc { font-size: 12px; color: var(--mid); line-height: 1.5; font-weight: 300; margin-bottom: 16px; }
+  .service-btn {
+    background: var(--charcoal);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .service-btn:hover { opacity: 0.8; }
+
+  /* ── BLOCK 10: OTHER THERAPY TYPES ── */
+  .explore { background: var(--off-white); }
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .explore-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px 22px;
+    border: 1.5px solid rgba(0,0,0,0.06);
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .explore-card:hover { border-color: var(--blue-accent); transform: translateY(-2px); }
+  .explore-left h4 { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+  .explore-left p { font-size: 13px; color: var(--mid); font-weight: 300; }
+  .explore-arrow { color: var(--soft); font-size: 18px; }
+
+  /* ── BLOCK 11: FINAL CTA ── */
+  .final-cta {
+    background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 100%);
+    text-align: center;
+    padding: 100px 60px;
+  }
+  .final-cta .section-title { font-size: 48px; margin-bottom: 16px; max-width: 700px; margin-inline: auto; }
+  .final-cta .section-sub { margin-inline: auto; max-width: 500px; }
+  .final-cta-badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(74,163,211,0.1);
+    color: var(--blue-dark);
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .social-proof {
+    margin-top: 28px;
+    font-size: 14px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+  .social-proof strong { color: var(--charcoal); font-weight: 600; }
+  .reviews {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .review-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px 22px;
+    max-width: 280px;
+    text-align: left;
+    box-shadow: var(--shadow);
+  }
+  .review-stars { color: #FBBF24; font-size: 14px; margin-bottom: 10px; }
+  .review-text { font-size: 14px; color: var(--charcoal-3); line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+  .review-author { font-size: 13px; font-weight: 600; color: var(--mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 30px 60px;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* ── BLOCK LABEL BADGES ── */
+  .block-badge {
+    display: inline-block;
+    background: rgba(74,163,211,0.1);
+    color: var(--blue-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(74,163,211,0.2);
+  }
+  .block-badge-dark {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.1);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    Dzeny
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Therapy Types</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Home</a><span>›</span>
+  <a href="#">Therapy Types</a><span>›</span>
+  Cognitive Behavioral Therapy
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 1 · HERO ━━━━━━━━━━━━━━━━ -->
+<section class="hero">
+  <div class="hero-content">
+    
+    <div class="hero-tag">Cognitive Behavioral Therapy</div>
+    <h1>Change your thoughts,<br><em>change your life</em></h1>
+    <p class="hero-sub">Evidence-based techniques to help you manage anxiety, break negative thought patterns, and feel more like yourself — with AI support available 24/7.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Get Started Free</button>
+      <button class="btn-ghost">Learn more ↓</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-phone">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <div class="phone-avatar"></div>
+          <span class="phone-header-text">Dzeny</span>
+        </div>
+        <div class="phone-messages">
+          <div class="msg msg-user">I've been feeling really anxious lately</div>
+          <div class="msg msg-bot">I hear you. Let's work through this together using some CBT techniques.</div>
+          <div class="msg msg-user">Where do we start?</div>
+          <div class="msg msg-bot">Let's identify the thought patterns that are causing the most stress right now.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-float-1">
+      <strong>Session complete ✓</strong>
+      Insights ready to review
+    </div>
+    <div class="hero-float-2">
+      <div class="float-badge"></div>
+      Good mood · Today
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 2 · WHAT IS ━━━━━━━━━━━━━━━━ -->
+<section class="what-is">
+  
+  <div class="what-is-grid">
+    <div class="what-is-text">
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">What Is Cognitive Behavioral Therapy?</h2>
+      <p>Cognitive Behavioral Therapy (CBT) is one of the most widely researched and effective forms of psychotherapy. It focuses on the connection between your thoughts, feelings, and behaviors — and how changing one can positively affect the others.</p>
+      <p>Originally developed by Dr. Aaron Beck in the 1960s, CBT has been proven effective for treating anxiety, depression, PTSD, OCD, and many other conditions. It is short-term, goal-oriented, and highly practical.</p>
+      <p>Unlike traditional talk therapy, CBT gives you concrete tools and strategies you can use in everyday life — not just during sessions.</p>
+    </div>
+    <div class="what-is-stats">
+      <div class="stat-card">
+        <div class="stat-num">80%</div>
+        <div class="stat-label">of people see improvement within 8–15 sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">years of clinical research behind CBT</div>
+      </div>
+      <div class="stat-card stat-card-accent">
+        <div class="stat-num">Built by industry experts,<br>designed for your everyday</div>
+        <div class="stat-label">Dzeny's AI is shaped by insights from thousands of therapy sessions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 3 · HELPS WITH ━━━━━━━━━━━━━━━━ -->
+<section>
+  
+  <div class="section-label">Conditions & Challenges</div>
+  <h2 class="section-title">What Can CBT Help With?</h2>
+  <p class="section-sub">From everyday stress to persistent anxiety — CBT provides practical tools for real challenges.</p>
+  <div class="helps-grid">
+    <div class="help-card">
+      <div class="help-icon">😰</div>
+      <div class="help-title">Anxiety & Panic</div>
+      <div class="help-desc">Understand triggers and break the cycle of anxious thinking before it escalates.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">😔</div>
+      <div class="help-title">Depression</div>
+      <div class="help-desc">Challenge negative thought patterns and rebuild routines that support mood.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">🔥</div>
+      <div class="help-title">Burnout</div>
+      <div class="help-desc">Identify warning signs early and create healthier boundaries at work and home.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">💤</div>
+      <div class="help-title">Sleep Problems</div>
+      <div class="help-desc">Address the thoughts and habits that keep you up at night.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">💭</div>
+      <div class="help-title">Negative Self-Talk</div>
+      <div class="help-desc">Replace self-critical thoughts with more balanced, realistic perspectives.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">💔</div>
+      <div class="help-title">Relationship Issues</div>
+      <div class="help-desc">Improve communication and recognize unhelpful patterns in relationships.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">😤</div>
+      <div class="help-title">Stress & Overwhelm</div>
+      <div class="help-desc">Develop practical coping strategies for the pressures of daily life.</div>
+    </div>
+    <div class="help-card">
+      <div class="help-icon">🙁</div>
+      <div class="help-title">Low Self-Esteem</div>
+      <div class="help-desc">Build a more compassionate and accurate view of yourself over time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 4 · GOALS + PROCESS ━━━━━━━━━━━━━━━━ -->
+<section class="goals-process">
+  
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Clear goals. A structured path.</h2>
+  <p class="section-sub">Two questions every user asks: "What will I achieve?" and "What do I need to do?" We answer both.</p>
+  <div class="two-col">
+    <div class="col-card">
+      <h3>Goals of CBT</h3>
+      <div class="goal-item">
+        <div class="goal-num">1</div>
+        <div class="goal-text">Identify and challenge distorted thinking patterns that cause distress</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">2</div>
+        <div class="goal-text">Develop healthier emotional responses to stressful situations</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">3</div>
+        <div class="goal-text">Build practical coping skills you can use in everyday life</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">4</div>
+        <div class="goal-text">Reduce symptoms of anxiety, depression, and chronic stress</div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">5</div>
+        <div class="goal-text">Create lasting behavioral change and emotional resilience</div>
+      </div>
+    </div>
+    <div class="col-card">
+      <h3>How Does a Session Work?</h3>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 1</div>
+          <div class="step-text">Check-in — Review mood and recent experiences since last session</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 2</div>
+          <div class="step-text">Focus — Set the agenda and identify today's central theme</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 3</div>
+          <div class="step-text">Explore — Identify thoughts, feelings, and behaviors linked to the issue</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 4</div>
+          <div class="step-text">Challenge — Question and reframe unhelpful thinking patterns</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot"></div>
+        <div>
+          <div class="step-label">Step 5</div>
+          <div class="step-text">Reflect — Summarize insights and set next steps or exercises</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 5 · CTA #1 ━━━━━━━━━━━━━━━━ -->
+<div class="cta-banner">
+  <div>
+    
+    <div class="cta-banner-text">
+      <h2>Ready to try it for yourself?</h2>
+      <p>Start a guided AI session based on CBT techniques — free, private, and available any time.</p>
+    </div>
+  </div>
+  <div class="cta-banner-right">
+    <button class="btn-primary">Try for Free →</button>
+    <div class="cta-microcopy">No credit card required · Cancel anytime</div>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 6 · TECHNIQUES ━━━━━━━━━━━━━━━━ -->
+<section class="techniques">
+  
+  <div class="section-label">Methods</div>
+  <h2 class="section-title">Core CBT Techniques</h2>
+  <p class="section-sub">Practical, evidence-backed tools you'll use in every Dzeny session.</p>
+  <div class="techniques-grid">
+    <div class="tech-card">
+      <div class="tech-icon">🧠</div>
+      <div class="tech-title">Cognitive Restructuring</div>
+      <div class="tech-desc">Learn to identify automatic negative thoughts and replace them with more balanced, realistic perspectives.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">⚡</div>
+      <div class="tech-title">Behavioral Activation</div>
+      <div class="tech-desc">Gradually re-engage with activities that bring a sense of pleasure or accomplishment to your day.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">📓</div>
+      <div class="tech-title">Thought Records</div>
+      <div class="tech-desc">Track thoughts, emotions, and situations to uncover recurring patterns that hold you back.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🎯</div>
+      <div class="tech-title">Exposure Therapy</div>
+      <div class="tech-desc">Gradually face feared situations in a safe, controlled way to reduce avoidance and build confidence.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🌬️</div>
+      <div class="tech-title">Relaxation Techniques</div>
+      <div class="tech-desc">Use breathing exercises and progressive muscle relaxation to calm the nervous system.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🔧</div>
+      <div class="tech-title">Problem-Solving</div>
+      <div class="tech-desc">Break overwhelming challenges into manageable steps with a clear, structured approach.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 7 · BENEFITS ━━━━━━━━━━━━━━━━ -->
+<section>
+  
+  <div class="section-label">What You Can Expect</div>
+  <h2 class="section-title">Real results, lasting change</h2>
+  <p class="section-sub">Mental well-being is the foundation of a fulfilling life. Here's what consistent CBT practice can bring.</p>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">Reduced anxiety and persistent worry</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">More restful, consistent sleep</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">Greater confidence in daily decisions</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">Healthier emotional responses to stress</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">A deeper understanding of your own patterns</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-check">✅</div>
+      <div class="benefit-text">More fulfilling relationships with others</div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 8 · DURATION + DISCLAIMER ━━━━━━━━━━━━━━━━ -->
+<section class="duration-block">
+  
+  <div class="section-label">What to Expect</div>
+  <h2 class="section-title">How long does it take?</h2>
+  <div class="dur-grid">
+    <div class="dur-card">
+      <h3>📅 Typical CBT Timeline</h3>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">A typical CBT course consists of 12–20 sessions, each lasting 45–60 minutes.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Most people begin to notice meaningful changes within 6–8 sessions.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">Sessions are usually held once a week, though this can vary based on your needs.</div></div>
+      <div class="dur-row"><div class="dur-dot"></div><div class="dur-text">With Dzeny, you can practice CBT techniques every day — at your own pace.</div></div>
+    </div>
+    <div class="disclaimer-card">
+      <h3>ℹ️ A Note on AI-Assisted Tools</h3>
+      <p>The tools on Dzeny are designed to support your mental wellness journey — not to replace professional care.</p>
+      <p>If you are experiencing severe symptoms or a mental health crisis, please reach out to a licensed therapist or crisis service.</p>
+      <p>Our AI-guided exercises are based on evidence-backed techniques and are best used alongside, or as a first step toward, professional support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 9 · DZENY SERVICES ━━━━━━━━━━━━━━━━ -->
+<section>
+  
+  <div class="section-label">Our AI-Powered Tools</div>
+  <h2 class="section-title">Put CBT into practice today</h2>
+  <p class="section-sub">Guided exercises based on CBT principles — available whenever you need them.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🌬️</div>
+      <div class="service-name">Breathing Exercises</div>
+      <div class="service-desc">Calm your nervous system with guided breathwork</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧘</div>
+      <div class="service-name">Guided Meditation</div>
+      <div class="service-desc">Build present-moment awareness through structured sessions</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📓</div>
+      <div class="service-name">Journaling</div>
+      <div class="service-desc">Reflect on thoughts with AI-guided prompts</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <div class="service-name">Mood Tracking</div>
+      <div class="service-desc">Log emotional patterns and spot what influences wellbeing</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🙏</div>
+      <div class="service-name">Gratitude Practice</div>
+      <div class="service-desc">Build a daily habit that shifts focus to what's going well</div>
+      <button class="service-btn">Try Free</button>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 10 · EXPLORE OTHER TYPES ━━━━━━━━━━━━━━━━ -->
+<section class="explore">
+  
+  <div class="section-label">Related Approaches</div>
+  <h2 class="section-title">Explore other approaches</h2>
+  <p class="section-sub">Not sure CBT is right for you? Discover other evidence-based methods.</p>
+  <div class="explore-grid">
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Mindfulness-Based Therapy</h4>
+        <p>Develop present-moment awareness to reduce stress</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Dialectical Behavior Therapy (DBT)</h4>
+        <p>Skills for emotional regulation and distress tolerance</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Acceptance & Commitment (ACT)</h4>
+        <p>Accept difficult feelings and commit to values-driven action</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Art Therapy</h4>
+        <p>Use creative expression to process hard-to-name emotions</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Somatic Therapy</h4>
+        <p>Explore the link between body sensations and emotions</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-left">
+        <h4>Psychodynamic Therapy</h4>
+        <p>Understand how the past shapes current thoughts and behavior</p>
+      </div>
+      <div class="explore-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━ BLOCK 11 · FINAL CTA ━━━━━━━━━━━━━━━━ -->
+<section class="final-cta">
+  
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Start your wellness journey today</h2>
+  <p class="section-sub">AI mental health for support and lifelong wellbeing — free to join, available 24/7.</p>
+  <div class="final-cta-badges">
+    <span class="badge">✓ Free to start</span>
+    <span class="badge">✓ AI-powered</span>
+    <span class="badge">✓ Available 24/7</span>
+    <span class="badge">✓ Anonymous & private</span>
+  </div>
+  <button class="btn-primary" style="font-size: 18px; padding: 18px 48px;">Get Started Free</button>
+  <div class="social-proof">Join <strong>10,000+</strong> people already taking steps toward better mental health</div>
+  <div class="reviews">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"The journaling prompts helped me notice patterns I never saw before. It changed how I approach my anxiety."</div>
+      <div class="review-author">Sarah, 29</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"I use the breathing exercises every morning now. It's become part of my daily routine and I feel much calmer."</div>
+      <div class="review-author">James, 34</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Dzeny helped me understand what was triggering my stress. It's like having support whenever I need it most."</div>
+      <div class="review-author">Maria, 26</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Dzeny is not a medical service and does not replace a professional psychologist, therapist or healthcare provider. &nbsp;·&nbsp; dzeny.com
+</footer>
+
+</body>
+</html>
