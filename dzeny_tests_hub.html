@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dzeny — Self-Tests Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky-light: #E8F5FC;
+    --sky-pale: #F2F9FD;
+    --charcoal: #1E1E1E;
+    --charcoal-2: #2D2D2D;
+    --charcoal-3: #3A3A3A;
+    --mid: #6B7280;
+    --soft: #9CA3AF;
+    --blue-accent: #4BA3D3;
+    --blue-dark: #2B6CB0;
+    --white: #FFFFFF;
+    --off-white: #F8FAFB;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 40px rgba(0,0,0,0.10);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--charcoal); font-size: 16px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; color: var(--charcoal); text-decoration: none; }
+  .nav-logo-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #6EC6F0 0%, #3A8FD6 100%); display: flex; align-items: center; justify-content: center; }
+  .nav-logo-dot::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: white; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--charcoal-3); text-decoration: none; font-size: 15px; font-weight: 400; transition: color 0.2s; }
+  .nav-links a.active { color: var(--blue-accent); font-weight: 500; }
+  .nav-links a:hover { color: var(--blue-accent); }
+  .nav-cta { background: var(--charcoal); color: white; border: none; padding: 11px 26px; border-radius: 100px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb { padding: 14px 60px; font-size: 13px; color: var(--soft); background: var(--off-white); border-bottom: 1px solid rgba(0,0,0,0.04); }
+  .breadcrumb a { color: var(--mid); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--blue-accent); }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 50%, var(--white) 100%);
+    padding: 72px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,163,211,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 640px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,163,211,0.12); color: var(--blue-dark); font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+  .hero-tag::before { content: '●'; font-size: 8px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1.12; color: var(--charcoal); margin-bottom: 18px; font-weight: 400; }
+  .hero h1 em { font-style: italic; color: var(--blue-accent); }
+  .hero-sub { font-size: 18px; color: var(--mid); line-height: 1.7; font-weight: 300; margin-bottom: 36px; max-width: 520px; }
+  .hero-stats { display: flex; gap: 36px; }
+  .h-stat-num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--charcoal); font-weight: 400; line-height: 1; margin-bottom: 4px; }
+  .h-stat-label { font-size: 13px; color: var(--mid); font-weight: 300; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--charcoal);
+    padding: 20px 60px;
+    display: flex; align-items: center; gap: 48px;
+    overflow: hidden;
+  }
+  .trust-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); white-space: nowrap; flex-shrink: 0; }
+  .trust-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+  .trust-items { display: flex; gap: 36px; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.65); white-space: nowrap; }
+  .trust-item::before { content: '✓'; color: var(--blue-accent); font-weight: 700; }
+
+  /* ── TABS SECTION ── */
+  .tests-section { padding: 60px 60px 80px; }
+
+  .tabs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+  .tabs-header-left h2 { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--charcoal); font-weight: 400; margin-bottom: 4px; }
+  .tabs-header-left p { font-size: 15px; color: var(--mid); font-weight: 300; }
+
+  /* tabs */
+  .tabs-row { display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
+  .tab-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 100px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    background: white; color: var(--mid);
+    font-size: 14px; font-weight: 400; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { border-color: var(--blue-accent); color: var(--charcoal); }
+  .tab-btn.active { background: var(--charcoal); color: white; border-color: var(--charcoal); font-weight: 500; }
+  .tab-count { font-size: 12px; opacity: 0.6; }
+
+  /* grid */
+  .tests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  /* test card */
+  .test-card {
+    background: white; border-radius: var(--radius);
+    border: 1.5px solid rgba(0,0,0,0.06);
+    padding: 28px 26px 24px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .test-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6EC6F0, #3A8FD6);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .test-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(74,163,211,0.2); }
+  .test-card:hover::before { opacity: 1; }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+  .card-icon { font-size: 32px; }
+  .card-img { width: 100%; height: 150px; border-radius: var(--radius-sm); object-fit: cover; margin-bottom: 16px; display: block; }
+  .test-card.featured .card-img { height: 170px; }
+  .card-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+  }
+  .tag-anxiety { background: rgba(239,68,68,0.08); color: #DC2626; }
+  .tag-mood { background: rgba(74,163,211,0.1); color: var(--blue-dark); }
+  .tag-stress { background: rgba(245,158,11,0.1); color: #B45309; }
+  .tag-personality { background: rgba(139,92,246,0.1); color: #7C3AED; }
+  .tag-relationships { background: rgba(16,185,129,0.1); color: #047857; }
+  .tag-selfesteem { background: rgba(236,72,153,0.1); color: #BE185D; }
+
+  .card-title { font-size: 17px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; line-height: 1.3; }
+  .card-desc { font-size: 13px; color: var(--mid); line-height: 1.65; font-weight: 300; margin-bottom: 20px; flex: 1; }
+
+  .card-meta { display: flex; gap: 16px; margin-bottom: 18px; }
+  .card-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--soft); }
+  .card-meta-item span:first-child { font-size: 13px; }
+
+  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.05); }
+  .card-taken { font-size: 12px; color: var(--soft); }
+  .card-taken strong { color: var(--mid); font-weight: 500; }
+  .card-cta {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 13px; font-weight: 600; color: var(--blue-dark);
+    transition: gap 0.2s;
+  }
+  .test-card:hover .card-cta { gap: 9px; }
+
+  /* featured card */
+  .test-card.featured {
+    background: var(--charcoal);
+    border-color: transparent;
+    grid-column: span 2;
+  }
+  .test-card.featured::before { opacity: 1; }
+  .test-card.featured .card-title { color: white; font-size: 20px; }
+  .test-card.featured .card-desc { color: rgba(255,255,255,0.55); }
+  .test-card.featured .card-meta-item { color: rgba(255,255,255,0.35); }
+  .test-card.featured .card-footer { border-color: rgba(255,255,255,0.08); }
+  .test-card.featured .card-taken { color: rgba(255,255,255,0.35); }
+  .test-card.featured .card-taken strong { color: rgba(255,255,255,0.55); }
+  .test-card.featured .card-cta { color: var(--sky-light); }
+  .test-card.featured .featured-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(74,163,211,0.2); color: var(--sky-light);
+    font-size: 11px; font-weight: 600; padding: 4px 10px;
+    border-radius: 100px; margin-bottom: 12px;
+  }
+
+  /* empty state */
+  .empty-state { text-align: center; padding: 80px 20px; grid-column: span 3; }
+  .empty-icon { font-size: 44px; margin-bottom: 16px; opacity: 0.4; }
+  .empty-text { font-size: 16px; color: var(--mid); }
+
+  /* ── WHY OUR TESTS ── */
+  .why-section { background: var(--off-white); padding: 72px 60px; }
+  .why-section .section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 14px; }
+  .why-section .section-title { font-family: 'DM Serif Display', serif; font-size: 38px; color: var(--charcoal); margin-bottom: 50px; font-weight: 400; line-height: 1.2; }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .why-card { background: white; border-radius: var(--radius); padding: 32px 28px; box-shadow: var(--shadow); }
+  .why-icon { font-size: 28px; margin-bottom: 16px; }
+  .why-title { font-size: 17px; font-weight: 600; color: var(--charcoal); margin-bottom: 10px; }
+  .why-desc { font-size: 14px; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+  /* ── FINAL CTA ── */
+  .final-cta { padding: 90px 60px; background: linear-gradient(160deg, var(--sky-light) 0%, var(--sky-pale) 100%); text-align: center; }
+  .final-cta h2 { font-family: 'DM Serif Display', serif; font-size: 44px; color: var(--charcoal); margin-bottom: 14px; font-weight: 400; }
+  .final-cta p { font-size: 17px; color: var(--mid); font-weight: 300; margin-bottom: 36px; max-width: 480px; margin-inline: auto; margin-bottom: 36px; }
+  .cta-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .badge { background: rgba(74,163,211,0.1); color: var(--blue-dark); font-size: 13px; padding: 6px 16px; border-radius: 100px; font-weight: 500; }
+  .btn-primary { background: var(--charcoal); color: white; border: none; padding: 17px 44px; border-radius: 100px; font-size: 17px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.15); }
+  .social-proof { margin-top: 20px; font-size: 14px; color: var(--mid); font-weight: 300; }
+  .social-proof strong { color: var(--charcoal); font-weight: 600; }
+
+  footer { background: var(--charcoal); color: rgba(255,255,255,0.45); text-align: center; padding: 28px 60px; font-size: 13px; font-weight: 300; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    Dzeny
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Therapy Types</a></li>
+    <li><a href="#" class="active">Self-Tests</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Home</a><span>›</span>
+  Self-Tests
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Free Self-Assessments</div>
+    <h1>Know yourself<br><em>better</em> — starting now</h1>
+    <p class="hero-sub">Clinically validated self-tests to help you understand your mental health, spot patterns, and take the right next step.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="h-stat-num">20+</div>
+        <div class="h-stat-label">Free tests available</div>
+      </div>
+      <div>
+        <div class="h-stat-num">3 min</div>
+        <div class="h-stat-label">Average completion time</div>
+      </div>
+      <div>
+        <div class="h-stat-num">50k+</div>
+        <div class="h-stat-label">Tests taken this month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span class="trust-label">Why trust our tests</span>
+  <div class="trust-divider"></div>
+  <div class="trust-items">
+    <span class="trust-item">Clinically validated scales (GAD-7, PHQ-9, PSS)</span>
+    <span class="trust-item">Built with licensed therapists</span>
+    <span class="trust-item">Anonymous & fully private</span>
+    <span class="trust-item">AI-powered personalized results</span>
+  </div>
+</div>
+
+<!-- TESTS SECTION -->
+<section class="tests-section">
+  <div class="tabs-header">
+    <div class="tabs-header-left">
+      <h2>All Self-Tests</h2>
+      <p>Find the assessment that fits where you are right now</p>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-row" id="tabs-row">
+    <button class="tab-btn active" onclick="switchTab('all', this)">All tests <span class="tab-count">20</span></button>
+    <button class="tab-btn" onclick="switchTab('anxiety', this)">Anxiety <span class="tab-count">4</span></button>
+    <button class="tab-btn" onclick="switchTab('mood', this)">Mood <span class="tab-count">3</span></button>
+    <button class="tab-btn" onclick="switchTab('stress', this)">Stress <span class="tab-count">3</span></button>
+    <button class="tab-btn" onclick="switchTab('personality', this)">Personality <span class="tab-count">4</span></button>
+    <button class="tab-btn" onclick="switchTab('relationships', this)">Relationships <span class="tab-count">3</span></button>
+    <button class="tab-btn" onclick="switchTab('selfesteem', this)">Self-Esteem <span class="tab-count">3</span></button>
+  </div>
+
+  <!-- GRID -->
+  <div class="tests-grid" id="tests-grid"></div>
+</section>
+
+<!-- WHY OUR TESTS -->
+<section class="why-section">
+  <div class="section-label">Why Choose Dzeny Tests</div>
+  <h2 class="section-title">More than a score — a starting point</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">📋</div>
+      <div class="why-title">Clinically validated</div>
+      <div class="why-desc">Every test is based on peer-reviewed, internationally recognized scales used by mental health professionals worldwide — not made-up quizzes.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤖</div>
+      <div class="why-title">AI-powered interpretation</div>
+      <div class="why-desc">Instead of a generic score, Dzeny's AI provides a personalized breakdown — explaining what your results mean for your specific situation.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔒</div>
+      <div class="why-title">Private by design</div>
+      <div class="why-desc">All tests are anonymous and encrypted. Your results belong to you — they're never shared, sold, or used without your explicit consent.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <div class="why-title">Actionable next steps</div>
+      <div class="why-desc">Every result comes with tailored recommendations — specific Dzeny tools, therapy approaches, or professional resources matched to your score.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📈</div>
+      <div class="why-title">Track your progress</div>
+      <div class="why-desc">Retake any test over time and watch your scores change. Seeing real improvement in your data is one of the most motivating things in mental wellness.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Fast & friction-free</div>
+      <div class="why-desc">Most tests take under 5 minutes. No registration needed to start — just honest questions and a meaningful result waiting at the end.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Ready to understand yourself better?</h2>
+  <p>Start with any test — free, anonymous, and available right now.</p>
+  <div class="cta-badges">
+    <span class="badge">✓ No registration needed</span>
+    <span class="badge">✓ Results in minutes</span>
+    <span class="badge">✓ AI-powered insights</span>
+    <span class="badge">✓ 100% private</span>
+  </div>
+  <button class="btn-primary">Take Your First Test</button>
+  <div class="social-proof">Joined by <strong>50,000+</strong> people on their mental wellness journey</div>
+</section>
+
+<footer>
+  Dzeny tests are for informational purposes only and do not constitute a clinical diagnosis. &nbsp;·&nbsp; dzeny.com/self-tests
+</footer>
+
+<script>
+  const allTests = [
+    // ANXIETY
+    { id: 1, img: 'https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?w=600&q=80', icon: '😰', title: 'Generalized Anxiety Disorder (GAD-7)', desc: 'Measure the severity of generalized anxiety using the gold-standard 7-question clinical scale.', questions: 7, time: '3 min', taken: '12.4k', tag: 'anxiety', tagLabel: 'Anxiety', featured: true },
+    { id: 2, img: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', icon: '😨', title: 'Social Anxiety Scale', desc: 'Assess how much social situations cause you worry, avoidance, or distress in daily life.', questions: 10, time: '4 min', taken: '8.1k', tag: 'anxiety', tagLabel: 'Anxiety' },
+    { id: 3, img: 'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=600&q=80', icon: '😱', title: 'Panic Disorder Assessment', desc: 'Explore the frequency and impact of panic attacks and related avoidance behaviors.', questions: 12, time: '5 min', taken: '5.3k', tag: 'anxiety', tagLabel: 'Anxiety' },
+    { id: 4, img: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&q=80', icon: '🧠', title: 'Health Anxiety Test', desc: 'Find out whether worry about illness and physical symptoms is affecting your quality of life.', questions: 9, time: '4 min', taken: '3.7k', tag: 'anxiety', tagLabel: 'Anxiety' },
+    // MOOD
+    { id: 5, img: 'https://images.unsplash.com/photo-1541199249251-f713e6145474?w=600&q=80', icon: '😔', title: 'Depression Screening (PHQ-9)', desc: 'The PHQ-9 is one of the most widely used tools for screening and measuring depression severity.', questions: 9, time: '3 min', taken: '15.2k', tag: 'mood', tagLabel: 'Mood' },
+    { id: 6, img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80', icon: '🌤️', title: 'Emotional Wellbeing Check', desc: 'A broad assessment of your current emotional state, energy levels, and life satisfaction.', questions: 14, time: '5 min', taken: '6.8k', tag: 'mood', tagLabel: 'Mood' },
+    { id: 7, img: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80', icon: '🎭', title: 'Mood Stability Assessment', desc: 'Understand how much your mood fluctuates and what patterns may be driving emotional instability.', questions: 10, time: '4 min', taken: '4.2k', tag: 'mood', tagLabel: 'Mood' },
+    // STRESS
+    { id: 8, img: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&q=80', icon: '🔥', title: 'Perceived Stress Scale (PSS-10)', desc: 'A globally recognized scale to measure how much stress you have perceived in the last month.', questions: 10, time: '4 min', taken: '9.6k', tag: 'stress', tagLabel: 'Stress' },
+    { id: 9, img: 'https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=600&q=80', icon: '💼', title: 'Burnout Assessment', desc: 'Evaluate signs of emotional exhaustion, detachment, and reduced effectiveness — especially at work.', questions: 12, time: '5 min', taken: '7.3k', tag: 'stress', tagLabel: 'Stress' },
+    { id: 10, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80', icon: '⚡', title: 'Resilience & Coping Skills Test', desc: 'Measure how effectively you cope with adversity and what resources you rely on under pressure.', questions: 10, time: '4 min', taken: '4.1k', tag: 'stress', tagLabel: 'Stress' },
+    // PERSONALITY
+    { id: 11, img: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&q=80', icon: '🌟', title: 'Big Five Personality Traits', desc: 'The most scientifically validated personality model — discover your scores on Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism.', questions: 44, time: '8 min', taken: '18.5k', tag: 'personality', tagLabel: 'Personality' },
+    { id: 12, img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80', icon: '🔍', title: 'Attachment Style Assessment', desc: 'Understand whether your attachment style is secure, anxious, avoidant — and how it shapes your relationships.', questions: 18, time: '6 min', taken: '11.2k', tag: 'personality', tagLabel: 'Personality' },
+    { id: 13, img: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80', icon: '🎯', title: 'Core Values Inventory', desc: 'Identify the values that matter most to you and explore where they may be out of alignment with your daily life.', questions: 20, time: '7 min', taken: '5.4k', tag: 'personality', tagLabel: 'Personality' },
+    { id: 14, img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80', icon: '🧩', title: 'Emotional Intelligence Test', desc: 'Measure your ability to perceive, understand, and manage emotions — in yourself and in others.', questions: 15, time: '6 min', taken: '6.7k', tag: 'personality', tagLabel: 'Personality' },
+    // RELATIONSHIPS
+    { id: 15, img: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80', icon: '💬', title: 'Communication Style Assessment', desc: 'Discover whether your communication is assertive, passive, or aggressive — and how to improve it.', questions: 12, time: '5 min', taken: '4.8k', tag: 'relationships', tagLabel: 'Relationships' },
+    { id: 16, img: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&q=80', icon: '💔', title: 'Relationship Satisfaction Scale', desc: 'Evaluate how fulfilled, heard, and connected you feel in your current or past relationship.', questions: 10, time: '4 min', taken: '7.1k', tag: 'relationships', tagLabel: 'Relationships' },
+    { id: 17, img: 'https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=600&q=80', icon: '🤝', title: 'Conflict Resolution Style Test', desc: 'Learn how you handle disagreements — and which approaches tend to work best or backfire.', questions: 12, time: '5 min', taken: '3.2k', tag: 'relationships', tagLabel: 'Relationships' },
+    // SELF-ESTEEM
+    { id: 18, img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80', icon: '💪', title: 'Rosenberg Self-Esteem Scale', desc: 'A classic 10-item scale used for decades to assess global self-worth and confidence levels.', questions: 10, time: '3 min', taken: '9.3k', tag: 'selfesteem', tagLabel: 'Self-Esteem' },
+    { id: 19, img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80', icon: '🪞', title: 'Body Image Assessment', desc: 'Explore your relationship with your physical appearance and how it affects your self-perception.', questions: 14, time: '5 min', taken: '4.6k', tag: 'selfesteem', tagLabel: 'Self-Esteem' },
+    { id: 20, img: 'https://images.unsplash.com/photo-1510894347713-fc3dc6166086?w=600&q=80', icon: '🌱', title: 'Self-Compassion Check', desc: 'Measure how kindly you treat yourself during difficult moments — vs. self-criticism and judgment.', questions: 12, time: '5 min', taken: '5.1k', tag: 'selfesteem', tagLabel: 'Self-Esteem' },
+  ];
+
+  let currentTab = 'all';
+  let searchQuery = '';
+
+  function tagClass(tag) {
+    const map = { anxiety: 'tag-anxiety', mood: 'tag-mood', stress: 'tag-stress', personality: 'tag-personality', relationships: 'tag-relationships', selfesteem: 'tag-selfesteem' };
+    return map[tag] || 'tag-mood';
+  }
+
+  function renderGrid(tests) {
+    const grid = document.getElementById('tests-grid');
+    if (tests.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No tests found. Try a different search or category.</div></div>`;
+      return;
+    }
+
+    grid.innerHTML = tests.map((t, i) => {
+      if (t.featured && currentTab === 'all' && !searchQuery) {
+        return `
+          <div class="test-card featured" onclick="alert('Opens test: ${t.title}')">
+            <div>
+              <div class="featured-badge">⭐ Most popular</div>
+            </div>
+            <img class="card-img" src="${t.img}" alt="${t.title}">
+            <div class="card-top">
+              <span class="card-tag tag-anxiety">${t.tagLabel}</span>
+            </div>
+            <div class="card-title">${t.title}</div>
+            <div class="card-desc">${t.desc}</div>
+            <div class="card-meta">
+              <div class="card-meta-item"><span>❓</span> ${t.questions} questions</div>
+              <div class="card-meta-item"><span>⏱</span> ${t.time}</div>
+            </div>
+            <div class="card-footer">
+              <div class="card-taken">Taken by <strong>${t.taken}</strong> people</div>
+              <div class="card-cta">Take test →</div>
+            </div>
+          </div>`;
+      }
+      return `
+        <div class="test-card" onclick="alert('Opens test: ${t.title}')">
+          <img class="card-img" src="${t.img}" alt="${t.title}">
+          <div class="card-top">
+            <span class="card-tag ${tagClass(t.tag)}">${t.tagLabel}</span>
+          </div>
+          <div class="card-title">${t.title}</div>
+          <div class="card-desc">${t.desc}</div>
+          <div class="card-meta">
+            <div class="card-meta-item"><span>❓</span> ${t.questions} questions</div>
+            <div class="card-meta-item"><span>⏱</span> ${t.time}</div>
+          </div>
+          <div class="card-footer">
+            <div class="card-taken">Taken by <strong>${t.taken}</strong></div>
+            <div class="card-cta">Take test →</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function filterTests() {
+    let filtered = allTests;
+    if (currentTab !== 'all') filtered = filtered.filter(t => t.tag === currentTab);
+    renderGrid(filtered);
+  }
+
+  function switchTab(tab, el) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    filterTests();
+  }
+
+  // initial render
+  renderGrid(allTests);
+</script>
+</body>
+</html>
