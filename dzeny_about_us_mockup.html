@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Dzeny — AI Mental Health App | Our Mission & Team</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#1a1a1a;background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);z-index:100}
+.logo{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:600}
+.logo-dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#5CC8E6,#3BA8D0)}
+.nav{display:flex;align-items:center;gap:32px;font-size:14px;color:#666}
+.nav a:hover{color:#1a1a1a}
+.nav-cta{background:#1a1a1a;color:#fff;padding:10px 22px;border-radius:24px;font-size:14px;font-weight:500;transition:background .2s}
+.nav-cta:hover{background:#333}
+
+/* Hero */
+.hero{padding:80px 48px 60px;text-align:center;background:linear-gradient(180deg,#dff0f7 0%,#edf7fb 100%);position:relative}
+.hero h1{font-size:48px;font-weight:600;line-height:1.2;margin-bottom:20px;letter-spacing:-0.5px;color:#1a1a1a}
+.hero h1 span{color:#3BA8D0}
+.hero-sub{font-size:18px;color:#555;max-width:560px;margin:0 auto 36px;line-height:1.6}
+.breadcrumb{font-size:13px;color:#888;margin-bottom:32px}
+.breadcrumb a{color:#3BA8D0}
+
+/* Section base */
+.section{padding:80px 48px;position:relative}
+.section-inner{max-width:1080px;margin:0 auto}
+.section-label{font-size:14px;font-weight:600;color:#3BA8D0;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.section-title{font-size:36px;font-weight:600;line-height:1.25;margin-bottom:16px;letter-spacing:-0.3px}
+.section-desc{font-size:17px;color:#555;line-height:1.7;max-width:720px}
+
+/* Block number badge */
+.block-badge{display:inline-flex;align-items:center;gap:8px;background:#ff6b35;color:#fff;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;margin-bottom:20px;text-transform:uppercase}
+
+/* ---- BLOCK 1: Company Story — белый ---- */
+.story{background:#ffffff}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:40px}
+.story-text p{font-size:16px;color:#444;line-height:1.8;margin-bottom:16px}
+.story-visual{position:relative;background:linear-gradient(135deg,#e8f6fa,#d0eef7);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:20px;min-height:360px;justify-content:center}
+.milestone{display:flex;align-items:flex-start;gap:16px}
+.milestone-year{font-size:14px;font-weight:600;color:#3BA8D0;min-width:48px;padding-top:2px}
+.milestone-text{font-size:14px;color:#444;line-height:1.5}
+.milestone-dot{width:10px;height:10px;border-radius:50%;background:#3BA8D0;margin-top:5px;flex-shrink:0}
+.milestone-line{width:2px;background:#c5e6f0;position:absolute;left:79px;top:60px;bottom:60px}
+
+/* ---- BLOCK 2: Mission — тёмный ---- */
+.mission{background:linear-gradient(180deg,#142535 0%,#0d1b28 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.mission::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(91,200,230,0.12) 0%,transparent 70%);pointer-events:none}
+.mission .section-label{color:#5CC8E6}
+.mission .block-badge{background:rgba(92,200,230,0.2);color:#5CC8E6}
+.mission-quote{font-size:22px;font-weight:400;line-height:1.65;max-width:720px;margin:0 auto;color:rgba(255,255,255,0.85)}
+.mission-quote strong{color:#5CC8E6;font-weight:600}
+.mission-sparkle{display:inline-block;width:28px;height:28px;margin-bottom:16px}
+
+/* ---- BLOCK 3: Advantages — тёплый кремовый ---- */
+.advantages{background:#fdf8f3}
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.adv-card{background:#fff;border:1px solid #f0e8dd;border-radius:16px;padding:32px 28px;transition:all .3s ease}
+.adv-card:hover{border-color:#3BA8D0;transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,168,208,0.08)}
+.adv-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px}
+.adv-icon.blue{background:#e8f6fa}
+.adv-icon.green{background:#e6f6ed}
+.adv-icon.purple{background:#f0eeff}
+.adv-icon.amber{background:#fef3e0}
+.adv-icon.pink{background:#fce8ef}
+.adv-card h3{font-size:18px;font-weight:600;margin-bottom:10px;color:#1a1a1a}
+.adv-card p{font-size:14px;color:#666;line-height:1.6}
+
+/* ---- BLOCK 4: Team — мягкий голубой ---- */
+.team{background:linear-gradient(180deg,#edf6fa 0%,#e3f1f7 100%)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px}
+.team-card{text-align:center}
+.team-photo{width:100%;aspect-ratio:1;border-radius:16px;background:#d8eaf1;margin-bottom:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.team-photo-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#d0e8f0,#b8dae6);display:flex;align-items:center;justify-content:center}
+.team-photo-placeholder span{font-size:40px;font-weight:600;color:#3BA8D0;opacity:0.45}
+.photo-badge{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);padding:4px 12px;border-radius:20px;font-size:11px;color:#666;white-space:nowrap}
+.team-card h3{font-size:16px;font-weight:600;margin-bottom:4px}
+.team-card .role{font-size:13px;color:#3BA8D0;font-weight:500;margin-bottom:8px}
+.team-card .bio{font-size:13px;color:#555;line-height:1.5}
+.team-card .linkedin{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#0077b5;margin-top:8px;font-weight:500}
+
+/* ---- BLOCK 5: Awards — лавандовый ---- */
+.awards{background:#f4f2f8}
+.awards-row{display:flex;align-items:center;justify-content:center;gap:40px;margin-top:48px;flex-wrap:wrap}
+.award-item{display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 32px;background:#fff;border-radius:16px;border:1px solid #e4e0ec;min-width:190px;transition:transform .2s}
+.award-item:hover{transform:translateY(-2px)}
+.award-logo{width:64px;height:64px;border-radius:12px;background:#ede9f5;display:flex;align-items:center;justify-content:center;font-size:12px;color:#8b7fb3;font-weight:600;text-align:center;line-height:1.3}
+.award-item .award-title{font-size:14px;font-weight:600;color:#1a1a1a;text-align:center}
+.award-item .award-desc{font-size:12px;color:#888;text-align:center}
+.stars{color:#f5a623;font-size:18px;letter-spacing:2px}
+
+/* ---- BLOCK 6: Gallery — мятный ---- */
+.gallery{background:linear-gradient(180deg,#f0f9f5 0%,#e8f5ee 100%)}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:16px;margin-top:48px}
+.gallery-item{border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#d4eddf,#b8dfc8);display:flex;align-items:center;justify-content:center;position:relative}
+.gallery-item:first-child{grid-row:span 2}
+.gallery-item .g-label{position:absolute;bottom:12px;left:12px;background:rgba(255,255,255,0.88);backdrop-filter:blur(6px);padding:6px 14px;border-radius:20px;font-size:12px;color:#3a6b4a;font-weight:500}
+.gallery-placeholder{font-size:13px;color:#5a9e6e;text-align:center;padding:20px;line-height:1.4}
+
+/* CTA */
+.cta-section{background:linear-gradient(180deg,#daeef5,#c8e4f0);text-align:center;padding:80px 48px}
+.cta-section h2{font-size:36px;font-weight:600;margin-bottom:16px;letter-spacing:-0.3px}
+.cta-section p{font-size:17px;color:#444;margin-bottom:32px}
+.cta-btn{display:inline-block;background:#1a1a1a;color:#fff;padding:16px 40px;border-radius:32px;font-size:16px;font-weight:500;transition:all .3s}
+.cta-btn:hover{background:#333;transform:translateY(-1px)}
+
+/* Footer */
+.footer{background:#1a1a1a;color:rgba(255,255,255,0.6);padding:48px;text-align:center;font-size:13px}
+.footer a{color:#5CC8E6}
+.footer-links{display:flex;justify-content:center;gap:32px;margin-bottom:16px;font-size:14px}
+.footer-disclaimer{margin-top:24px;font-size:11px;color:rgba(255,255,255,0.35);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* Mockup badge */
+.mockup-badge{position:fixed;top:16px;right:16px;background:#ff6b35;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;z-index:999;letter-spacing:0.5px}
+
+
+
+.note{font-size:13px;color:#999;font-style:italic;margin-top:20px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="mockup-badge">MOCKUP / МАКЕТ</div>
+
+
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Dzeny
+  </div>
+  <nav class="nav">
+    <a href="#">FAQ</a>
+    <a href="#">Blog</a>
+    <a href="#" style="color:#3BA8D0;font-weight:500">About Us</a>
+    <a href="#">Contacts</a>
+    <a href="#" class="nav-cta">Try 7 Days Free</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="breadcrumb"><a href="#">Home</a> / About Us</div>
+  <h1>About <span>Dzeny</span>: Who We Are<br>and Why We Built This</h1>
+  <p class="hero-sub">We believe mental health support should be available to everyone, anytime. Here's the story behind Dzeny and the team making it happen.</p>
+</section>
+
+<!-- Block 1: Company Story -->
+<section class="section story">
+  <div class="section-inner">
+    <div class="block-badge">Блок 1 — Company Story</div>
+    <div class="section-label">Our story</div>
+    <div class="story-grid">
+      <div class="story-text">
+        <p>Dzeny was founded in <strong>[year]</strong> with a simple but powerful belief: mental health support should be available to everyone, anytime. What started as a small team of psychologists and engineers has grown into a trusted AI wellness platform used by thousands of people worldwide.</p>
+        <p>Our founders saw a gap between the growing demand for mental health support and the limited availability of affordable, accessible care. By combining clinical expertise with cutting-edge AI technology, we set out to create a tool that could offer meaningful, personalized support — day or night, wherever you are.</p>
+        <p>Since <strong>[year]</strong>, Dzeny has been helping people navigate anxiety, stress, burnout, and everyday emotional challenges through AI-powered conversations shaped by insights from thousands of real therapy sessions.</p>
+        <p class="note" style="text-align:left">* Текст-заглушка. Клиент заполняет реальными данными о компании.</p>
+      </div>
+      <div class="story-visual" style="position:relative">
+        <div class="milestone-line"></div>
+        <div class="milestone">
+          <div class="milestone-year">[year]</div>
+          <div class="milestone-dot"></div>
+          <div class="milestone-text"><strong>Founded</strong> — idea born from clinical research</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-year">[year]</div>
+          <div class="milestone-dot"></div>
+          <div class="milestone-text"><strong>Beta Launch</strong> — first AI therapy sessions</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-year">[year]</div>
+          <div class="milestone-dot"></div>
+          <div class="milestone-text"><strong>Public Release</strong> — iOS & Android launch</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-year">[year]</div>
+          <div class="milestone-dot"></div>
+          <div class="milestone-text"><strong>10,000+ users</strong> — community milestone</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-year">Now</div>
+          <div class="milestone-dot" style="background:#1a1a1a"></div>
+          <div class="milestone-text"><strong>Growing worldwide</strong> — continuous AI improvements</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 2: Our Mission -->
+<section class="section mission">
+  <div class="section-inner">
+    <div class="block-badge">Блок 2 — Our Mission</div><br>
+    <div class="section-label">Our mission</div>
+    <svg class="mission-sparkle" viewBox="0 0 24 24" fill="none"><path d="M12 2L13.5 9.5L21 12L13.5 14.5L12 22L10.5 14.5L3 12L10.5 9.5L12 2Z" fill="#5CC8E6" opacity="0.6"/></svg>
+    <p class="mission-quote">Mental well-being is the foundation of a <strong>fulfilling life</strong>. By integrating AI with <strong>therapists' expertise</strong>, we make support <strong>accessible</strong> — helping people overcome challenges, embrace joy, and live <strong>happier, healthier</strong> lives.</p>
+  </div>
+</section>
+
+<!-- Block 3: Advantages -->
+<section class="section advantages">
+  <div class="section-inner">
+    <div class="block-badge">Блок 3 — Why Dzeny / Advantages</div>
+    <div class="section-label">Why Dzeny</div>
+    <div class="section-title">Built by industry experts,<br>designed for your everyday</div>
+    <div class="adv-grid">
+      <div class="adv-card">
+        <div class="adv-icon blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#3BA8D0"/></svg>
+        </div>
+        <h3>Built by Industry Experts</h3>
+        <p>Developed in collaboration with licensed therapists and mental health specialists who shaped every aspect of the AI experience.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#34a853" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="#34a853" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Available 24/7</h3>
+        <p>Support whenever you need it, no scheduling required. Start a session anytime, day or night — Dzeny is always ready.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon purple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" fill="#6c5ce7"/></svg>
+        </div>
+        <h3>Anonymous & Confidential</h3>
+        <p>No personal data required. Your conversations are completely private, creating a judgment-free safe space.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon amber">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.94s4.18 1.36 4.18 3.85c0 1.89-1.44 2.98-3.12 3.19z" fill="#f5a623"/></svg>
+        </div>
+        <h3>Affordable</h3>
+        <p>Start for free, then from $8.33/month. Quality mental health support shouldn't break the bank.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon pink">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#e84393"/></svg>
+        </div>
+        <h3>AI-Powered, Human-Informed</h3>
+        <p>Shaped by insights from thousands of real therapy sessions. Our AI learns from clinical expertise to provide meaningful support.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-icon blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z" fill="#3BA8D0"/></svg>
+        </div>
+        <h3>Adaptive Long-Term Support</h3>
+        <p>Dzeny adapts to your progress, offering personalized practices and tracking your wellbeing journey over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Block 4: Team -->
+<section class="section team">
+  <div class="section-inner">
+    <div class="block-badge">Блок 4 — Meet the Team</div>
+    <div class="section-label">Meet the team</div>
+    <div class="section-title">The people behind Dzeny</div>
+    <p class="section-desc">Our team combines deep expertise in psychology, AI, and product design to deliver the most effective mental health support.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder"><span>CEO</span></div>
+          <div class="photo-badge">Фото сотрудника</div>
+        </div>
+        <h3>[Full Name]</h3>
+        <div class="role">CEO & Co-Founder</div>
+        <p class="bio">[Education], [years] years of experience in [field]. Led the vision of making mental health support accessible through AI technology.</p>
+        <a href="#" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder"><span>CTO</span></div>
+          <div class="photo-badge">Фото сотрудника</div>
+        </div>
+        <h3>[Full Name]</h3>
+        <div class="role">CTO & Co-Founder</div>
+        <p class="bio">[Education], expert in AI/ML and natural language processing. Architected the core AI therapy engine behind Dzeny.</p>
+        <a href="#" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder"><span>PhD</span></div>
+          <div class="photo-badge">Фото сотрудника</div>
+        </div>
+        <h3>[Full Name]</h3>
+        <div class="role">Head of Clinical Psychology</div>
+        <p class="bio">Licensed clinical psychologist with [years]+ years in CBT and mindfulness therapy. Ensures clinical accuracy of all AI responses.</p>
+        <a href="#" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-photo-placeholder"><span>UX</span></div>
+          <div class="photo-badge">Фото сотрудника</div>
+        </div>
+        <h3>[Full Name]</h3>
+        <div class="role">Head of Product & Design</div>
+        <p class="bio">[Education], specializing in health-tech UX. Designed the conversational interface that makes Dzeny feel natural and supportive.</p>
+        <a href="#" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <p class="note">* Клиент заполняет реальными именами, фото и bio сотрудников</p>
+  </div>
+</section>
+
+<!-- Block 5: Awards & Recognition -->
+<section class="section awards">
+  <div class="section-inner">
+    <div class="block-badge">Блок 5 — Awards & Recognition</div>
+    <div class="section-label" style="text-align:center">Recognition & trust</div>
+    <div class="section-title" style="text-align:center">Awards, certificates & press</div>
+    <div class="awards-row">
+      <div class="award-item">
+        <div class="award-logo">App<br>Store</div>
+        <div class="stars">★★★★★</div>
+        <div class="award-title">4.8 Rating</div>
+        <div class="award-desc">App Store</div>
+      </div>
+      <div class="award-item">
+        <div class="award-logo" style="font-size:11px">Featured<br>In</div>
+        <div class="award-title">[Publication Name]</div>
+        <div class="award-desc">As seen in press</div>
+      </div>
+      <div class="award-item">
+        <div class="award-logo" style="font-size:20px">&#127942;</div>
+        <div class="award-title">[Award Name]</div>
+        <div class="award-desc">[Year]</div>
+      </div>
+      <div class="award-item">
+        <div class="award-logo" style="font-size:20px">&#129309;</div>
+        <div class="award-title">[Partner / Certificate]</div>
+        <div class="award-desc">Verified partnership</div>
+      </div>
+    </div>
+    <p class="note">* Клиент заполняет реальными наградами, сертификатами и упоминаниями</p>
+  </div>
+</section>
+
+<!-- Block 6: Photo Gallery -->
+<section class="section gallery">
+  <div class="section-inner">
+    <div class="block-badge">Блок 6 — Photo Gallery</div>
+    <div class="section-label">Gallery</div>
+    <div class="section-title">Inside Dzeny</div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Фото команды / офиса<br><br><small>alt: "Dzeny team working together in the office"</small></div>
+        <div class="g-label">Team at work</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Скриншот приложения<br><br><small>alt: "Dzeny app chat interface"</small></div>
+        <div class="g-label">Dzeny app</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Фото с конференции<br><br><small>alt: "Dzeny team at mental health conference"</small></div>
+        <div class="g-label">Conference</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Фото сертификата<br><br><small>alt: "Dzeny certification document"</small></div>
+        <div class="g-label">Certificates</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Фото продукта<br><br><small>alt: "Dzeny wellness tracking dashboard"</small></div>
+        <div class="g-label">Product</div>
+      </div>
+    </div>
+    <p class="note">* Все изображения должны иметь заполненный alt-текст на английском</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to start your<br>wellness journey?</h2>
+  <p>Try Dzeny free for 7 days. No commitment, no judgment.</p>
+  <a href="#" class="cta-btn">Try Dzeny For Free</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">FAQ</a>
+    <a href="#">Blog</a>
+    <a href="#">About Us</a>
+    <a href="#">Contacts</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+  </div>
+  <p>&copy; 2026 Dzeny. All rights reserved.</p>
+  <div class="footer-disclaimer">Dzeny is not a medical service and does not replace a professional psychologist, therapist or healthcare provider. Dzeny is fully AI-based and has significant limitations. If you believe you have health concerns, including mental health issues, please consult a qualified healthcare professional.</div>
+</footer>
+
+</body>
+</html>
