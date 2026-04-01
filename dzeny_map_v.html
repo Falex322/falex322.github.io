@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта продвижения dzeny.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font:'Onest',system-ui,sans-serif;
+  --bg:#f0ede7;
+  --surface:#ffffff;
+  --surface2:#f5f3ee;
+  --border:rgba(0,0,0,0.09);
+  --border2:rgba(0,0,0,0.15);
+  --text:#1c1a16;
+  --muted:#6b6960;
+  --faint:#9c9892;
+  --teal:#0F6E56;
+  --teal-bg:#e1f5ee;
+  --teal-bd:#9FE1CB;
+  --purple:#3C3489;
+  --purple-bg:#EEEDFE;
+  --amber:#63380a;
+  --amber-bg:#FAEEDA;
+  --amber-bd:#EF9F27;
+  --red:#8b1a1a;
+  --red-bg:#fff2f2;
+  --red-bd:#f5c1c1;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6}
+.page{max-width:860px;margin:0 auto;padding:2.5rem 2rem 5rem}
+
+/* ── typography ── */
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.h1{font-size:28px;font-weight:600;line-height:1.15;margin-bottom:8px}
+.h2{font-size:19px;font-weight:600;margin-bottom:.6rem}
+.h3{font-size:15px;font-weight:600;margin-bottom:.35rem}
+.body{font-size:14px;color:var(--muted);line-height:1.75}
+.strong{color:var(--text);font-weight:600}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.section{margin-bottom:2.25rem}
+
+/* ── transition arrow ── */
+.flow-bridge{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:12px;padding:1.1rem 1.3rem;
+  margin:1.5rem 0;font-size:14px;color:var(--muted);line-height:1.7
+}
+.flow-bridge .arrow{font-size:20px;color:var(--faint);flex-shrink:0;margin-top:1px}
+
+/* ── cards grid ── */
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.15rem}
+.card-num{font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--faint);margin-bottom:8px;text-transform:uppercase}
+.card-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.card-body{font-size:13px;color:var(--muted);line-height:1.6}
+.card.ac-amber{border-left:3px solid var(--amber-bd);border-radius:0 12px 12px 0}
+.card.ac-red{border-left:3px solid #e24b4a;border-radius:0 12px 12px 0}
+.card.ac-purple{border-left:3px solid #7F77DD;border-radius:0 12px 12px 0}
+
+/* ── direction detail cards ── */
+.dcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.dcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+.tag-t{background:var(--teal-bg);color:var(--teal)}
+.tag-p{background:var(--purple-bg);color:var(--purple)}
+.tag-a{background:var(--amber-bg);color:var(--amber)}
+.tag-r{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+.dcard-title{font-size:15px;font-weight:600;margin-bottom:5px}
+.dcard-desc{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.55}
+.dlist{list-style:none;border-top:1px solid var(--border);padding-top:10px;display:flex;flex-direction:column;gap:5px}
+.dlist li{font-size:12px;color:var(--muted);padding-left:14px;position:relative}
+.dlist li::before{content:'→';position:absolute;left:0;color:var(--faint);font-size:11px}
+.dlist li.dim{opacity:.45}
+
+/* ── infographic wrapper ── */
+.infograph{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.infograph-cap{font-size:12px;color:var(--faint);text-align:center;padding:8px 1rem 14px}
+
+/* ── soft warning ── */
+.notice{background:#fffaf5;border:1px solid #f5d89a;border-radius:14px;padding:1.4rem 1.5rem;margin-bottom:2rem}
+.notice-label{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#a06010;margin-bottom:8px}
+.notice-title{font-size:16px;font-weight:600;margin-bottom:10px}
+.notice-body{font-size:13px;color:var(--muted);line-height:1.8}
+.notice-body strong{color:var(--text);font-weight:600}
+
+/* ── workflow ── */
+.wf-wrap{overflow-x:auto;padding-bottom:4px}
+.wf{display:flex;gap:0;min-width:560px}
+.wf-step{flex:1}
+.wf-inner{padding:13px 9px;border-radius:10px;margin:0 3px;text-align:center}
+.wf-actor{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.wf-text{font-size:12px;color:var(--text);line-height:1.4}
+.ag .wf-inner{background:#e8f1fb}.ag .wf-actor{color:#0c447c}
+.cl .wf-inner{background:#e1f5ee}.cl .wf-actor{color:#085041}
+.bo .wf-inner{background:#faeeda}.bo .wf-actor{color:#633806}
+.wf-note{font-size:12px;color:var(--faint);margin-top:10px;line-height:1.65}
+
+/* ── footer ── */
+.footer{text-align:center;font-size:11px;color:var(--faint);padding-top:.5rem}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ════════════════════════════
+     HEADER
+════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Карта продвижения · апрель 2026 · 2 месяца работы</div>
+  <div class="h1">dzeny.com — план роста</div>
+  <p class="body">Ниже — три направления, по которым мы активно двигаемся, текущий статус каждого и то, почему их скорость связана между собой.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════
+     КОНТЕКСТ
+════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Контекст проекта</div>
+  <div class="h2">Держим в голове — на это мы не влияем</div>
+  <p class="body" style="margin-bottom:1rem">Три объективных фактора присутствуют в любом новом YMYL-проекте. Их нельзя убрать — но, работая правильно, можно пройти эти стадии значительно быстрее.</p>
+
+  <div class="cards3">
+    <div class="card ac-amber">
+      <div class="card-num">Фактор 01</div>
+      <div class="card-title">Сайт с нуля</div>
+      <div class="card-body">SEO требует полноценной структуры: about, blog, products, policy и т.д. Один лэндинг — это PPC. Для органики Google должен видеть систему страниц, которой можно доверять.</div>
+    </div>
+    <div class="card ac-red">
+      <div class="card-num">Фактор 02</div>
+      <div class="card-title">YMYL-тематика</div>
+      <div class="card-body">Медицина — жёсткие требования Google. Страницы проходят более тщательную проверку: контент не должен вредить пользователю. Доверие строится медленнее, чем в обычных нишах.</div>
+    </div>
+    <div class="card ac-purple">
+      <div class="card-num">Фактор 03</div>
+      <div class="card-title">Песочница Google</div>
+      <div class="card-body">Следствие первых двух. Новый YMYL-сайт проходит карантинный период. Обойти невозможно, но активная работа сокращает его и закладывает базу для быстрого роста после выхода.</div>
+    </div>
+  </div>
+</div>
+
+<div class="flow-bridge">
+  <span class="arrow">↓</span>
+  <span>Именно поэтому <span class="strong">нам сейчас важна скорость по всем трём направлениям</span>. Каждый месяц активной работы в период песочницы — это сокращение пути к органическому трафику. Ниже — как мы двигаемся и где сейчас находимся.</span>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════
+     ТРИ НАПРАВЛЕНИЯ — ИНФОГРАФИКА
+════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Карта работ</div>
+  <div class="h2">Три направления — один результат</div>
+  <p class="body" style="margin-bottom:1rem">Все три направления взаимосвязаны. Контент — фундамент. Ссылки — усилитель. Перелинковка — распределитель. Замедление в одном блоке влияет на всю систему.</p>
+
+  <div class="infograph">
+    <!-- SVG: Three Directions Map -->
+    <!-- ViewBox: 680 × 308 -->
+    <!-- Hub: x=230,y=20,w=220,h=52, center=(340,46) -->
+    <!-- Boxes: Content x=42,y=132,w=188; Links x=246,y=132,w=188; InternalLink x=450,y=132,w=188 -->
+    <!-- All checked: max right edge = 450+188=638 ✓ within 640 safe zone -->
+    <svg width="100%" viewBox="0 0 680 308" xmlns="http://www.w3.org/2000/svg" style="display:block">
+
+      <!-- ── Hub ── -->
+      <rect x="230" y="20" width="220" height="52" rx="10" fill="#1c1a16"/>
+      <text x="340" y="42" text-anchor="middle" font-family="'Onest',sans-serif" font-size="16" font-weight="600" fill="#ffffff">dzeny.com</text>
+      <text x="340" y="59" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9FE1CB">медицина · YMYL</text>
+
+      <!-- ── Connection lines ── -->
+      <!-- stem -->
+      <line x1="340" y1="72" x2="340" y2="106" stroke="#c8c5be" stroke-width="1.5"/>
+      <!-- horizontal rail -->
+      <line x1="136" y1="106" x2="544" y2="106" stroke="#c8c5be" stroke-width="1.5"/>
+      <!-- drops with direction colors -->
+      <line x1="136" y1="106" x2="136" y2="132" stroke="#e24b4a" stroke-width="2"/>
+      <line x1="340" y1="106" x2="340" y2="132" stroke="#1D9E75" stroke-width="2"/>
+      <line x1="544" y1="106" x2="544" y2="132" stroke="#EF9F27" stroke-width="2"/>
+
+      <!-- ══════ CONTENT BOX ══════ -->
+      <!-- x=42, y=132, w=188, h=106, center x=136 -->
+      <!-- texts: title center=(136,158), desc=(136,180), badge center=(136,206) -->
+      <!-- badge "нет публикаций": 16 chars × 7px=112 + 20 = 132px, x=136-66=70, w=132, right=202 ✓ -->
+      <rect x="42" y="132" width="188" height="106" rx="10" fill="#fff8f8" stroke="#f5c1c1" stroke-width="1"/>
+      <rect x="42" y="132" width="188" height="5" rx="0" fill="#e24b4a"/>
+      <!-- left accent line -->
+      <line x1="45" y1="140" x2="45" y2="232" stroke="#e24b4a" stroke-width="3" stroke-linecap="round"/>
+      <text x="136" y="162" text-anchor="middle" font-family="'Onest',sans-serif" font-size="14" font-weight="600" fill="#1c1a16">Контент</text>
+      <text x="136" y="182" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" fill="#6b6960">создание семантики</text>
+      <!-- status badge -->
+      <rect x="70" y="192" width="132" height="22" rx="11" fill="#fff0f0" stroke="#f5c1c1" stroke-width="1"/>
+      <text x="136" y="207" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#8b1a1a">! нет публикаций</text>
+
+      <!-- ══════ LINKS BOX ══════ -->
+      <!-- x=246, y=132, w=188, center x=340 -->
+      <!-- badge "в работе": 8 chars × 7px=56+20=76px, x=340-38=302, w=76, right=378 ✓ -->
+      <rect x="246" y="132" width="188" height="106" rx="10" fill="#f5fcf8" stroke="#9FE1CB" stroke-width="1"/>
+      <rect x="246" y="132" width="188" height="5" rx="0" fill="#1D9E75"/>
+      <line x1="249" y1="140" x2="249" y2="232" stroke="#1D9E75" stroke-width="3" stroke-linecap="round"/>
+      <text x="340" y="162" text-anchor="middle" font-family="'Onest',sans-serif" font-size="14" font-weight="600" fill="#1c1a16">Ссылки</text>
+      <text x="340" y="182" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" fill="#6b6960">авторитет сайта</text>
+      <rect x="299" y="192" width="82" height="22" rx="11" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="340" y="207" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#0F6E56">✓ в работе</text>
+
+      <!-- ══════ INTERNAL LINKING BOX ══════ -->
+      <!-- x=450, y=132, w=188, center x=544 right=638 ✓ -->
+      <!-- "Перелинковка": 12 chars × 8.5px=102px, center 544 → 493-595 ✓ -->
+      <!-- badge "ждёт контента": 13 chars × 7px=91+20=111px, x=544-55.5=488.5→489, right=600 ✓ -->
+      <rect x="450" y="132" width="188" height="106" rx="10" fill="#fdfbf4" stroke="#e8d8a0" stroke-width="1"/>
+      <rect x="450" y="132" width="188" height="5" rx="0" fill="#EF9F27"/>
+      <line x1="453" y1="140" x2="453" y2="232" stroke="#EF9F27" stroke-width="3" stroke-linecap="round"/>
+      <text x="544" y="162" text-anchor="middle" font-family="'Onest',sans-serif" font-size="14" font-weight="600" fill="#1c1a16">Перелинковка</text>
+      <text x="544" y="182" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" fill="#6b6960">внутренние связи</text>
+      <rect x="489" y="192" width="110" height="22" rx="11" fill="#faeeda" stroke="#e8c880" stroke-width="1"/>
+      <text x="544" y="207" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#63380a">~ ждёт контента</text>
+
+      <!-- ── bottom note ── -->
+      <!-- "статус обновляется по мере прогресса": 37 chars × 7px=259px ±129.5, center 340 → 210.5-469.5 ✓ -->
+      <text x="340" y="274" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9c9892">статус обновляется по мере прогресса</text>
+      <!-- legend dots -->
+      <circle cx="149" cy="292" r="4" fill="#e24b4a"/>
+      <text x="158" y="296" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">стоп</text>
+      <circle cx="215" cy="292" r="4" fill="#1D9E75"/>
+      <text x="224" y="296" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">в работе</text>
+      <circle cx="296" cy="292" r="4" fill="#EF9F27"/>
+      <text x="305" y="296" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">ждёт</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══ DETAIL CARDS ═══ -->
+<div class="section">
+  <div class="dcards">
+
+    <!-- Content -->
+    <div class="dcard">
+      <div>
+        <span class="tag tag-r">⚠ Контент — стоп</span>
+      </div>
+      <div class="dcard-title">Семантическая система</div>
+      <div class="dcard-desc">Фундамент органики. Сеть статей на разные аспекты темы формирует авторитет сайта в глазах Google.</div>
+      <ul class="dlist">
+        <li>Сбор семантики и актуализация контент-плана</li>
+        <li>ТЗ — минимум 10 в месяц (уже выставлены)</li>
+        <li>Контент по ТЗ + проверка по чек-листу</li>
+        <li>Публикация 10–15 материалов в месяц</li>
+        <li class="dim">Мониторинг ключей — стартует после публикаций</li>
+        <li class="dim">Анализ эффективности — стартует после публикаций</li>
+      </ul>
+    </div>
+
+    <!-- Links -->
+    <div class="dcard">
+      <div><span class="tag tag-t">✓ Ссылки — в работе</span></div>
+      <div class="dcard-title">Авторитетность сайта</div>
+      <div class="dcard-desc">На зарубежном рынке без ссылок не продвинуться. Это один из главных сигналов доверия к сайту в Google.</div>
+      <ul class="dlist">
+        <li>Простановка ссылок по ссылочной стратегии</li>
+        <li>Анализ конкурентов, поиск новых стратегий</li>
+        <li>Мониторинг результатов через GSC, Ahrefs, GA4</li>
+      </ul>
+    </div>
+
+    <!-- Internal Linking -->
+    <div class="dcard">
+      <div><span class="tag tag-a">~ Перелинковка — ждёт</span></div>
+      <div class="dcard-title">Внутренние связи</div>
+      <div class="dcard-desc">Распределяем ссылочный вес между страницами. Хабы для блогов уже созданы — ждём страниц для связки.</div>
+      <ul class="dlist">
+        <li>Хабы для блогов и тестов уже созданы</li>
+        <li class="dim">Анализ перелинковки — после публикации страниц</li>
+        <li class="dim">Устранение сиротских страниц — после публикаций</li>
+        <li class="dim">Полная связка страниц — зависит от контента</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════
+     ПОЧЕМУ НУЖЕН ОБЪЁМ КОНТЕНТА
+════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Почему важен объём</div>
+  <div class="h2">Один блог не даёт результата — нужна сеть</div>
+  <p class="body" style="margin-bottom:1rem">
+    SEO-сайт в глазах Google — это система взаимосвязанных материалов на одну тематику. Чем больше таких материалов, тем сильнее сигнал авторитетности. Один блог, даже идеально написанный, этого сигнала не создаёт.
+  </p>
+
+  <div class="infograph">
+    <!--
+    SVG: Semantic Web
+    ViewBox: 680 × 248
+    LEFT (x=0-220, center=110): isolated blog
+    RIGHT (x=230-680, center=450): semantic network
+    Divider at x=222
+
+    LEFT:
+      Header line1: x=110, y=18
+      Header line2: x=110, y=34
+      Blog box: x=44, y=48, w=132, h=48 → right=176 ✓ center=(110,72)
+      Text "Блог #1" at (110,68): 7ch×8.5px=60px ±30 → 80-140 ✓
+      Notes: y=112, y=126, y=140
+
+    RIGHT:
+      Header: x=450, y=18 and y=34
+      Hub: x=386, y=68, w=128, h=48 → right=514 ✓ center=(450,92)
+      Hub text "dzeny.com" at (450,88): 9ch×8px=72px ±36 → 414-486 ✓
+
+      Sats (each 84w × 30h):
+        TL: x=260, y=22, w=84, h=30 → right=344 ✓ center=(302,37) bottom=52
+        TR: x=516, y=22, w=84, h=30 → right=600 ✓ center=(558,37) bottom=52
+        L:  x=244, y=80, w=84, h=30 → right=328 ✓ center=(286,95)
+        R:  x=556, y=80, w=84, h=30 → right=640 ✓ center=(598,95)
+        BL: x=260, y=138, w=84, h=30 → right=344 ✓ center=(302,153) top=138
+        BR: x=516, y=138, w=84, h=30 → right=600 ✓ center=(558,153) top=138
+
+      "Блог #N" = 7ch at 11px, ~5.5px/ch = 38.5px ±19.25. Fits in 84px easily ✓
+      "тема N" = 6ch at 10px ✓
+
+      Lines from hub (x=386-514, y=68-116):
+        To TL: from (406,68) to (344,52)
+        To TR: from (494,68) to (516,52)
+        To L: from (386,92) to (328,95)
+        To R: from (514,92) to (556,95)
+        To BL: from (406,116) to (344,138)
+        To BR: from (494,116) to (516,138)
+
+      Footer: "чем больше связанных статей — тем выше авторитет в теме"
+        = 53ch × 6.5px = 344.5px ±172.25. Center 340: 167.75-512.25 ✓
+    -->
+    <svg width="100%" viewBox="0 0 680 248" xmlns="http://www.w3.org/2000/svg" style="display:block">
+
+      <!-- LEFT SIDE: isolated blog -->
+      <text x="110" y="18" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9c9892">один блог</text>
+      <text x="110" y="34" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9c9892">= слабый сигнал</text>
+
+      <!-- isolated box, dashed border to show loneliness -->
+      <rect x="44" y="48" width="132" height="48" rx="8" fill="#f5f3ee" stroke="#c8c5be" stroke-width="1" stroke-dasharray="5 3"/>
+      <text x="110" y="68" text-anchor="middle" font-family="'Onest',sans-serif" font-size="13" font-weight="600" fill="#9c9892">Блог #1</text>
+      <text x="110" y="84" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c8c5be">изолирован</text>
+
+      <!-- broken arrows to nowhere -->
+      <line x1="176" y1="72" x2="206" y2="72" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="44" y1="72" x2="18" y2="72" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="110" y1="96" x2="110" y2="114" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+
+      <text x="110" y="128" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">нет связей</text>
+      <text x="110" y="143" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">нет сети — нет сигнала</text>
+
+      <!-- DIVIDER -->
+      <line x1="222" y1="10" x2="222" y2="198" stroke="#e0ddd6" stroke-width="1" stroke-dasharray="5 4"/>
+
+      <!-- RIGHT SIDE: semantic network -->
+      <text x="450" y="18" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">семантическая сеть</text>
+      <text x="450" y="34" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">= сильный сигнал</text>
+
+      <!-- Hub -->
+      <rect x="386" y="68" width="128" height="48" rx="10" fill="#0F6E56"/>
+      <text x="450" y="88" text-anchor="middle" font-family="'Onest',sans-serif" font-size="13" font-weight="600" fill="#ffffff">dzeny.com</text>
+      <text x="450" y="104" text-anchor="middle" font-family="'Onest',sans-serif" font-size="10" fill="#9FE1CB">медицина</text>
+
+      <!-- Satellites: TL -->
+      <rect x="260" y="22" width="84" height="30" rx="6" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="302" y="35" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#0F6E56">Блог #1</text>
+      <text x="302" y="47" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#1D9E75">тема 1</text>
+
+      <!-- TR -->
+      <rect x="516" y="22" width="84" height="30" rx="6" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="558" y="35" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#0F6E56">Блог #2</text>
+      <text x="558" y="47" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#1D9E75">тема 2</text>
+
+      <!-- L -->
+      <rect x="244" y="80" width="84" height="30" rx="6" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1"/>
+      <text x="286" y="93" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#3C3489">Блог #3</text>
+      <text x="286" y="105" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#534AB7">тема 3</text>
+
+      <!-- R: x=556, w=84, right=640 ✓ -->
+      <rect x="556" y="80" width="84" height="30" rx="6" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1"/>
+      <text x="598" y="93" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#3C3489">Блог #4</text>
+      <text x="598" y="105" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#534AB7">тема 4</text>
+
+      <!-- BL -->
+      <rect x="260" y="138" width="84" height="30" rx="6" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="302" y="151" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#0F6E56">Блог #5</text>
+      <text x="302" y="163" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#1D9E75">тема 5</text>
+
+      <!-- BR -->
+      <rect x="516" y="138" width="84" height="30" rx="6" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="558" y="151" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="600" fill="#0F6E56">Блог #6</text>
+      <text x="558" y="163" text-anchor="middle" font-family="'Onest',sans-serif" font-size="9" fill="#1D9E75">тема 6</text>
+
+      <!-- Hub → satellite connections -->
+      <!-- To TL (302,52): from hub top-left area (406,68) → sat bottom-right (344,52) -->
+      <line x1="406" y1="68" x2="344" y2="52" stroke="#1D9E75" stroke-width="1.5" opacity="0.65"/>
+      <!-- To TR (558,52): from (494,68) → (516,52) -->
+      <line x1="494" y1="68" x2="516" y2="52" stroke="#1D9E75" stroke-width="1.5" opacity="0.65"/>
+      <!-- To L (328,95): from hub left (386,92) → sat right (328,95) -->
+      <line x1="386" y1="92" x2="328" y2="95" stroke="#7F77DD" stroke-width="1.5" opacity="0.65"/>
+      <!-- To R (556,95): from hub right (514,92) → sat left (556,95) -->
+      <line x1="514" y1="92" x2="556" y2="95" stroke="#7F77DD" stroke-width="1.5" opacity="0.65"/>
+      <!-- To BL (302,138): from (406,116) → (344,138) -->
+      <line x1="406" y1="116" x2="344" y2="138" stroke="#1D9E75" stroke-width="1.5" opacity="0.65"/>
+      <!-- To BR (558,138): from (494,116) → (516,138) -->
+      <line x1="494" y1="116" x2="516" y2="138" stroke="#1D9E75" stroke-width="1.5" opacity="0.65"/>
+
+      <!-- Cross-links between satellites (faint) -->
+      <line x1="302" y1="52" x2="302" y2="80" stroke="#1D9E75" stroke-width="0.6" opacity="0.3" stroke-dasharray="3 2"/>
+      <line x1="302" y1="110" x2="302" y2="138" stroke="#1D9E75" stroke-width="0.6" opacity="0.3" stroke-dasharray="3 2"/>
+      <line x1="558" y1="52" x2="558" y2="80" stroke="#1D9E75" stroke-width="0.6" opacity="0.3" stroke-dasharray="3 2"/>
+      <line x1="558" y1="110" x2="558" y2="138" stroke="#1D9E75" stroke-width="0.6" opacity="0.3" stroke-dasharray="3 2"/>
+
+      <!-- Footer note -->
+      <!-- "чем больше связанных материалов — тем выше авторитет сайта" -->
+      <!-- 55ch × 6.5px = 357.5px ±178.75. Center 340: 161.25-518.75 ✓ -->
+      <text x="340" y="210" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">чем больше связанных материалов — тем выше авторитет сайта</text>
+      <text x="340" y="228" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9c9892">цель: 10–15 новых материалов в месяц</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     ВНУТРЕННЯЯ ПЕРЕЛИНКОВКА
+════════════════════════════ -->
+<div class="section">
+  <div class="h2">Почему важна перелинковка</div>
+  <p class="body" style="margin-bottom:1rem">
+    Каждая страница с хорошим трафиком — это «донор» ссылочного веса для остального сайта. Но только если она связана с другими страницами внутренними ссылками. Изолированная страница эту ценность теряет.
+  </p>
+
+  <div class="infograph">
+    <!--
+    SVG: Internal Linking
+    ViewBox: 680 × 236
+
+    LEFT (center x=109): orphan page
+      Header: x=109, y=18
+      Box: x=38, y=34, w=142, h=52 → right=180 ✓ center=(109,60)
+        "1 000 визитов" at (109,56): 13ch×7.5px=97.5px ±48.75 → 60.25-157.75 ✓
+        "в месяц" at (109,72): 7ch×7px=49px ±24.5 → 84.5-133.5 ✓
+      Notes: y=100, y=115, y=130
+
+    RIGHT (center x=468): connected pages
+      Header: x=468, y=18
+      Hub: x=404, y=68, w=128, h=52 → right=532 ✓ center=(468,94)
+        "1 000 визитов" at (468,90): 97.5px ±48.75 → 419.25-516.75 ✓
+        "в месяц" at (468,106) ✓
+
+      Page A: x=302, y=18, w=112, h=38 → right=414 ✓ center=(358,37) bottom=56
+        "Страница A" at (358,37): 10ch×7.5px=75px ±37.5 → 320.5-395.5 ✓
+
+      Page B: x=524, y=18, w=112, h=38 → right=636 ✓ center=(580,37) bottom=56
+        "Страница B" at (580,37): 75px ±37.5 → 542.5-617.5 ✓
+
+      Page C: x=404, y=148, w=128, h=38 → right=532 ✓ center=(468,167)
+        "Страница C" at (468,167): 75px ±37.5 → 430.5-505.5 ✓
+
+      Lines (hub y=68-120):
+        Hub→A: hub TL area (430,68) → A bottom-center (358,56): gap=12px ✓
+        Hub→B: hub TR (506,68) → B bottom-center (580,56): gap=12px ✓
+        Hub→C: hub bottom (468,120) → C top (468,148): straight ✓
+
+      Divider at x=232
+    -->
+    <svg width="100%" viewBox="0 0 680 236" xmlns="http://www.w3.org/2000/svg" style="display:block">
+      <defs>
+        <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- LEFT: orphan -->
+      <!-- header: "Страница без связей" = 19ch × 6.5px = 123.5px ±61.75. At x=109: 47.25-170.75 ✓ -->
+      <text x="109" y="18" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#9c9892">Страница без связей</text>
+
+      <rect x="38" y="34" width="142" height="52" rx="8" fill="#f5f3ee" stroke="#c8c5be" stroke-width="1" stroke-dasharray="5 3"/>
+      <text x="109" y="56" text-anchor="middle" font-family="'Onest',sans-serif" font-size="13" font-weight="600" fill="#9c9892">1 000 визитов</text>
+      <text x="109" y="72" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">в месяц</text>
+
+      <!-- broken arrows from orphan -->
+      <line x1="180" y1="60" x2="208" y2="60" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="38" y1="60" x2="12" y2="60" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="109" y1="86" x2="109" y2="102" stroke="#d8d5ce" stroke-width="1" stroke-dasharray="4 3"/>
+
+      <!-- notes: each line 18ch max at center x=109 ✓ -->
+      <text x="109" y="116" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">ссылочный вес</text>
+      <text x="109" y="131" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">теряется впустую</text>
+      <text x="109" y="146" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#c0bdb6">другие не получают</text>
+
+      <!-- DIVIDER -->
+      <line x1="232" y1="8" x2="232" y2="204" stroke="#e0ddd6" stroke-width="1" stroke-dasharray="5 4"/>
+
+      <!-- RIGHT: connected -->
+      <!-- header: "Страница в системе" = 18ch × 6.5px = 117px ±58.5. At x=468: 409.5-526.5 ✓ -->
+      <text x="468" y="18" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">Страница в системе</text>
+
+      <!-- Page A: x=302, y=18, w=112 → right=414 ✓ center=(358,37) -->
+      <rect x="302" y="22" width="112" height="38" rx="7" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="358" y="41" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" font-weight="600" fill="#0F6E56">Страница A</text>
+
+      <!-- Page B: x=524, y=22, w=112 → right=636 ✓ center=(580,41) -->
+      <rect x="524" y="22" width="112" height="38" rx="7" fill="#e1f5ee" stroke="#9FE1CB" stroke-width="1"/>
+      <text x="580" y="41" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" font-weight="600" fill="#0F6E56">Страница B</text>
+
+      <!-- Hub: x=404, y=68, w=128 → right=532 ✓ center=(468,94) -->
+      <rect x="404" y="68" width="128" height="52" rx="10" fill="#0F6E56"/>
+      <text x="468" y="90" text-anchor="middle" font-family="'Onest',sans-serif" font-size="13" font-weight="600" fill="#ffffff">1 000 визитов</text>
+      <text x="468" y="106" text-anchor="middle" font-family="'Onest',sans-serif" font-size="10" fill="#9FE1CB">в месяц</text>
+
+      <!-- Page C: x=404, y=148, w=128 → right=532 ✓ center=(468,167) -->
+      <rect x="404" y="148" width="128" height="38" rx="7" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1"/>
+      <text x="468" y="167" text-anchor="middle" font-family="'Onest',sans-serif" font-size="12" font-weight="600" fill="#3C3489">Страница C</text>
+
+      <!-- Arrows: hub (404-532, 68-120) → pages -->
+      <!-- Hub→A: from (430,68) to A bottom-center (358,60) — gap=8px ✓ -->
+      <line x1="430" y1="68" x2="358" y2="60" stroke="#1D9E75" stroke-width="2" marker-end="url(#arw)"/>
+      <!-- Hub→B: from (506,68) to B bottom-center (580,60) — gap=8px ✓ -->
+      <line x1="506" y1="68" x2="580" y2="60" stroke="#1D9E75" stroke-width="2" marker-end="url(#arw)"/>
+      <!-- Hub→C: straight down from (468,120) to C top (468,148) — gap=28px ✓ -->
+      <line x1="468" y1="120" x2="468" y2="148" stroke="#7F77DD" stroke-width="2" marker-end="url(#arw)"/>
+
+      <!-- Footer -->
+      <!-- "ссылочный вес распределяется — весь сайт становится сильнее" -->
+      <!-- 59ch × 6.5px = 383.5px ±191.75. Center 340: 148.25-531.75 ✓ -->
+      <text x="340" y="206" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" fill="#6b6960">ссылочный вес распределяется — весь сайт становится сильнее</text>
+    </svg>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════
+     КОНТЕНТ — SOFT NOTICE
+════════════════════════════ -->
+<div class="notice">
+  <div class="notice-label">Контент — ускоряемся</div>
+  <div class="notice-title">Сейчас нет ни одной опубликованной статьи — это нужно изменить</div>
+  <div class="notice-body">
+    На данный момент у нас подготовлены ТЗ, контент пишется — это отлично, процесс запущен. Но ни одна статья ещё не опубликована на сайте.<br><br>
+
+    Важный момент: <strong>не нужно добиваться идеала</strong>. Достаточно, чтобы материал был качественным и соответствовал чек-листу. Попытки довести до совершенства каждый текст перед публикацией тормозят всю систему.<br><br>
+
+    Как только материалы начнут выходить, у нас появятся реальные данные: что индексируется, как ведут себя пользователи, какие запросы начинают расти. <strong>Только после публикаций мы сможем мониторить результаты и анализировать данные</strong> — до этого момента работаем «вслепую».<br><br>
+
+    Поэтому сейчас главный приоритет с нашей стороны — ускориться с отдачей материалов, а с вашей — ускориться с публикацией.
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     КАК МЫ РАБОТАЕМ ВМЕСТЕ
+════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Процесс</div>
+  <div class="h2">Как мы работаем вместе</div>
+  <p class="body" style="margin-bottom:1rem">Рост сайта строится на синхронной работе двух команд. Вот полный цикл — от ТЗ до оценки результатов.</p>
+
+  <div class="wf-wrap">
+    <div class="wf">
+      <div class="wf-step ag">
+        <div class="wf-inner">
+          <div class="wf-actor">Агентство</div>
+          <div class="wf-text">Анализируем, создаём ТЗ</div>
+        </div>
+      </div>
+      <div class="wf-step cl">
+        <div class="wf-inner">
+          <div class="wf-actor">Клиент</div>
+          <div class="wf-text">Внедряет на сайт</div>
+        </div>
+      </div>
+      <div class="wf-step ag">
+        <div class="wf-inner">
+          <div class="wf-actor">Агентство</div>
+          <div class="wf-text">Проверяем, даём рекомендации</div>
+        </div>
+      </div>
+      <div class="wf-step cl">
+        <div class="wf-inner">
+          <div class="wf-actor">Клиент</div>
+          <div class="wf-text">Корректирует и публикует</div>
+        </div>
+      </div>
+      <div class="wf-step bo">
+        <div class="wf-inner">
+          <div class="wf-actor">Вместе</div>
+          <div class="wf-text">Индексируем, результат оцениваем спустя 2–4 недели</div>
+        </div>
+      </div>
+      <div class="wf-step ag">
+        <div class="wf-inner">
+          <div class="wf-actor">Агентство</div>
+          <div class="wf-text">Собираем данные, отправляем отчёт</div>
+        </div>
+      </div>
+      <div class="wf-step bo">
+        <div class="wf-inner">
+          <div class="wf-actor">Вместе</div>
+          <div class="wf-text">Обсуждаем, двигаемся дальше</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="wf-note">Задержка на любом шаге сдвигает следующий. Качество и скорость — это баланс, а не выбор между ними.</p>
+</div>
+
+<hr class="divider">
+<div class="footer">dzeny.com · карта продвижения · апрель 2026</div>
+
+</div>
+</body>
+</html>
