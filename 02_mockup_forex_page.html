@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мокап — Forex produktowa strona | J2T · Rush Agency</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
+  /* Layout */
+  .doc-header { background: #1a1a2e; color: #fff; padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .doc-header span { font-size: 13px; opacity: .7; }
+  .doc-header strong { font-size: 14px; }
+  .doc-title { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 24px 32px 20px; }
+  .doc-title h1 { font-size: 20px; color: #1a1a2e; margin-bottom: 4px; }
+  .doc-title p { font-size: 13px; color: #666; }
+  .doc-title .meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .doc-title .meta span { font-size: 12px; background: #f0f2f5; padding: 4px 10px; border-radius: 4px; color: #555; }
+
+  .page-wrap { display: flex; gap: 24px; padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
+  .sidebar { width: 220px; flex-shrink: 0; position: sticky; top: 57px; height: fit-content; }
+  .sidebar-nav { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+  .sidebar-nav a { display: flex; align-items: center; gap: 8px; padding: 9px 12px; font-size: 12px; color: #333; text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .15s; }
+  .sidebar-nav a:last-child { border-bottom: none; }
+  .sidebar-nav a:hover { background: #f5f8fc; }
+  .sidebar-nav .num { font-size: 11px; font-weight: 700; color: #1F5E8B; background: #D9E8F5; border-radius: 3px; padding: 1px 5px; min-width: 22px; text-align: center; }
+  .sidebar-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .05em; padding: 8px 12px 4px; }
+
+  .page-canvas { flex: 1; min-width: 0; }
+  .mock-note { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #5D4037; margin-bottom: 16px; }
+  .mock-note strong { color: #E65100; }
+
+  /* Blocks */
+  .block { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+  .block-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #f8f9fa; border-bottom: 1px solid #e0e0e0; }
+  .block-num { font-size: 11px; font-weight: 700; color: #1F5E8B; background: #D9E8F5; border-radius: 4px; padding: 3px 8px; }
+  .block-name { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .block-tag { margin-left: auto; font-size: 11px; color: #666; background: #efefef; border-radius: 4px; padding: 2px 8px; }
+  .block-new { font-size: 10px; color: #C62828; background: #FFEBEE; border-radius: 4px; padding: 2px 7px; margin-left: 6px; font-weight: 700; }
+  .block-body { padding: 16px; }
+
+  /* Block content styles */
+  .breadcrumb { font-size: 12px; color: #888; margin-bottom: 10px; }
+  .breadcrumb span { color: #1F5E8B; }
+  .hero-h1 { font-size: 26px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; line-height: 1.25; }
+  .hero-sub { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 14px; max-width: 560px; }
+  .cta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { background: #1F5E8B; color: #fff; font-weight: 700; font-size: 14px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; }
+  .btn-demo { background: transparent; color: #1F5E8B; font-size: 14px; padding: 9px 20px; border-radius: 6px; border: 2px solid #1F5E8B; cursor: pointer; }
+  .badge-cysec { display: inline-flex; align-items: center; gap: 5px; background: #f0f2f5; border: 1px solid #ddd; border-radius: 4px; padding: 5px 10px; font-size: 11px; color: #555; margin-left: 10px; }
+  .annot { font-size: 11px; color: #1F5E8B; font-style: italic; margin-top: 12px; padding: 6px 10px; background: #f0f6ff; border-left: 3px solid #1F5E8B; border-radius: 0 4px 4px 0; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .stat-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 12px; text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 700; color: #1F5E8B; }
+  .stat-label { font-size: 12px; color: #666; margin-top: 4px; }
+
+  .edu-h2 { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .edu-columns { display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: start; }
+  .edu-text .ph-line { height: 9px; background: #e8e8e8; border-radius: 4px; margin-bottom: 7px; }
+  .edu-img { background: #e8edf3; border-radius: 8px; height: 130px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888; border: 1px dashed #bbb; }
+
+  .conditions-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .conditions-table th { background: #1a1a2e; color: #fff; padding: 8px 12px; text-align: left; font-size: 12px; }
+  .conditions-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; color: #333; }
+  .conditions-table tr:nth-child(even) td { background: #f8f9fa; }
+  .footnote { font-size: 11px; color: #888; margin-top: 8px; font-style: italic; }
+  .warn-note { background: #FFF8E1; border-left: 3px solid #F57F17; padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 12px; color: #5D4037; margin-top: 10px; }
+
+  .instr-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .instr-card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px 6px; text-align: center; }
+  .instr-flag { width: 28px; height: 28px; border-radius: 50%; background: #D9E8F5; display: flex; align-items: center; justify-content: center; font-size: 14px; margin: 0 auto 6px; }
+  .instr-name { font-size: 11px; font-weight: 700; color: #333; }
+  .instr-sub { font-size: 10px; color: #888; }
+  .instr-more { font-size: 12px; color: #1F5E8B; margin-top: 10px; cursor: pointer; }
+
+  .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; }
+  .platform-screen { background: #e8edf3; border-radius: 8px; height: 110px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888; border: 1px dashed #bbb; }
+  .platform-features { display: flex; flex-direction: column; gap: 8px; }
+  .pf-item { display: flex; align-items: flex-start; gap: 8px; }
+  .pf-icon { width: 16px; height: 16px; background: #D9E8F5; border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+  .pf-text { font-size: 12px; color: #333; line-height: 1.4; }
+  .pf-text strong { font-size: 13px; display: block; color: #1a1a2e; }
+
+  .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .adv-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 12px; }
+  .adv-icon { width: 32px; height: 32px; background: #D9E8F5; border-radius: 6px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .adv-title { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 5px; }
+  .adv-text { font-size: 11px; color: #555; line-height: 1.5; }
+
+  .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .step-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; }
+  .step-num { font-size: 28px; font-weight: 700; color: #1F5E8B; opacity: .4; margin-bottom: 8px; }
+  .step-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 5px; }
+  .step-text { font-size: 12px; color: #555; line-height: 1.5; }
+  .steps-cta { text-align: center; margin-top: 14px; }
+
+  .risk-block { background: #f8f9fa; border-left: 4px solid #bbb; border-radius: 0 6px 6px 0; padding: 12px 16px; font-size: 12px; color: #555; line-height: 1.6; margin-bottom: 8px; font-style: italic; }
+  .reg-row { display: flex; align-items: center; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
+  .reg-badge { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 6px 12px; font-size: 12px; color: #444; }
+
+  .faq-list { }
+  .faq-item { border-bottom: 1px solid #f0f0f0; padding: 10px 0; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q { font-size: 13px; color: #1a1a2e; font-weight: 500; }
+  .faq-icon { font-size: 18px; color: #ccc; }
+  .schema-note { font-size: 11px; color: #1F5E8B; margin-top: 8px; font-style: italic; }
+
+  .xsell-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .xsell-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 12px; text-align: center; }
+  .xsell-icon { width: 36px; height: 36px; background: #D9E8F5; border-radius: 50%; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .xsell-name { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+  .xsell-sub { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.4; }
+  .xsell-link { font-size: 12px; color: #1F5E8B; }
+
+  .cta-block { background: #1a1a2e; border-radius: 8px; padding: 28px; text-align: center; }
+  .cta-h2 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .cta-sub { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 18px; }
+  .cta-demo-link { font-size: 13px; color: rgba(255,255,255,.6); margin-left: 16px; }
+
+  @media (max-width: 900px) {
+    .page-wrap { flex-direction: column; padding: 12px 16px; }
+    .sidebar { width: 100%; position: static; }
+    .stats-row, .adv-grid { grid-template-columns: repeat(2, 1fr); }
+    .edu-columns, .platform-grid { grid-template-columns: 1fr; }
+    .instr-grid { grid-template-columns: repeat(3, 1fr); }
+    .steps-row { grid-template-columns: 1fr; }
+    .xsell-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div><strong>Визуальный мокап продуктовой страницы · j2t.com</strong></div>
+  <span>Rush Agency  ·  Апрель 2026  ·  Пример: страница Forex (PL)</span>
+</div>
+
+<div class="doc-title">
+  <h1>Мокап новой структуры: /pl/solutions/forex/</h1>
+  <p>Страница: Handel Forex  ·  Единый шаблон применяется ко всем 4 продуктовым страницам: Stocks, Bonds, Forex, Global Futures</p>
+  <div class="meta">
+    <span>🗂 Документ 2 из 3</span>
+    <span>📐 Desktop 1280px</span>
+    <span>🌐 Язык: Polish (PL)</span>
+    <span>📋 Блоков: 12</span>
+    <span>✉ Связан с: ТЗ на внедрение (Doc. 3)</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- SIDEBAR NAV -->
+  <div class="sidebar">
+    <div class="sidebar-label">Навигация по блокам</div>
+    <div class="sidebar-nav">
+      <a href="#b01"><span class="num">01</span> Hero</a>
+      <a href="#b02"><span class="num">02</span> Stats bar</a>
+      <a href="#b03"><span class="num">03</span> Educational</a>
+      <a href="#b04"><span class="num">04</span> Торговые условия</a>
+      <a href="#b05"><span class="num">05</span> Инструменты</a>
+      <a href="#b06"><span class="num">06</span> Платформа</a>
+      <a href="#b07"><span class="num">07</span> Преимущества</a>
+      <a href="#b08"><span class="num">08</span> 3 шага</a>
+      <a href="#b09"><span class="num">09</span> Risk notice</a>
+      <a href="#b10"><span class="num">10</span> FAQ</a>
+      <a href="#b11"><span class="num">11</span> Cross-sell</a>
+      <a href="#b12"><span class="num">12</span> Bottom CTA</a>
+    </div>
+  </div>
+
+  <!-- PAGE CANVAS -->
+  <div class="page-canvas">
+
+    <div class="mock-note">
+      <strong>Для клиента:</strong> Данный мокап показывает предлагаемую структуру страницы Forex на польском языке. Все тексты — демонстрационные. Серые блоки = зоны для изображений/скриншотов платформы. Одинаковая структура применяется к страницам Stocks, Bonds и Futures — меняется только контент внутри блоков.
+    </div>
+
+    <!-- BLOCK 01: HERO -->
+    <div class="block" id="b01">
+      <div class="block-header">
+        <span class="block-num">01</span>
+        <span class="block-name">Hero — szpica strony (Шапка)</span>
+        <span class="block-tag">BOFU · Conversion</span>
+      </div>
+      <div class="block-body">
+        <div class="breadcrumb">Strona główna &rsaquo; Instrumenty &rsaquo; <span>Forex</span></div>
+        <div class="hero-h1">Handel Forex — ponad 80 par walutowych</div>
+        <div class="hero-sub">Just2Trade oferuje handel na rynku Forex za pośrednictwem profesjonalnych platform MetaTrader 4 i MetaTrader 5. Handluj głównymi, mniejszymi i egzotycznymi parami walutowymi z niskim spreadem i dźwignią do 1:30.</div>
+        <div class="cta-row">
+          <button class="btn-primary">Otwórz konto</button>
+          <button class="btn-demo">Wypróbuj demo</button>
+          <span class="badge-cysec">🛡 Regulowany przez CySEC</span>
+        </div>
+        <div class="annot">Рекомендации копирайтеру: H1 содержит primary keyword «Handel Forex». Подзаголовок — 2–3 предложения: что предлагает j2t + ключевое УТП. Без упоминания конкурентов. Без гарантий прибыли.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 02: STATS BAR -->
+    <div class="block" id="b02">
+      <div class="block-header">
+        <span class="block-num">02</span>
+        <span class="block-name">Key Stats Bar — Liczby</span>
+        <span class="block-tag">Trust · Numbers</span>
+      </div>
+      <div class="block-body">
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-num">80+</div><div class="stat-label">par walutowych</div></div>
+          <div class="stat-card"><div class="stat-num">0,1</div><div class="stat-label">typowy spread (pipsy)*</div></div>
+          <div class="stat-card"><div class="stat-num">1:30</div><div class="stat-label">maks. dźwignia finansowa</div></div>
+          <div class="stat-card"><div class="stat-num">24/5</div><div class="stat-label">godziny handlu</div></div>
+        </div>
+        <div class="annot">Рекомендации: только реальные данные j2t. Числа согласуются с отделом продукта. * к числу «0,1 pipsa» обязательна сноска о типичном значении.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 03: EDUCATIONAL -->
+    <div class="block" id="b03">
+      <div class="block-header">
+        <span class="block-num">03</span>
+        <span class="block-name">Educational Intro — Czym jest rynek Forex?</span>
+        <span class="block-tag">SEO · Informational</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2">Czym jest rynek Forex i jak na nim handlować?</div>
+        <div class="edu-columns">
+          <div class="edu-text">
+            <div class="ph-line" style="width:100%"></div>
+            <div class="ph-line" style="width:95%"></div>
+            <div class="ph-line" style="width:88%"></div>
+            <div class="ph-line" style="width:92%"></div>
+            <div class="ph-line" style="width:80%"></div>
+            <br>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:6px">Jak działają pary walutowe?</div>
+            <div class="ph-line" style="width:100%"></div>
+            <div class="ph-line" style="width:90%"></div>
+            <div class="ph-line" style="width:82%"></div>
+            <br>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:6px">Dla kogo jest handel Forex?</div>
+            <div class="ph-line" style="width:100%"></div>
+            <div class="ph-line" style="width:85%"></div>
+          </div>
+          <div class="edu-img">Скриншот платформы<br>(MT4/MT5 из терминала j2t<br>с вотермарком)</div>
+        </div>
+        <div class="annot">НОВЫЙ БЛОК · Рекомендации: 200–300 слов. Контент для опытного трейдера, не новичка. 2–3 подзаголовка H3. Обязателен 1 внутренний линк на обучающий материал блога j2t. Нет инвестиционных советов, нет гарантий прибыли.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 04: TRADING CONDITIONS -->
+    <div class="block" id="b04">
+      <div class="block-header">
+        <span class="block-num">04</span>
+        <span class="block-name">Warunki handlowe — Tabela</span>
+        <span class="block-tag">Commercial · Critical</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:12px">Warunki handlowe Forex w Just2Trade</div>
+        <table class="conditions-table">
+          <thead>
+            <tr>
+              <th>Para walutowa</th>
+              <th>Typowy spread</th>
+              <th>Swap długi</th>
+              <th>Swap krótki</th>
+              <th>Dźwignia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>EUR/USD</td><td>0,1 pipsa*</td><td>[dane J2T]</td><td>[dane J2T]</td><td>1:30</td></tr>
+            <tr><td>GBP/USD</td><td>0,3 pipsa*</td><td>[dane J2T]</td><td>[dane J2T]</td><td>1:30</td></tr>
+            <tr><td>USD/JPY</td><td>0,2 pipsa*</td><td>[dane J2T]</td><td>[dane J2T]</td><td>1:30</td></tr>
+            <tr><td>AUD/USD</td><td>0,5 pipsa*</td><td>[dane J2T]</td><td>[dane J2T]</td><td>1:20</td></tr>
+            <tr><td>EUR/GBP</td><td>0,4 pipsa*</td><td>[dane J2T]</td><td>[dane J2T]</td><td>1:20</td></tr>
+          </tbody>
+        </table>
+        <p class="footnote">*Podane spready są typowe i mogą się zmieniać w zależności od warunków rynkowych. Aktualne warunki dostępne po zalogowaniu do platformy.</p>
+        <div class="warn-note">⚠ Для копирайтера/редактора: таблица заполняется только данными из тарифов j2t. Никаких live-виджетов и сторонних данных (требование редакционной политики).</div>
+        <div class="annot">НОВЫЙ БЛОК · Критически важен для конверсии. Данные — из собственных торговых условий j2t. Пример ячеек [dane J2T] = заполнить актуальными свопами из торговой системы.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 05: INSTRUMENTS -->
+    <div class="block" id="b05">
+      <div class="block-header">
+        <span class="block-num">05</span>
+        <span class="block-name">Dostępne pary walutowe — Instrumenty</span>
+        <span class="block-tag">Product depth</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:12px">Handluj ponad 80 parami walutowymi</div>
+        <div class="instr-grid">
+          <div class="instr-card"><div class="instr-flag">🇪🇺</div><div class="instr-name">EUR/USD</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇬🇧</div><div class="instr-name">GBP/USD</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇯🇵</div><div class="instr-name">USD/JPY</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇦🇺</div><div class="instr-name">AUD/USD</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇨🇭</div><div class="instr-name">USD/CHF</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇨🇦</div><div class="instr-name">USD/CAD</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇳🇿</div><div class="instr-name">NZD/USD</div><div class="instr-sub">Główna para</div></div>
+          <div class="instr-card"><div class="instr-flag">🇵🇱</div><div class="instr-name">USD/PLN</div><div class="instr-sub">Egzotyczna</div></div>
+          <div class="instr-card"><div class="instr-flag">🇪🇺</div><div class="instr-name">EUR/GBP</div><div class="instr-sub">Krzyżowa</div></div>
+          <div class="instr-card"><div class="instr-flag">🌍</div><div class="instr-name">+71 par</div><div class="instr-sub">Mniejsze i egzotyczne</div></div>
+        </div>
+        <div class="instr-more">→ Pokaż pełną listę par walutowych</div>
+        <div class="annot">Рекомендации: 10 карточек + ссылка «Pokaż wszystkie». Для Stocks — логотипы бирж. Для Bonds — 4 карточки категорий. Для Futures — группы контрактов.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 06: PLATFORM -->
+    <div class="block" id="b06">
+      <div class="block-header">
+        <span class="block-num">06</span>
+        <span class="block-name">Platforma handlowa — MetaTrader 4 / 5</span>
+        <span class="block-tag">Product feature</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:14px">Handluj Forex na platformach MT4 i MT5</div>
+        <div class="platform-grid">
+          <div class="platform-screen">Скриншот MT4/MT5<br>(из терминала j2t, вотермарк)</div>
+          <div class="platform-features">
+            <div class="pf-item"><div class="pf-icon"></div><div class="pf-text"><strong>80+ wskaźników technicznych</strong>Zaawansowana analiza techniczna bezpośrednio na wykresie.</div></div>
+            <div class="pf-item"><div class="pf-icon"></div><div class="pf-text"><strong>Handel algorytmiczny (EA)</strong>Automatyzuj strategie za pomocą Expert Advisors na MT4/MT5.</div></div>
+            <div class="pf-item"><div class="pf-icon"></div><div class="pf-text"><strong>Aplikacja mobilna</strong>Handluj z każdego miejsca — iOS i Android.</div></div>
+            <div class="pf-item"><div class="pf-icon"></div><div class="pf-text"><strong>Wiadomości rynkowe w czasie rzeczywistym</strong>Analizy i newsy bezpośrednio w platformie.</div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px"><button class="btn-demo">Pobierz platformę MT5</button></div>
+        <div class="annot">Рекомендации: Forex → MT4+MT5. Stocks → MT5 Global + Sterling Trader Pro. Bonds → MT5 Bond Scanner. Futures → CQG. Скриншоты — только из терминала j2t с вотермарком (редполитика).</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 07: ADVANTAGES -->
+    <div class="block" id="b07" style="background:#f8f9fa">
+      <div class="block-header" style="background:#eff1f4">
+        <span class="block-num">07</span>
+        <span class="block-name">Dlaczego handlować Forex w Just2Trade?</span>
+        <span class="block-tag">Commercial · Benefits</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:14px">Dlaczego Just2Trade do handlu Forex?</div>
+        <div class="adv-grid">
+          <div class="adv-card"><div class="adv-icon">📉</div><div class="adv-title">Spread od 0,1 pipsa</div><div class="adv-text">Niskie koszty transakcji na głównych parach walutowych EUR/USD, GBP/USD i USD/JPY.</div></div>
+          <div class="adv-card"><div class="adv-icon">🔧</div><div class="adv-title">Platformy MT4 i MT5</div><div class="adv-text">Dostęp do dwóch wiodących platform Forex — MetaTrader 4 i MetaTrader 5 — na komputerze i urządzeniu mobilnym.</div></div>
+          <div class="adv-card"><div class="adv-icon">⚖️</div><div class="adv-title">Dźwignia do 1:30</div><div class="adv-text">Handel z dźwignią finansową do 1:30 dla klientów detalicznych, zgodnie z wymogami regulacyjnymi ESMA.</div></div>
+          <div class="adv-card"><div class="adv-icon">🛡</div><div class="adv-title">Licencja CySEC</div><div class="adv-text">Lime Trading (CY) Ltd jest regulowana przez Cypryjską Komisję Papierów Wartościowych i Giełd (CySEC).</div></div>
+        </div>
+        <div class="annot">Рекомендации: каждое преимущество — конкретная цифра или факт из условий j2t. Без сравнений с другими брокерами. Без гарантий прибыли.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 08: HOW TO START -->
+    <div class="block" id="b08">
+      <div class="block-header">
+        <span class="block-num">08</span>
+        <span class="block-name">Jak zacząć handlować Forex — 3 kroki</span>
+        <span class="block-tag">Conversion · Steps</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:14px">Zacznij handlować Forex w 3 prostych krokach</div>
+        <div class="steps-row">
+          <div class="step-card"><div class="step-num">01</div><div class="step-title">Zarejestruj konto Forex</div><div class="step-text">Wypełnij formularz online i przejdź weryfikację tożsamości. Cały proces trwa mniej niż 10 minut.</div></div>
+          <div class="step-card"><div class="step-num">02</div><div class="step-title">Zasilij rachunek</div><div class="step-text">Wpłać środki przelewem bankowym lub kartą. Minimalna wpłata od [kwota J2T]. Rachunek w PLN, EUR lub USD.</div></div>
+          <div class="step-card"><div class="step-num">03</div><div class="step-title">Zacznij handlować</div><div class="step-text">Pobierz MetaTrader 4 lub 5, wybierz parę walutową i złóż pierwsze zlecenie. Dostępne konto demo.</div></div>
+        </div>
+        <div class="steps-cta"><button class="btn-primary">Otwórz konto teraz</button></div>
+        <div class="annot">НОВЫЙ БЛОК · Рекомендации: текст максимально лаконичный, 1–2 предложения на шаг. Шаг 1 меняется по типу счёта (Stocks → MT5 Global, Futures → CQG). Остальное — единый шаблон.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 09: RISK NOTICE -->
+    <div class="block" id="b09">
+      <div class="block-header">
+        <span class="block-num">09</span>
+        <span class="block-name">Risk Notice + Regulacja</span>
+        <span class="block-tag">Trust · YMYL · Обязательный</span>
+      </div>
+      <div class="block-body">
+        <div class="risk-block">
+          <strong>Ostrzeżenie o ryzyku (CFD):</strong> Kontrakty CFD na rynku Forex są złożonymi instrumentami i wiążą się z wysokim ryzykiem szybkiej utraty pieniędzy z powodu dźwigni finansowej. <strong>[X]%</strong> rachunków inwestorów detalicznych traci pieniądze podczas handlu CFD z Just2Trade. Zastanów się, czy rozumiesz, jak działają CFD, i czy możesz sobie pozwolić na podjęcie wysokiego ryzyka utraty pieniędzy.
+        </div>
+        <div class="risk-block" style="border-left-color:#999">
+          Trading on financial markets carries risks. The value of the investments can both increase and decrease and the investors may lose all their investment capital. In case of a leveraged product, the loss may be more than the initial capital invested.
+        </div>
+        <div class="reg-row">
+          <span class="reg-badge">🛡 CySEC — Licencja nr [xxxxx]</span>
+          <span class="reg-badge">🏦 Ochrona środków ICF do €20 000</span>
+          <span class="reg-badge">🇪🇺 Regulacje ESMA</span>
+        </div>
+        <div class="annot">Рекомендации: тексты дисклеймеров — строго из утверждённого шаблона редполитики, без изменений. [X]% — согласовать с юристом и отделом продукта перед публикацией. Страницы Stocks/Bonds — без CFD-дисклеймера.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 10: FAQ -->
+    <div class="block" id="b10">
+      <div class="block-header">
+        <span class="block-num">10</span>
+        <span class="block-name">Często zadawane pytania o Forex</span>
+        <span class="block-tag">SEO · FAQ Schema</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:12px">Często zadawane pytania o handel Forex</div>
+        <div class="faq-list">
+          <div class="faq-item"><span class="faq-q">Co to jest spread i jak wpływa na koszty handlu?</span><span class="faq-icon">+</span></div>
+          <div class="faq-item"><span class="faq-q">Jak działa dźwignia finansowa na rynku Forex?</span><span class="faq-icon">+</span></div>
+          <div class="faq-item"><span class="faq-q">Jakie pary walutowe są dostępne w Just2Trade?</span><span class="faq-icon">+</span></div>
+          <div class="faq-item"><span class="faq-q">Czy mogę handlować Forex z konta w złotych (PLN)?</span><span class="faq-icon">+</span></div>
+          <div class="faq-item"><span class="faq-q">Jak otworzyć konto demo Forex?</span><span class="faq-icon">+</span></div>
+          <div class="faq-item"><span class="faq-q">Jaka jest minimalna kwota wpłaty na konto Forex?</span><span class="faq-icon">+</span></div>
+        </div>
+        <p class="schema-note">✓ FAQPage Schema (JSON-LD) обязательна — реализуется разработчиком</p>
+        <div class="annot">НОВЫЙ БЛОК · Рекомендации: 5–8 вопросов, ответы 3–5 предложений. 1–2 внутренних линка в ответах. Вопросы формируются на основе реальных поисковых запросов PL-аудитории.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 11: CROSS-SELL -->
+    <div class="block" id="b11" style="background:#f8f9fa">
+      <div class="block-header" style="background:#eff1f4">
+        <span class="block-num">11</span>
+        <span class="block-name">Odkryj inne instrumenty — Powiązane produkty</span>
+        <span class="block-tag">Navigation · SEO</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="edu-h2" style="margin-bottom:14px">Odkryj inne instrumenty w Just2Trade</div>
+        <div class="xsell-grid">
+          <div class="xsell-card"><div class="xsell-icon">📈</div><div class="xsell-name">Akcje</div><div class="xsell-sub">Inwestuj w prawdziwe akcje z giełd na całym świecie.</div><div class="xsell-link">Dowiedz się więcej →</div></div>
+          <div class="xsell-card"><div class="xsell-icon">🏦</div><div class="xsell-name">Obligacje</div><div class="xsell-sub">Rządowe i korporacyjne obligacje z wypłatą kuponów.</div><div class="xsell-link">Dowiedz się więcej →</div></div>
+          <div class="xsell-card"><div class="xsell-icon">📊</div><div class="xsell-name">Futures</div><div class="xsell-sub">Globalne kontrakty terminowe przez platformę CQG.</div><div class="xsell-link">Dowiedz się więcej →</div></div>
+          <div class="xsell-card"><div class="xsell-icon">⚡</div><div class="xsell-name">MT5 Global</div><div class="xsell-sub">Dostęp do 9 000+ instrumentów z jednego konta.</div><div class="xsell-link">Dowiedz się więcej →</div></div>
+        </div>
+        <div class="annot">НОВЫЙ БЛОК · Рекомендации: 4 карточки — другие продукты j2t. Anchor-тексты согласно правилам внутренней перелинковки (редполитика, Раздел 4). Для страницы Stocks → Bonds, Forex, Futures, MT5 Global.</div>
+      </div>
+    </div>
+
+    <!-- BLOCK 12: BOTTOM CTA -->
+    <div class="block" id="b12">
+      <div class="block-header">
+        <span class="block-num">12</span>
+        <span class="block-name">Bottom CTA — Konwersja</span>
+        <span class="block-tag">Conversion · CTA</span>
+        <span class="block-new">НОВЫЙ БЛОК</span>
+      </div>
+      <div class="block-body">
+        <div class="cta-block">
+          <div class="cta-h2">Otwórz konto Forex i zacznij handlować</div>
+          <div class="cta-sub">Platforma MT4/MT5 · Spread od 0,1 pipsa · Konto demo dostępne</div>
+          <button class="btn-primary" style="font-size:15px;padding:12px 28px">Otwórz konto</button>
+          <a class="cta-demo-link" href="#">lub wypróbuj konto demo →</a>
+        </div>
+        <div class="annot">НОВЫЙ БЛОК · Рекомендации: контрастный фон (тёмный). H2 — специфичный призыв для каждого продукта. Подзаголовок — 1 предложение с ключевым УТП. Присутствует у всех 5 конкурентов.</div>
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:16px;margin-bottom:20px">
+      <div style="font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:10px">Легенда</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#555">
+        <span><span style="display:inline-block;width:10px;height:10px;background:#FFEBEE;border:1px solid #F44336;border-radius:2px;margin-right:4px"></span>Новый блок — добавить</span>
+        <span><span style="display:inline-block;width:10px;height:10px;background:#E8F5E9;border:1px solid #4CAF50;border-radius:2px;margin-right:4px"></span>Существующий блок — обновить контент</span>
+        <span><span style="display:inline-block;width:10px;height:10px;background:#FFF3E0;border-radius:2px;margin-right:4px"></span>Важное примечание редполитики</span>
+        <span>Синий курсив = рекомендации для команды</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="background:#1a1a2e;color:rgba(255,255,255,.5);text-align:center;padding:16px;font-size:12px;">
+  Rush Agency  ·  Мокап продуктовой страницы j2t.com  ·  Апрель 2026  ·  Документ 2 из 3
+</div>
+
+</body>
+</html>
