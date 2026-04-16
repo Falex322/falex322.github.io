@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading de Forex con Just2Trade | Broker Forex Online │ Just2Trade</title>
+<meta name="description" content="Opera +70 pares de divisas con spreads competitivos en MT4/MT5. Broker regulado por CySEC. Cuenta demo gratuita.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1C3A;
+    --navy-mid: #132850;
+    --teal: #00BFA5;
+    --teal-dark: #00897B;
+    --teal-light: #E0F5F2;
+    --gold: #F5A623;
+    --white: #FFFFFF;
+    --light: #F6F9FC;
+    --border: #E2E8F0;
+    --text: #1A2B47;
+    --text-mid: #4A5D7A;
+    --text-muted: #8899AF;
+    --red: #E53E3E;
+    --font: 'Manrope', sans-serif;
+    --serif: 'DM Serif Display', serif;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+  html { font-family: var(--font); color: var(--text); background: #fff; font-size: 15px; }
+  body { max-width: 1200px; margin: 0 auto; }
+
+  /* NAV */
+  nav { background: var(--navy); padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { color: #fff; font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { background: var(--teal); color: #fff !important; padding: 8px 20px; border-radius: 6px; font-weight: 600 !important; }
+  .breadcrumb { background: var(--navy-mid); padding: 10px 40px; font-size: 12px; color: rgba(255,255,255,0.5); }
+  .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .breadcrumb span { color: rgba(255,255,255,0.8); }
+
+  /* ---- B1: HERO ---- */
+  .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3a6b 100%); padding: 80px 40px 70px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; right: -80px; top: -80px; width: 500px; height: 500px; border-radius: 50%; background: rgba(0,191,165,0.07); }
+  .hero::after { content: ''; position: absolute; right: 80px; bottom: -120px; width: 300px; height: 300px; border-radius: 50%; background: rgba(0,191,165,0.05); }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,191,165,0.15); border: 1px solid rgba(0,191,165,0.3); border-radius: 20px; padding: 5px 14px; margin-bottom: 20px; }
+  .hero-badge-dot { width: 8px; height: 8px; background: var(--teal); border-radius: 50%; }
+  .hero-badge-text { font-size: 12px; color: var(--teal); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .hero h1 { font-family: var(--serif); font-size: 46px; color: #fff; line-height: 1.15; margin-bottom: 16px; }
+  .hero h1 em { color: var(--teal); font-style: normal; }
+  .hero-subtitle { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 10px; }
+  .cysec-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 7px 14px; margin-bottom: 28px; }
+  .cysec-icon { font-size: 16px; }
+  .cysec-text { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 600; }
+  .cysec-num { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+  .btn-primary { background: var(--teal); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: background 0.2s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { background: var(--teal-dark); }
+  .btn-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font); transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.7); }
+  .risk-notice { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 480px; }
+  .hero-visual { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 24px; }
+  .mini-chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .pair-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .pair-price { font-size: 22px; font-weight: 800; color: var(--teal); }
+  .pair-change { font-size: 12px; color: #48BB78; background: rgba(72,187,120,0.15); padding: 3px 8px; border-radius: 4px; font-weight: 600; }
+  .mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 60px; margin-bottom: 16px; }
+  .mini-bar { flex: 1; border-radius: 2px 2px 0 0; transition: opacity 0.2s; }
+  .mini-bar:hover { opacity: 0.8; }
+  .pairs-mini { display: flex; flex-direction: column; gap: 8px; }
+  .pair-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 13px; }
+  .pair-row:last-child { border-bottom: none; }
+  .pair-sym { color: rgba(255,255,255,0.7); font-weight: 500; }
+  .pair-val { color: #fff; font-weight: 600; }
+  .pair-chg-pos { color: #48BB78; font-size: 12px; font-weight: 600; }
+  .pair-chg-neg { color: #FC8181; font-size: 12px; font-weight: 600; }
+
+  /* ---- SECTION COMMONS ---- */
+  section { padding: 72px 40px; }
+  section:nth-child(even) { background: var(--light); }
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--teal-dark); margin-bottom: 12px; }
+  .section-title { font-family: var(--serif); font-size: 34px; color: var(--text); line-height: 1.2; margin-bottom: 14px; }
+  .section-subtitle { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 600px; margin-bottom: 44px; }
+
+  /* ---- B2: CONDICIONES ---- */
+  .conds { background: var(--navy); }
+  .conds .section-label { color: var(--teal); }
+  .conds .section-title { color: #fff; }
+  .conds .section-subtitle { color: rgba(255,255,255,0.6); }
+  .conds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+  .cond-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 24px 20px; text-align: center; position: relative; }
+  .cond-card.highlight { border-color: var(--teal); background: rgba(0,191,165,0.1); }
+  .cond-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .cond-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .cond-value { font-size: 28px; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px; }
+  .cond-value em { font-style: normal; color: var(--teal); }
+  .cond-note { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .fees-link { font-size: 14px; color: var(--teal); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .fees-link:hover { color: #fff; }
+
+  /* ---- B3: COTIZACIONES ---- */
+  .quote-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 14px; }
+  .quote-table thead th { background: var(--navy); color: rgba(255,255,255,0.7); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .quote-table thead th:first-child { border-radius: 8px 0 0 8px; }
+  .quote-table thead th:last-child { border-radius: 0 8px 8px 0; }
+  .quote-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  .quote-table tbody tr:hover { background: #F0FDF9; }
+  .quote-table td { padding: 13px 16px; }
+  .symbol { font-weight: 700; color: var(--text); font-size: 14px; }
+  .pair-desc { font-size: 11px; color: var(--text-muted); }
+  .bid-ask { font-size: 14px; font-weight: 600; color: var(--text); font-family: monospace; }
+  .spread-val { font-size: 13px; font-weight: 600; color: var(--teal-dark); }
+  .change-pos { color: #2F855A; font-weight: 700; font-size: 13px; }
+  .change-neg { color: var(--red); font-weight: 700; font-size: 13px; }
+  .btn-operar { background: var(--teal); color: #fff; border: none; padding: 6px 14px; border-radius: 5px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font); }
+  .live-dot { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #2F855A; background: #F0FFF4; padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; }
+  .live-dot::before { content: ''; width: 7px; height: 7px; background: #48BB78; border-radius: 50%; animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ---- B4: VENTAJAS ---- */
+  .ventajas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ventaja-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 22px; transition: box-shadow 0.2s, transform 0.2s; }
+  .ventaja-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .ventaja-icon { width: 44px; height: 44px; background: var(--teal-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+  .ventaja-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .ventaja-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+  .ventaja-badge { display: inline-block; background: #FFF7E0; color: #B7770A; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+
+  /* ---- B5: CÓMO FUNCIONA ---- */
+  .funciona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .funciona-card { border-left: 3px solid var(--teal); padding-left: 20px; }
+  .funciona-num { font-size: 32px; font-weight: 800; color: var(--teal-light); line-height: 1; margin-bottom: 6px; }
+  .funciona-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .funciona-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+  .funciona-tag { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; margin-top: 10px; }
+  .platform-screenshot { background: var(--navy); border-radius: var(--radius); padding: 20px; margin-top: 40px; display: flex; align-items: center; justify-content: center; height: 160px; }
+  .screenshot-label { color: rgba(255,255,255,0.3); font-size: 13px; font-style: italic; }
+
+  /* ---- B6: TABLA COMPARACIÓN ---- */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .comp-table th { padding: 14px 20px; font-size: 13px; font-weight: 700; text-align: center; }
+  .comp-table th:first-child { text-align: left; }
+  .th-j2t { background: var(--navy); color: #fff; border-radius: 8px 8px 0 0; position: relative; }
+  .th-j2t::after { content: '✓ Mejor opción'; position: absolute; top: -22px; left: 50%; transform: translateX(-50%); background: var(--teal); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; white-space: nowrap; }
+  .th-comp { background: var(--light); color: var(--text-mid); }
+  .comp-table tbody tr { border-bottom: 1px solid var(--border); }
+  .comp-table tbody tr:hover { background: #F8FAFC; }
+  .comp-table td { padding: 13px 20px; text-align: center; }
+  .comp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-mid); font-size: 13px; }
+  .td-j2t { background: rgba(0,191,165,0.06); font-weight: 700; color: var(--text); }
+  .td-comp { color: var(--text-mid); }
+  .comp-check { color: var(--teal-dark); font-size: 16px; }
+  .comp-cross { color: var(--red); }
+  .comp-win { color: var(--teal-dark); font-weight: 700; }
+  .comp-note { font-size: 11px; color: var(--text-muted); margin-top: 12px; text-align: right; font-style: italic; }
+
+  /* ---- B7: PLATAFORMAS ---- */
+  .platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .platform-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; }
+  .platform-logo { font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 8px; font-family: var(--font); letter-spacing: -1px; }
+  .platform-logo span { color: var(--teal); }
+  .platform-sub { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; font-weight: 500; }
+  .platform-features { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .platform-features li { font-size: 13px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 7px; }
+  .platform-features li::before { content: '✓'; color: var(--teal); font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .platform-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-download { background: var(--navy); color: #fff; border: none; padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); text-decoration: none; }
+  .btn-web { background: transparent; color: var(--teal-dark); border: 1.5px solid var(--teal); padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); text-decoration: none; }
+
+  /* ---- B8: CÓMO EMPEZAR ---- */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+  .steps-grid::before { content: ''; position: absolute; top: 36px; left: calc(16.66% + 10px); right: calc(16.66% + 10px); height: 2px; background: var(--teal); z-index: 0; }
+  .step-card { text-align: center; padding: 0 32px; position: relative; }
+  .step-num { width: 72px; height: 72px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #fff; margin: 0 auto 24px; position: relative; z-index: 1; border: 4px solid #fff; }
+  .step-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .step-desc { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+  .step-sub { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-top: 8px; }
+  .steps-cta { text-align: center; margin-top: 44px; }
+
+  /* ---- B9: CONFIANZA ---- */
+  .trust { background: var(--navy); }
+  .trust .section-title { color: #fff; }
+  .trust-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 44px; }
+  .trust-stat { text-align: center; padding: 28px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); }
+  .trust-value { font-size: 36px; font-weight: 800; color: #fff; font-family: var(--serif); line-height: 1; margin-bottom: 6px; }
+  .trust-value em { font-style: normal; color: var(--teal); }
+  .trust-label { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .trust-badges { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .trust-cysec { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 14px 24px; display: flex; align-items: center; gap: 14px; }
+  .cysec-logo { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -1px; }
+  .cysec-info { }
+  .cysec-info-title { font-size: 13px; font-weight: 700; color: #fff; }
+  .cysec-info-sub { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .eu-note { background: rgba(0,191,165,0.1); border: 1px solid rgba(0,191,165,0.25); border-radius: 6px; padding: 10px 16px; font-size: 12px; color: var(--teal); font-weight: 500; margin-left: auto; max-width: 280px; line-height: 1.5; }
+
+  /* ---- B10: QUÉ ES ---- */
+  .que-es-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start; }
+  .que-es-content h2 { font-family: var(--serif); font-size: 30px; color: var(--text); margin-bottom: 20px; }
+  .que-es-content h3 { font-size: 17px; font-weight: 700; color: var(--text); margin: 28px 0 12px; }
+  .que-es-content p { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px; }
+  .que-es-sidebar { }
+  .video-placeholder { background: var(--navy); border-radius: var(--radius); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .play-btn { width: 64px; height: 64px; background: rgba(0,191,165,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .play-icon { width: 0; height: 0; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid #fff; margin-left: 5px; }
+  .video-label { font-size: 13px; color: rgba(255,255,255,0.6); font-style: italic; }
+  .demo-cta-box { background: var(--teal-light); border-radius: var(--radius); padding: 24px; text-align: center; }
+  .demo-cta-box h4 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .demo-cta-box p { font-size: 13px; color: var(--text-mid); margin-bottom: 16px; }
+
+  /* ---- B11: PAGOS ---- */
+  .payments-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+  .payment-logo { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px 20px; font-size: 15px; font-weight: 800; color: var(--text); min-width: 90px; text-align: center; }
+  .payment-logo.visa { color: #1a1f71; font-style: italic; font-size: 20px; }
+  .payment-logo.mc { display: flex; align-items: center; gap: 4px; }
+  .mc-red { width: 20px; height: 20px; background: #EB001B; border-radius: 50%; }
+  .mc-orange { width: 20px; height: 20px; background: #F79E1B; border-radius: 50%; margin-left: -8px; }
+  .payment-logo.paypal { color: #003087; }
+  .payment-logo.skrill { background: #881C8B; color: #fff; border-color: #881C8B; }
+  .payment-logo.bank { color: var(--text); font-size: 13px; }
+  .payment-note { font-size: 14px; color: var(--text-mid); margin-top: 16px; }
+  .payment-note strong { color: var(--text); }
+
+  /* ---- B12: NOTICIAS ---- */
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 28px; }
+  .news-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .news-img { height: 140px; background: var(--navy); display: flex; align-items: center; justify-content: center; }
+  .news-img-label { font-size: 13px; color: rgba(255,255,255,0.3); font-style: italic; }
+  .news-content { padding: 18px; }
+  .news-tag { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; }
+  .news-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .news-date { font-size: 12px; color: var(--text-muted); }
+  .news-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--teal-dark); font-weight: 600; text-decoration: none; margin-top: 12px; }
+
+  /* ---- B13: FAQ ---- */
+  .faq { background: var(--light); }
+  .faq-list { max-width: 800px; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .faq-question { padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text); gap: 16px; }
+  .faq-arrow { color: var(--teal); font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-answer { padding: 0 24px 18px; font-size: 14px; color: var(--text-mid); line-height: 1.7; display: none; }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-schema-note { font-size: 11px; color: var(--text-muted); margin-top: 16px; display: flex; align-items: center; gap: 6px; }
+  .schema-badge { background: #F0FFF4; color: #2F855A; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; border: 1px solid #C6F6D5; }
+
+  /* ---- B14: CTA FINAL ---- */
+  .cta-final { background: linear-gradient(135deg, var(--navy) 0%, #1a3a6b 100%); text-align: center; padding: 80px 40px; }
+  .cta-final h2 { font-family: var(--serif); font-size: 40px; color: #fff; margin-bottom: 12px; }
+  .cta-final h2 em { color: var(--teal); font-style: normal; }
+  .cta-final .subtitle { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+  .cta-final-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .trust-row { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.5); }
+  .trust-item::before { content: '✓'; color: var(--teal); font-weight: 700; }
+
+  /* ---- B15: AVISO ---- */
+  .aviso { background: #F1F5F9; padding: 28px 40px; border-top: 1px solid var(--border); }
+  .aviso-content { max-width: 900px; }
+  .aviso-title { font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .aviso-text { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+  .aviso-text strong { color: var(--text-mid); }
+
+  /* ---- FOOTER ---- */
+  footer { background: var(--navy); padding: 40px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+  .footer-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+  .footer-logo span { color: var(--teal); }
+  .footer-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col li a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; }
+  .footer-col li a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ---- BLOCK LABELS (annotation) ---- */
+  .block-label { display: inline-block; background: rgba(0,0,0,0.07); color: var(--text-muted); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .conds .block-label { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+  .trust .block-label { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+  .cta-final .block-label { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">just<span>2</span>trade</div>
+  <div class="nav-links">
+    <a href="#">Soluciones</a>
+    <a href="#">Plataformas</a>
+    <a href="#">Análisis</a>
+    <a href="#">Tarifas</a>
+    <a href="#">Sobre Nosotros</a>
+    <a href="#" class="nav-cta">Abrir Cuenta</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="#">Inicio</a> › <a href="#">Soluciones</a> › <span>Trading de Forex</span>
+</div>
+
+<!-- B1: HERO -->
+<section class="hero">
+  <div style="padding: 0; max-width: none;">
+    <span class="block-label" style="position:absolute;top:16px;left:16px;z-index:10;">B1 — Hero</span>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span class="hero-badge-text">Broker Forex Regulado</span>
+        </div>
+        <h1>Trading de <em>Forex</em> con Just2Trade</h1>
+        <p class="hero-subtitle">Opera más de 70 pares de divisas con spreads desde 0.0 pips. Incluye pares LATAM: USD/MXN, USD/ARS y más.</p>
+        <div class="cysec-badge">
+          <span class="cysec-icon">🛡</span>
+          <div>
+            <div class="cysec-text">Regulado por CySEC</div>
+            <div class="cysec-num">Licencia Nº 281/15 — Regulador Europeo</div>
+          </div>
+        </div>
+        <div class="hero-ctas">
+          <a href="#" class="btn-primary">Abrir Cuenta</a>
+          <a href="#" class="btn-secondary">Cuenta Demo Gratuita</a>
+        </div>
+        <p class="risk-notice">Los CFDs son instrumentos complejos y conllevan un alto riesgo de perder dinero rapidamente. El 74% de los inversores minoristas pierde dinero al operar CFDs. Asegúrese de comprender su funcionamiento.</p>
+      </div>
+      <div>
+        <div class="hero-visual">
+          <div class="mini-chart-header">
+            <div>
+              <div class="pair-name">EUR/USD</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="pair-price">1.0847</div>
+              <div class="pair-change">+0.34%</div>
+            </div>
+          </div>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:40%;background:rgba(0,191,165,0.4)"></div>
+            <div class="mini-bar" style="height:55%;background:rgba(0,191,165,0.45)"></div>
+            <div class="mini-bar" style="height:45%;background:rgba(0,191,165,0.4)"></div>
+            <div class="mini-bar" style="height:70%;background:rgba(0,191,165,0.5)"></div>
+            <div class="mini-bar" style="height:60%;background:rgba(0,191,165,0.45)"></div>
+            <div class="mini-bar" style="height:80%;background:rgba(0,191,165,0.55)"></div>
+            <div class="mini-bar" style="height:65%;background:rgba(0,191,165,0.5)"></div>
+            <div class="mini-bar" style="height:90%;background:rgba(0,191,165,0.6)"></div>
+            <div class="mini-bar" style="height:75%;background:rgba(0,191,165,0.55)"></div>
+            <div class="mini-bar" style="height:100%;background:var(--teal)"></div>
+          </div>
+          <div class="pairs-mini">
+            <div class="pair-row">
+              <span class="pair-sym">GBP/USD</span>
+              <span class="pair-val">1.2634</span>
+              <span class="pair-chg-pos">+0.21%</span>
+            </div>
+            <div class="pair-row">
+              <span class="pair-sym">USD/JPY</span>
+              <span class="pair-val">149.87</span>
+              <span class="pair-chg-neg">-0.18%</span>
+            </div>
+            <div class="pair-row">
+              <span class="pair-sym">USD/MXN</span>
+              <span class="pair-val">17.23</span>
+              <span class="pair-chg-neg">-0.42%</span>
+            </div>
+            <div class="pair-row">
+              <span class="pair-sym">USD/ARS</span>
+              <span class="pair-val">945.50</span>
+              <span class="pair-chg-neg">-0.09%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B2: CONDICIONES -->
+<section class="conds" style="padding:60px 40px;">
+  <span class="block-label">B2 — Condiciones de Trading</span>
+  <p class="section-label">Condiciones de Trading</p>
+  <h2 class="section-title" style="color:#fff;font-size:28px;margin-bottom:32px;">Spreads competitivos. Sin comisiones ocultas.</h2>
+  <div class="conds-grid">
+    <div class="cond-card highlight">
+      <span class="cond-icon">📊</span>
+      <div class="cond-label">Spreads desde</div>
+      <div class="cond-value"><em>0.0</em> pips</div>
+      <div class="cond-note">EUR/USD promedio 0.2 pips</div>
+    </div>
+    <div class="cond-card">
+      <span class="cond-icon">💸</span>
+      <div class="cond-label">Comisión desde</div>
+      <div class="cond-value"><em>$3.5</em></div>
+      <div class="cond-note">por lote estándar (round turn)</div>
+    </div>
+    <div class="cond-card">
+      <span class="cond-icon">⚡</span>
+      <div class="cond-label">Apalancamiento hasta</div>
+      <div class="cond-value">1:<em>30</em></div>
+      <div class="cond-note">Para clientes retail UE (CySEC)</div>
+    </div>
+    <div class="cond-card">
+      <span class="cond-icon">🏎</span>
+      <div class="cond-label">Ejecución desde</div>
+      <div class="cond-value"><em>12</em> ms</div>
+      <div class="cond-note">Servidores en NY4 & LD4</div>
+    </div>
+  </div>
+  <a href="/es/fees/" class="fees-link">Ver todas las tarifas y comisiones →</a>
+</section>
+
+<!-- B3: COTIZACIONES EN VIVO -->
+<section style="padding:72px 40px;">
+  <span class="block-label">B3 — Cotizaciones en Vivo</span>
+  <div class="live-dot">Precios en tiempo real</div>
+  <p class="section-label">Cotizaciones en Vivo</p>
+  <h2 class="section-title">Opera directamente desde la tabla</h2>
+  <p class="section-subtitle">Actualización en tiempo real. Incluye principales pares LATAM para traders de México, Argentina y Colombia.</p>
+  <table class="quote-table">
+    <thead>
+      <tr>
+        <th>Par / Instrumento</th>
+        <th>Compra (Bid)</th>
+        <th>Venta (Ask)</th>
+        <th>Spread</th>
+        <th>Cambio 24h</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><div class="symbol">EUR/USD</div><div class="pair-desc">Euro / Dólar Estadounidense</div></td><td class="bid-ask">1.08462</td><td class="bid-ask">1.08474</td><td class="spread-val">0.2 pips</td><td class="change-pos">+0.34%</td><td><button class="btn-operar">Operar</button></td></tr>
+      <tr><td><div class="symbol">GBP/USD</div><div class="pair-desc">Libra Esterlina / Dólar</div></td><td class="bid-ask">1.26318</td><td class="bid-ask">1.26335</td><td class="spread-val">0.5 pips</td><td class="change-pos">+0.21%</td><td><button class="btn-operar">Operar</button></td></tr>
+      <tr><td><div class="symbol">USD/JPY</div><div class="pair-desc">Dólar / Yen Japonés</div></td><td class="bid-ask">149.851</td><td class="bid-ask">149.874</td><td class="spread-val">0.8 pips</td><td class="change-neg">-0.18%</td><td><button class="btn-operar">Operar</button></td></tr>
+      <tr style="background:#FFF8E7;"><td><div class="symbol">USD/MXN</div><div class="pair-desc" style="color:#B7770A;font-weight:600;">🌎 Par LATAM — Peso Mexicano</div></td><td class="bid-ask">17.2285</td><td class="bid-ask">17.2395</td><td class="spread-val">0.9 pips</td><td class="change-neg">-0.42%</td><td><button class="btn-operar">Operar</button></td></tr>
+      <tr style="background:#FFF8E7;"><td><div class="symbol">USD/ARS</div><div class="pair-desc" style="color:#B7770A;font-weight:600;">🌎 Par LATAM — Peso Argentino</div></td><td class="bid-ask">945.20</td><td class="bid-ask">945.80</td><td class="spread-val">1.2 pips</td><td class="change-neg">-0.09%</td><td><button class="btn-operar">Operar</button></td></tr>
+      <tr><td><div class="symbol">XAU/USD</div><div class="pair-desc">Oro / Dólar</div></td><td class="bid-ask">2042.30</td><td class="bid-ask">2042.85</td><td class="spread-val">1.8 pips</td><td class="change-pos">+0.57%</td><td><button class="btn-operar">Operar</button></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--text-muted);">* Precios orientativos. Los precios reales varían en función de las condiciones del mercado. ¿Ves diferencias? <a href="#" style="color:var(--teal-dark);">Ver plataforma en vivo</a></p>
+</section>
+
+<!-- B4: VENTAJAS CLAVE -->
+<section style="background:var(--light);padding:72px 40px;">
+  <span class="block-label">B4 — Ventajas Clave</span>
+  <p class="section-label">¿Por Qué Just2Trade?</p>
+  <h2 class="section-title">6 razones para operar Forex con nosotros</h2>
+  <p class="section-subtitle">Comparado con los principales brokers del mercado ES-LATAM.</p>
+  <div class="ventajas-grid">
+    <div class="ventaja-card">
+      <div class="ventaja-icon">📉</div>
+      <div class="ventaja-title">Spreads desde 0.0 pips</div>
+      <p class="ventaja-desc">Los spreads más ajustados en EUR/USD, GBP/USD y principales pares. Ideal para scalpers y traders de alta frecuencia.</p>
+    </div>
+    <div class="ventaja-card">
+      <div class="ventaja-icon">⚡</div>
+      <div class="ventaja-title">Ejecución ultrarrápida</div>
+      <p class="ventaja-desc">Órdenes ejecutadas en menos de 12 ms desde servidores colocados en NY4 (Equinix) y LD4 (Londres).</p>
+    </div>
+    <div class="ventaja-card">
+      <div class="ventaja-icon">🖥</div>
+      <div class="ventaja-title">MT4 + MT5 + CQG</div>
+      <p class="ventaja-desc">Acceso a las tres plataformas más utilizadas por los traders profesionales. MT4 sigue disponible (XTB lo cerró en 2025).</p>
+      <span class="ventaja-badge">✓ MT4 disponible vs XTB</span>
+    </div>
+    <div class="ventaja-card">
+      <div class="ventaja-icon">🛡</div>
+      <div class="ventaja-title">Regulado por CySEC</div>
+      <p class="ventaja-desc">Licencia europea Nº 281/15. Fondos de clientes segregados. Compensación hasta €20.000 (ICF).</p>
+    </div>
+    <div class="ventaja-card">
+      <div class="ventaja-icon">👥</div>
+      <div class="ventaja-title">+155.000 clientes</div>
+      <p class="ventaja-desc">Presente en 130 países desde 2016. Comunidad activa de traders en España, México, Colombia y Argentina.</p>
+    </div>
+    <div class="ventaja-card">
+      <div class="ventaja-icon">🗣</div>
+      <div class="ventaja-title">Soporte 24/5 en español</div>
+      <p class="ventaja-desc">Asistencia en castellano por chat en vivo, email y teléfono. Equipo especializado en horario de mercados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- B5: CÓMO FUNCIONA -->
+<section style="padding:72px 40px;">
+  <span class="block-label">B5 — Cómo Funciona</span>
+  <p class="section-label">Conceptos Fundamentales</p>
+  <h2 class="section-title">Cómo funciona el Trading de Forex</h2>
+  <p class="section-subtitle">Tres pilares que todo trader debe entender antes de comenzar a operar.</p>
+  <div class="funciona-grid">
+    <div class="funciona-card">
+      <div class="funciona-num">01</div>
+      <div class="funciona-title">Posiciones largas y cortas</div>
+      <p class="funciona-desc">En Forex, puedes ganar tanto si el mercado sube (posición larga / buy) como si baja (posición corta / sell). Compras un par cuando crees que la divisa base se apreciará frente a la cotizada. Vendes cuando anticipas depreciación.</p>
+      <span class="funciona-tag">Long / Short</span>
+    </div>
+    <div class="funciona-card">
+      <div class="funciona-num">02</div>
+      <div class="funciona-title">Apalancamiento (EU Cap 1:30)</div>
+      <p class="funciona-desc">El apalancamiento permite controlar posiciones mayores con un capital reducido. Para clientes retail en la UE (CySEC), el límite es 1:30 en pares mayores. Para cuentas profesionales, los límites son más elevados.</p>
+      <span class="funciona-tag">Regulado CySEC</span>
+    </div>
+    <div class="funciona-card">
+      <div class="funciona-num">03</div>
+      <div class="funciona-title">Control del riesgo</div>
+      <p class="funciona-desc">Herramientas esenciales: Stop Loss (límite de pérdida), Take Profit (objetivo de ganancia) y protección de saldo negativo garantizada por CySEC. Just2Trade aplica el cierre automático si el margen cae al 50%.</p>
+      <span class="funciona-tag">Stop Loss obligatorio</span>
+    </div>
+  </div>
+  <div class="platform-screenshot">
+    <span class="screenshot-label">[ Captura de pantalla MT5 en español — interfaz real de la plataforma ]</span>
+  </div>
+</section>
+
+<!-- B6: TABLA COMPARACIÓN -->
+<section style="background:var(--light);padding:72px 40px;">
+  <span class="block-label">B6 — Tabla de Comparación</span>
+  <p class="section-label">Comparativa de Brokers</p>
+  <h2 class="section-title">Just2Trade vs. la competencia</h2>
+  <p class="section-subtitle">Datos verificados. Actualización trimestral.</p>
+  <div style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:200px;">Criterio</th>
+          <th class="th-j2t" style="min-width:150px;">Just2Trade</th>
+          <th class="th-comp" style="min-width:140px;">Pepperstone</th>
+          <th class="th-comp" style="min-width:140px;">Admirals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Spread EUR/USD (prom.)</td><td class="td-j2t comp-win">0.2 pips</td><td class="td-comp">0.6 pips</td><td class="td-comp">0.4 pips</td></tr>
+        <tr><td>Spread XAU/USD (prom.)</td><td class="td-j2t comp-win">1.8 pips</td><td class="td-comp">2.1 pips</td><td class="td-comp">2.3 pips</td></tr>
+        <tr><td>Depósito mínimo</td><td class="td-j2t">$100</td><td class="td-comp">$200</td><td class="td-comp">$100</td></tr>
+        <tr><td>Plataformas</td><td class="td-j2t"><span class="comp-win">MT4 + MT5 + CQG</span></td><td class="td-comp">MT4, MT5</td><td class="td-comp">MT4, MT5</td></tr>
+        <tr><td>MT4 disponible (2025)</td><td class="td-j2t"><span class="comp-check">✓ Sí</span></td><td class="td-comp"><span class="comp-check">✓ Sí</span></td><td class="td-comp"><span class="comp-check">✓ Sí</span></td></tr>
+        <tr><td>Regulación</td><td class="td-j2t comp-win">CySEC (UE)</td><td class="td-comp">FCA, ASIC</td><td class="td-comp">CySEC, ASIC</td></tr>
+        <tr><td>Cuenta demo sin límite</td><td class="td-j2t"><span class="comp-check">✓</span></td><td class="td-comp"><span class="comp-check">✓</span></td><td class="td-comp"><span class="comp-check">✓</span></td></tr>
+        <tr><td>Soporte en español 24/5</td><td class="td-j2t"><span class="comp-check">✓</span></td><td class="td-comp"><span class="comp-cross">✗</span></td><td class="td-comp"><span class="comp-check">✓</span></td></tr>
+        <tr><td>Pares LATAM (MXN, ARS)</td><td class="td-j2t"><span class="comp-check">✓</span></td><td class="td-comp"><span class="comp-cross">✗</span></td><td class="td-comp"><span class="comp-check">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="comp-note">Datos actualizados en enero de 2025. Spreads obtenidos de plataformas oficiales de cada broker en condiciones normales de mercado.</p>
+</section>
+
+<!-- B7: PLATAFORMAS -->
+<section style="padding:72px 40px;">
+  <span class="block-label">B7 — Plataformas</span>
+  <p class="section-label">Plataformas de Trading</p>
+  <h2 class="section-title">Opera desde la plataforma que prefieras</h2>
+  <p class="section-subtitle">MT4, MT5, CQG y Sterling Trader Pro — tú decides.</p>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-logo">MT<span>4</span></div>
+      <div class="platform-sub">MetaTrader 4 · Para Forex & CFDs</div>
+      <ul class="platform-features">
+        <li>Más de 30 indicadores técnicos integrados</li>
+        <li>Expert Advisors (trading automático)</li>
+        <li>Disponible para Windows, iOS y Android</li>
+      </ul>
+      <div class="platform-btns">
+        <a href="#" class="btn-download">Descargar</a>
+        <a href="#" class="btn-web">Web Trader</a>
+      </div>
+    </div>
+    <div class="platform-card" style="border-color:var(--teal);border-width:2px;">
+      <div style="background:var(--teal-light);color:var(--teal-dark);font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:8px;">Más popular</div>
+      <div class="platform-logo">MT<span>5</span></div>
+      <div class="platform-sub">MetaTrader 5 · Multimercado</div>
+      <ul class="platform-features">
+        <li>+80 instrumentos técnicos y 21 timeframes</li>
+        <li>Libro de órdenes y profundidad de mercado</li>
+        <li>Backtesting avanzado con múltiples divisas</li>
+      </ul>
+      <div class="platform-btns">
+        <a href="#" class="btn-download">Descargar</a>
+        <a href="#" class="btn-web">Web Trader</a>
+      </div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-logo">C<span>QG</span></div>
+      <div class="platform-sub">CQG Integrated Client · Futuros</div>
+      <ul class="platform-features">
+        <li>Acceso directo al mercado (DMA) en CME, EUREX</li>
+        <li>Datos premium de nivel 2</li>
+        <li>API para trading algorítmico profesional</li>
+      </ul>
+      <div class="platform-btns">
+        <a href="#" class="btn-download">Descargar</a>
+      </div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-logo" style="font-size:18px;">Sterling<span>Pro</span></div>
+      <div class="platform-sub">Sterling Trader Pro · Acciones</div>
+      <ul class="platform-features">
+        <li>DMA en NYSE, NASDAQ, LSE (+30.000 valores)</li>
+        <li>Routing inteligente de órdenes</li>
+        <li>Herramientas avanzadas de L2 / momentum</li>
+      </ul>
+      <div class="platform-btns">
+        <a href="#" class="btn-download">Descargar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B8: CÓMO EMPEZAR -->
+<section style="background:var(--light);padding:72px 40px;">
+  <span class="block-label">B8 — Cómo Empezar</span>
+  <p class="section-label">Empieza en 3 Pasos</p>
+  <h2 class="section-title" style="text-align:center;">¿Cómo abrir tu cuenta?</h2>
+  <p class="section-subtitle" style="text-align:center;margin:0 auto 60px;">Sin complicaciones. En menos de 10 minutos.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Abre tu cuenta</div>
+      <p class="step-desc">Regístrate en línea. Solo te pedimos nombre, email y país de residencia para comenzar.</p>
+      <span class="step-sub">Solo unos minutos</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">Realiza un depósito</div>
+      <p class="step-desc">Elige entre más de 20 métodos de pago: tarjeta, transferencia, PayPal o Skrill. Desde $100.</p>
+      <span class="step-sub">+20 métodos de pago</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">Tu primera operación</div>
+      <p class="step-desc">Elige el par de divisas, el tamaño de la posición y establece tu stop loss. O practica primero en demo.</p>
+      <span class="step-sub">O practica en demo</span>
+    </div>
+  </div>
+  <div class="steps-cta">
+    <a href="#" class="btn-primary" style="font-size:16px;padding:16px 36px;">Abrir Cuenta Ahora →</a>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Cuenta demo: virtual $10.000, sin límite de tiempo, sin depósito obligatorio</p>
+  </div>
+</section>
+
+<!-- B9: CONFIANZA -->
+<section class="trust" style="padding:72px 40px;">
+  <span class="block-label">B9 — Confianza y Premios</span>
+  <p class="section-label" style="color:var(--teal);">Confianza y Regulación</p>
+  <h2 class="section-title" style="color:#fff;margin-bottom:44px;">Respaldados por regulación europea</h2>
+  <div class="trust-stats">
+    <div class="trust-stat">
+      <div class="trust-value">+<em>155</em>K</div>
+      <div class="trust-label">Clientes activos</div>
+    </div>
+    <div class="trust-stat">
+      <div class="trust-value"><em>130</em></div>
+      <div class="trust-label">Países</div>
+    </div>
+    <div class="trust-stat">
+      <div class="trust-value">Desde <em>2016</em></div>
+      <div class="trust-label">En el mercado</div>
+    </div>
+    <div class="trust-stat">
+      <div class="trust-value"><em>€20</em>K</div>
+      <div class="trust-label">Compensación ICF</div>
+    </div>
+  </div>
+  <div class="trust-badges">
+    <div class="trust-cysec">
+      <div class="cysec-logo">CySEC</div>
+      <div class="cysec-info">
+        <div class="cysec-info-title">Regulado por CySEC — Licencia 281/15</div>
+        <div class="cysec-info-sub">Comisión de Valores de Chipre</div>
+      </div>
+    </div>
+    <div class="eu-note">
+      <strong style="color:var(--teal);">¿Qué es CySEC?</strong><br>
+      CySEC es el regulador financiero europeo de Chipre, supervisado por ESMA (UE). Garantiza las mismas protecciones que FCA (Reino Unido) o BaFin (Alemania) para clientes de toda LATAM.
+    </div>
+  </div>
+</section>
+
+<!-- B10: QUÉ ES EL TRADING -->
+<section style="padding:72px 40px;">
+  <span class="block-label">B10 — ¿Qué es el Trading de Forex?</span>
+  <div class="que-es-grid">
+    <div class="que-es-content">
+      <h2>¿Qué es el Trading de Forex?</h2>
+      <p>El mercado de divisas (Forex, del inglés Foreign Exchange) es el mercado financiero más grande y líquido del mundo, con un volumen diario que supera los <strong>6,6 billones de dólares</strong>. A diferencia de las bolsas tradicionales, Forex opera de manera descentralizada, 24 horas al día, 5 días a la semana, conectando bancos, instituciones y traders de todo el mundo.</p>
+      <p>Al operar Forex con Just2Trade, estás comprando o vendiendo un par de divisas: por ejemplo, EUR/USD significa que compras euros y vendes dólares. Si el euro se aprecia frente al dólar, tu posición gana valor. Si se deprecia, pierde.</p>
+      <h3>Cómo funcionan los mercados de Forex</h3>
+      <p>Los precios del Forex están determinados por la oferta y demanda globales, influenciadas por factores macroeconómicos como tasas de interés, inflación, datos de empleo y decisiones de bancos centrales como la Reserva Federal (Fed), el Banco Central Europeo (BCE) o el Banco de México (Banxico).</p>
+      <p>Los traders minoristas acceden al mercado a través de brokers regulados como Just2Trade, que actúan como intermediarios y ofrecen acceso a la liquidez interbancaria con spreads competitivos y herramientas avanzadas de gestión del riesgo.</p>
+      <h3>Ventajas de operar con Just2Trade</h3>
+      <p>Just2Trade destaca en el mercado hispanohablante por ofrecer acceso simultáneo a MT4, MT5 y CQG — una combinación única cuando competidores como XTB han cerrado MT4 para nuevos clientes desde 2025. Además, incluye pares LATAM como USD/MXN y USD/ARS, soporte en castellano 24/5 y una cuenta demo sin límite de tiempo para que los traders principiantes practiquen sin riesgo.</p>
+    </div>
+    <div class="que-es-sidebar">
+      <div class="video-placeholder">
+        <div class="play-btn"><div class="play-icon"></div></div>
+        <span class="video-label">Video explicativo en español<br>(YouTube J2T — si disponible)</span>
+      </div>
+      <div class="demo-cta-box">
+        <h4>Practica sin riesgo</h4>
+        <p>Cuenta demo con $10.000 virtuales. Sin límite de tiempo. Sin depósito inicial obligatorio.</p>
+        <a href="#" class="btn-primary" style="display:block;text-align:center;">Abrir Cuenta Demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B11: MÉTODOS DE PAGO -->
+<section style="background:var(--light);padding:72px 40px;">
+  <span class="block-label">B11 — Métodos de Pago</span>
+  <p class="section-label">Métodos de Pago</p>
+  <h2 class="section-title">Deposita y retira con facilidad</h2>
+  <p class="section-subtitle">Más de 20 métodos de pago disponibles. Sin comisión de depósito.</p>
+  <div class="payments-row">
+    <div class="payment-logo visa">VISA</div>
+    <div class="payment-logo mc"><div class="mc-red"></div><div class="mc-orange"></div><span style="font-size:13px;font-weight:700;margin-left:6px;">Mastercard</span></div>
+    <div class="payment-logo paypal">PayPal</div>
+    <div class="payment-logo skrill">Skrill</div>
+    <div class="payment-logo bank">🏦 Transferencia<br>Bancaria</div>
+    <div class="payment-logo" style="color:var(--text-muted);font-size:13px;">+ 15 más →</div>
+  </div>
+  <p class="payment-note"><strong>Sin comisión de depósito.</strong> Depósito mínimo desde $100. PayPal y transferencia bancaria son los métodos preferidos en LATAM. Los retiros se procesan en 1–3 días hábiles.</p>
+</section>
+
+<!-- B12: ANÁLISIS Y NOTICIAS -->
+<section style="padding:72px 40px;">
+  <span class="block-label">B12 — Análisis y Noticias</span>
+  <p class="section-label">Análisis y Noticias</p>
+  <h2 class="section-title">Últimas noticias sobre Forex</h2>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-img"><span class="news-img-label">[ Imagen del artículo ]</span></div>
+      <div class="news-content">
+        <span class="news-tag">Forex · Análisis</span>
+        <div class="news-title">EUR/USD: ¿Puede el euro mantener niveles clave ante la Fed?</div>
+        <div class="news-date">14 enero, 2025</div>
+        <a href="#" class="news-link">Leer análisis →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img"><span class="news-img-label">[ Imagen del artículo ]</span></div>
+      <div class="news-content">
+        <span class="news-tag">Forex · LATAM</span>
+        <div class="news-title">USD/MXN: Impacto de la política de Banxico en el peso mexicano</div>
+        <div class="news-date">12 enero, 2025</div>
+        <a href="#" class="news-link">Leer análisis →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img"><span class="news-img-label">[ Imagen del artículo ]</span></div>
+      <div class="news-content">
+        <span class="news-tag">Forex · Estrategia</span>
+        <div class="news-title">Los 5 errores más comunes en trading de Forex (y cómo evitarlos)</div>
+        <div class="news-date">10 enero, 2025</div>
+        <a href="#" class="news-link">Leer artículo →</a>
+      </div>
+    </div>
+  </div>
+  <a href="/es/solutions/blog/" style="font-size:14px;color:var(--teal-dark);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">Ver todas las noticias y análisis →</a>
+</section>
+
+<!-- B13: FAQ -->
+<section class="faq" style="padding:72px 40px;">
+  <span class="block-label">B13 — FAQ Accordion + FAQPage Schema</span>
+  <p class="section-label">Preguntas Frecuentes</p>
+  <h2 class="section-title">Preguntas frecuentes sobre Forex</h2>
+  <p class="section-subtitle">Respuestas a las dudas más habituales de nuestros clientes hispanohablantes.</p>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Es seguro operar Forex con Just2Trade?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">Sí. Just2Trade está regulado por CySEC (Comisión de Valores de Chipre), organismo supervisor europeo bajo ESMA. Los fondos de los clientes se mantienen en cuentas bancarias segregadas, separadas del capital operativo de la empresa. Además, ofrecemos protección de saldo negativo y compensación ICF de hasta €20.000.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Cuánto dinero necesito para empezar a operar Forex?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">El depósito mínimo para abrir una cuenta real es de $100. Sin embargo, recomendamos comenzar con la cuenta demo gratuita (con $10.000 virtuales y sin límite de tiempo) para familiarizarse con la plataforma y las condiciones del mercado antes de invertir dinero real.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Qué plataformas de trading ofrece Just2Trade para Forex?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">Ofrecemos acceso a MetaTrader 4 (MT4), MetaTrader 5 (MT5), CQG Integrated Client y Sterling Trader Pro. A diferencia de competidores como XTB, que cerró MT4 para nuevos clientes en 2025, Just2Trade mantiene MT4 completamente disponible, lo que lo hace ideal para traders con estrategias ya configuradas en esa plataforma.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Cuál es el apalancamiento máximo disponible para traders en España/LATAM?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">Para clientes clasificados como retail bajo regulación CySEC/ESMA, el apalancamiento máximo en pares de divisas principales es de 1:30. Para índices principales es 1:20 y para materias primas 1:10. Los clientes que soliciten clasificación como inversores profesionales pueden acceder a apalancamientos superiores, previa evaluación.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Puedo operar pares de divisas latinoamericanos como USD/MXN?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">Sí. Just2Trade ofrece spreads competitivos en pares LATAM como USD/MXN (peso mexicano), USD/ARS (peso argentino), USD/COP (peso colombiano) y USD/BRL (real brasileño). Estos pares son especialmente relevantes para traders de México, Argentina, Colombia y Brasil que desean operar con sus divisas locales.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Cómo puedo retirar mis fondos?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">Los retiros se procesan en 1-3 días hábiles. Puedes retirar por los mismos métodos que utilizaste para depositar: tarjeta de crédito/débito, transferencia bancaria, PayPal o Skrill. Just2Trade no cobra comisiones de retiro para la mayoría de métodos. El método de transferencia bancaria es ideal para montos superiores a $500.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        ¿Qué es la protección de saldo negativo?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">La protección de saldo negativo garantiza que nunca puedas perder más del capital que has depositado. Si el mercado se mueve drásticamente en tu contra y el saldo de tu cuenta llega a cero, Just2Trade absorbe la pérdida adicional. Este mecanismo es obligatorio para brokers regulados por CySEC bajo directrices ESMA.</div>
+    </div>
+  </div>
+  <div class="faq-schema-note">
+    <span class="schema-badge">FAQPage JSON-LD</span>
+    Schema markup para Featured Snippets en Google.es y LATAM
+  </div>
+</section>
+
+<!-- B14: CTA FINAL -->
+<section class="cta-final">
+  <span class="block-label">B14 — CTA Final</span>
+  <h2>¿Listo para operar <em>Forex</em>?</h2>
+  <p class="subtitle">Únete a más de 155.000 traders que ya confían en Just2Trade</p>
+  <div class="cta-final-btns">
+    <a href="#" class="btn-primary" style="font-size:16px;padding:16px 36px;">Abrir Cuenta</a>
+    <a href="#" class="btn-secondary" style="font-size:16px;padding:16px 36px;">Cuenta Demo Gratuita</a>
+  </div>
+  <div class="trust-row">
+    <span class="trust-item">Regulado por CySEC Nº 281/15</span>
+    <span class="trust-item">Fondos segregados</span>
+    <span class="trust-item">Protección saldo negativo</span>
+    <span class="trust-item">Soporte en español 24/5</span>
+  </div>
+</section>
+
+<!-- B15: AVISO DE RIESGO -->
+<div class="aviso">
+  <div class="aviso-content">
+    <div class="aviso-title">⚠ Aviso de Riesgo Importante — B15</div>
+    <p class="aviso-text">Los CFDs son instrumentos financieros complejos y conllevan un alto riesgo de perder dinero rápidamente debido al apalancamiento. <strong>El [X]% de los inversores minoristas pierde dinero al negociar CFDs con este proveedor.</strong> Debe considerar si comprende el funcionamiento de los CFDs y si puede permitirse asumir un riesgo elevado de perder su dinero. <strong>Just2Trade está autorizado y regulado por la Comisión de Valores de Chipre (CySEC) bajo el número de licencia 281/15.</strong> Este material no constituye asesoramiento de inversión.</p>
+    <p class="aviso-text" style="margin-top:8px;"><em>Nota para developers: completar [X]% con el porcentaje actualizado proporcionado por el equipo de compliance antes de la publicación.</em></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">just<span>2</span>trade</div>
+      <p class="footer-desc">Broker de trading regulado por CySEC (Licencia 281/15). Forex, acciones, futuros y bonos con plataformas MT4, MT5 y CQG. Presente en 130 países desde 2016.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Soluciones</h4>
+      <ul>
+        <li><a href="#">Trading de Forex</a></li>
+        <li><a href="#">Acciones Globales</a></li>
+        <li><a href="#">Futuros CQG</a></li>
+        <li><a href="#">Bonos y Eurobonos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre Nosotros</a></li>
+        <li><a href="#">Regulación</a></li>
+        <li><a href="#">Tarifas</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos y Condiciones</a></li>
+        <li><a href="#">Aviso Legal</a></li>
+        <li><a href="#">Tratamiento de Reclamaciones</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Just2Trade Online Ltd. Todos los derechos reservados. CySEC Licencia 281/15.</p>
+    <p class="footer-copy">just2trade.com/es — Versión española</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
