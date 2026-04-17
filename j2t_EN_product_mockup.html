@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J2T — EN Product Page Mockup</title>
+<style>
+:root{
+  --blue:#008AD9; --blue-dk:#146595; --blue-xdk:#0B3D5C;
+  --blue-lt:#E8F4FC; --blue-md:#C8E4F5;
+  --navy:#091624; --navy2:#0D1F30; --navy3:#132840;
+  --border:#E0E0E0; --border-b:rgba(0,138,217,.22);
+  --white:#fff; --offwhite:#F7FAFD; --midblue:#EBF5FC;
+  --text:#0D1F30; --muted:#5B7082; --light:#8BAABB;
+  --green:#16A34A; --red:#DC2626; --gold:#D97706;
+  --radius:10px; --shadow:0 2px 14px rgba(0,0,0,.07);
+  --shadow-md:0 4px 24px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',system-ui,sans-serif;background:#DDE4EC;color:var(--text);font-size:14px;line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+
+/* META */
+.meta{background:var(--navy);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--blue);position:sticky;top:0;z-index:300}
+.meta-logo{font-size:19px;font-weight:900;color:#fff;letter-spacing:-1px}.meta-logo b{color:var(--blue)}
+.meta-inf{text-align:center}
+.meta-ttl{font-size:13px;font-weight:700;color:#fff}
+.meta-sub{font-size:11px;color:#7A9BB5;margin-top:1px}
+.meta-pills{display:flex;gap:6px}
+.pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.p-en{background:rgba(22,163,74,.18);color:#4ADE80;border:1px solid rgba(22,163,74,.35)}
+.p-all{background:rgba(0,138,217,.18);color:#5CC8FF;border:1px solid rgba(0,138,217,.35)}
+.p-new{background:rgba(139,92,246,.18);color:#C4B5FD;border:1px solid rgba(139,92,246,.35)}
+.p-req{background:rgba(220,38,38,.18);color:#FCA5A5;border:1px solid rgba(220,38,38,.35)}
+.p-note{background:rgba(217,119,6,.18);color:#FCD34D;border:1px solid rgba(217,119,6,.35)}
+
+/* LEGEND + TOC */
+.legend{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin:14px 24px;padding:11px 18px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--muted)}
+.leg-t{font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text)}
+.leg-i{display:flex;align-items:center;gap:5px}
+.toc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin:0 24px 14px;padding:14px 18px}
+.toc-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:9px}
+.toc-g{display:grid;grid-template-columns:repeat(5,1fr);gap:3px 12px}
+.toc-a{font-size:11px;color:var(--blue);padding:3px 0;display:flex;align-items:center;gap:4px}
+.toc-n{font-size:10px;color:var(--light);min-width:18px}
+
+/* BLOCK WRAP */
+.bw{margin:10px 24px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.bh{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#fff;border:1px solid var(--border);border-bottom:none;border-radius:12px 12px 0 0}
+.bn{width:29px;height:29px;background:var(--navy);color:#5CC8FF;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0}
+.bname{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.bnote{font-size:11px;color:var(--muted);max-width:500px;line-height:1.4}
+.bpills{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
+.bc{border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+
+/* PRODUCT TABS */
+.prod-tab-bar{background:var(--navy2);padding:0 32px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.07)}
+.prod-tab{padding:10px 20px;font-size:12px;font-weight:700;color:#7A9BB5;cursor:pointer;border-bottom:2px solid transparent;transition:.15s}
+.prod-tab.active{color:#fff;border-bottom-color:var(--blue)}
+.prod-tab:hover:not(.active){color:#aaa}
+.prod-tab-hint{font-size:10px;color:#3A5060;padding:10px 32px;align-self:center;margin-left:auto;white-space:nowrap}
+
+/* ANNOTATIONS */
+.ann{background:rgba(0,138,217,.06);border:1px dashed rgba(0,138,217,.28);border-radius:7px;padding:8px 12px;font-size:11px;color:#0B4F7A;margin-top:10px;line-height:1.55}
+.ann::before{content:"✏ "}
+.ann-dk{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.18);border-radius:7px;padding:8px 12px;font-size:11px;color:#7A9BB5;margin-top:10px;line-height:1.55}
+.ann-dk::before{content:"✏ "}
+.prod-ann{background:rgba(217,119,6,.08);border:1px dashed rgba(217,119,6,.3);border-radius:7px;padding:8px 12px;font-size:11px;color:#7C4C0A;margin-top:8px;line-height:1.55}
+.prod-ann::before{content:"↔ продукт: "}
+
+/* ── TYPOGRAPHY ── */
+.ey{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:var(--blue);margin-bottom:5px}
+.ey-w{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:#5CC8FF;margin-bottom:5px}
+.ey-g{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:#16A34A;margin-bottom:5px}
+.h2{font-size:26px;font-weight:900;color:var(--text);letter-spacing:-.5px;line-height:1.2;margin-bottom:8px}
+.h2w{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px;max-width:560px}
+.subw{font-size:14px;color:#7A9BB5;line-height:1.65;margin-bottom:28px}
+.ac{color:var(--blue);font-style:normal}
+.acw{color:#5CC8FF;font-style:normal}
+
+/* BUTTONS */
+.btn-p{background:var(--blue);color:#fff;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:700;border:none;cursor:pointer;display:inline-block;transition:.15s}
+.btn-p:hover{background:var(--blue-dk)}
+.btn-g{background:transparent;color:#fff;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:600;border:1.5px solid rgba(255,255,255,.28);cursor:pointer;display:inline-block}
+.btn-o{background:transparent;color:var(--blue);padding:11px 24px;border-radius:7px;font-size:14px;font-weight:600;border:1.5px solid var(--blue);cursor:pointer;display:inline-block}
+.btn-sm{font-size:12px;font-weight:700;padding:8px 14px;border-radius:6px;cursor:pointer}
+.btn-sm-s{background:var(--blue);color:#fff;border:none}
+.btn-sm-g{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* ══════════════════════════════════════
+   SECTIONS
+══════════════════════════════════════ */
+
+/* B01 HERO — dark navy + dot pattern */
+.s-hero{background:var(--navy);padding:56px 48px;position:relative;overflow:hidden}
+.s-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,138,217,.08) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.s-hero::after{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,138,217,.12),transparent 70%);pointer-events:none}
+.hero-g{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;z-index:1}
+.hero-bc{font-size:12px;color:#5A7A90;margin-bottom:14px}
+.hero-bc span{color:#5CC8FF}
+.hero-h1{font-size:42px;font-weight:900;color:#fff;line-height:1.12;letter-spacing:-1px;margin-bottom:16px}
+.hero-sub{font-size:15px;color:#7A9BB5;line-height:1.65;margin-bottom:26px;max-width:440px}
+.trust-line{display:flex;align-items:center;gap:6px;font-size:12px;color:#7A9BB5;margin-top:14px}
+.td{width:7px;height:7px;background:#16A34A;border-radius:50%}
+.hero-disc{font-size:11px;color:#3A5A6E;border-top:1px solid rgba(255,255,255,.07);padding-top:14px;margin-top:18px;line-height:1.6}
+
+/* Hero right panel */
+.hero-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden}
+.hp-top{background:rgba(0,138,217,.1);border-bottom:1px solid rgba(255,255,255,.07);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.hp-live{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#5CC8FF}
+.hp-dot{width:6px;height:6px;background:#16A34A;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hp-label{font-size:11px;color:#3A5060}
+.ticker-list{padding:8px 0}
+.tk{display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
+.tk:last-child{border-bottom:none}
+.tk-sym{font-size:13px;font-weight:700;color:#fff;width:85px}
+.tk-val{font-size:13px;color:#B8D0E0;flex:1;text-align:right}
+.tk-up{font-size:11px;font-weight:700;color:#16A34A;width:60px;text-align:right}
+.tk-dn{font-size:11px;font-weight:700;color:#DC2626;width:60px;text-align:right}
+.hp-chart{height:70px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-end;padding:8px 18px;gap:4px}
+.hbar{border-radius:2px 2px 0 0;flex:1;background:rgba(0,138,217,.4)}
+.hbar.hi{background:var(--blue)}
+
+/* B02 STATS — gradient stripe */
+.s-stats{background:linear-gradient(135deg,var(--blue-dk) 0%,var(--blue-xdk) 100%);padding:0}
+.ticker-strip{display:flex;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.15)}
+.ts-i{display:flex;align-items:center;gap:8px;padding:8px 18px;border-right:1px solid rgba(255,255,255,.06);font-size:11px;white-space:nowrap}
+.ts-sym{font-weight:700;color:#fff}
+.ts-val{color:#8BAABB}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:24px 16px;border-right:1px solid rgba(255,255,255,.1)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:34px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.stat-u{font-size:18px;color:rgba(255,255,255,.5);font-weight:400}
+.stat-l{font-size:11px;color:rgba(255,255,255,.5);margin-top:5px;letter-spacing:.2px}
+.stat-hint{font-size:9px;color:rgba(255,255,255,.25);margin-top:2px}
+.stats-cta{padding:12px 48px;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06)}
+
+/* B03 INSTRUMENTS — white with strong table */
+.s-white{background:#fff;padding:44px 48px}
+.s-offwhite{background:var(--offwhite);padding:44px 48px}
+.s-midblue{background:var(--midblue);padding:44px 48px}
+.s-darkblue{background:linear-gradient(160deg,var(--blue-xdk),var(--navy2));padding:44px 48px}
+.s-navy{background:var(--navy);padding:44px 48px}
+.s-navy2{background:var(--navy2);padding:44px 48px}
+.s-grad{background:linear-gradient(135deg,var(--navy),var(--blue-xdk));padding:44px 48px}
+
+/* Table */
+.data-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.data-tbl thead tr{background:linear-gradient(90deg,var(--navy2),var(--blue-xdk))}
+.data-tbl th{padding:12px 16px;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#8BAABB}
+.data-tbl td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.data-tbl tbody tr:nth-child(even){background:#FAFCFF}
+.data-tbl tbody tr:hover{background:var(--blue-lt)}
+.td-sym{font-weight:700;color:var(--text)}
+.td-blue{color:var(--blue);font-weight:700}
+.td-up{color:var(--green);font-weight:700;font-size:12px}
+.td-dn{color:var(--red);font-weight:700;font-size:12px}
+.td-cta{color:var(--blue);font-weight:700;cursor:pointer;white-space:nowrap}
+.td-cta:hover{text-decoration:underline}
+.tag-sm{font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;vertical-align:middle;margin-left:4px}
+.tag-forex{background:#E8F4FC;color:var(--blue-dk)}
+.tag-stocks{background:#ECFDF5;color:#065F46}
+.tag-bonds{background:#FEF9EC;color:#92400E}
+.tag-futures{background:#F5F3FF;color:#5B21B6}
+.tbl-note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+.lnk-more{color:var(--blue);font-size:13px;font-weight:700;margin-top:14px;display:inline-block}
+.tbl-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+
+/* Locale box */
+.loc-box{background:var(--blue-lt);border:1px solid var(--border-b);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--blue-dk);margin-top:12px;line-height:1.6}
+
+/* B04 ADVANTAGES — offwhite with accent cards */
+.adv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.adv{background:#fff;border:1px solid var(--border);border-radius:10px;padding:22px;position:relative;overflow:hidden;transition:.2s}
+.adv::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+.adv:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.adv.green::before{background:var(--green)}
+.adv.gold::before{background:var(--gold)}
+.adv-ico{width:42px;height:42px;border-radius:10px;background:var(--blue-lt);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:13px}
+.adv.green .adv-ico{background:#DCFCE7}
+.adv-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.adv-d{font-size:12px;color:var(--muted);line-height:1.55}
+.adv-badge{font-size:10px;font-weight:700;color:var(--green);margin-top:6px;display:flex;align-items:center;gap:3px}
+
+/* B05 HOW IT WORKS — dark blue gradient */
+.how3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px}
+.how{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:24px;position:relative;overflow:hidden}
+.how::after{content:attr(data-n);position:absolute;right:16px;top:12px;font-size:60px;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+.how-n{width:36px;height:36px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;margin-bottom:14px}
+.how-t{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.how-d{font-size:12px;color:#7A9BB5;line-height:1.6}
+.how-lnk{font-size:11px;color:#5CC8FF;margin-top:10px;display:block}
+.how-vis{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:24px;text-align:center;color:#3A5A6E;font-size:12px;line-height:1.8;margin-top:0}
+
+/* B06 COMPARISON — offwhite with premium table */
+.comp-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.comp-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.comp-tbl thead tr{background:var(--navy)}
+.comp-tbl th{padding:12px 18px;text-align:left;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#7A9BB5}
+.comp-tbl th:first-child{color:#B8D0E0}
+.comp-tbl td{padding:13px 18px;border-bottom:1px solid var(--border)}
+.comp-tbl tr:last-child td{border-bottom:none}
+.comp-tbl tr.j2t td{background:linear-gradient(90deg,#EBF5FC,#F5F9FD)}
+.comp-tbl tr.j2t td:first-child{border-left:3px solid var(--blue);font-weight:800;color:var(--blue-dk)}
+.comp-tbl td:first-child{font-weight:600;color:var(--text)}
+.ck{color:var(--green);font-weight:800;font-size:15px}
+.cx{color:var(--red);font-weight:700}
+.comp-note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+
+/* B07 PLATFORMS — navy bg with cards */
+.plat3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;overflow:hidden;transition:.2s}
+.plat:hover{border-color:rgba(0,138,217,.5)}
+.plat.feat{border-color:rgba(0,138,217,.4);background:rgba(0,138,217,.07)}
+.plat-top{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;justify-content:space-between}
+.plat-tag-b{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;background:rgba(0,138,217,.2);color:#5CC8FF;padding:3px 8px;border-radius:4px}
+.plat-tag-g{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;background:rgba(22,163,74,.2);color:#4ADE80;padding:3px 8px;border-radius:4px}
+.plat-name{font-size:17px;font-weight:900;color:#fff;margin-top:7px}
+.plat-sub{font-size:11px;color:#7A9BB5;margin-top:3px}
+.plat-body{padding:16px 20px}
+.plat-feat{list-style:none}
+.plat-feat li{font-size:12px;color:#7A9BB5;padding:4px 0;padding-left:14px;position:relative}
+.plat-feat li::before{content:'·';position:absolute;left:0;color:#5CC8FF}
+.plat-btns{display:flex;gap:8px;margin-top:14px}
+.pop-badge{font-size:9px;font-weight:800;background:rgba(0,138,217,.25);color:#5CC8FF;padding:3px 8px;border-radius:4px;align-self:flex-start;margin-top:2px}
+
+/* B08 STEPS — split layout */
+.steps-split{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:420px}
+.steps-left{background:#fff;padding:44px 48px}
+.steps-right{background:linear-gradient(160deg,var(--blue),var(--blue-dk));padding:44px 48px;display:flex;flex-direction:column;justify-content:center}
+.step-list{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.step-i{display:flex;gap:18px;padding-bottom:24px;position:relative}
+.step-i:not(:last-child)::after{content:'';position:absolute;left:16px;top:36px;bottom:0;width:1px;background:var(--border)}
+.step-c{width:34px;height:34px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--blue);flex-shrink:0;background:#fff;z-index:1;position:relative}
+.step-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.step-d{font-size:12px;color:var(--muted);line-height:1.55}
+.step-hint{font-size:10px;color:var(--light);margin-top:3px}
+.steps-r-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+.steps-r-sub{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.demo-box{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:20px;margin-top:16px}
+.demo-box-t{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.demo-box-d{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:12px;line-height:1.5}
+
+/* B09 TRUST — navy with awards */
+.trust-g{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.t-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.t-stat::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.06),transparent)}
+.t-n{font-size:30px;font-weight:900;color:#5CC8FF;letter-spacing:-1px}
+.t-l{font-size:11px;color:#7A9BB5;margin-top:3px}
+.awards{display:flex;flex-direction:column;gap:10px}
+.award{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:12px 16px;position:relative;overflow:hidden}
+.award::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold)}
+.award-yr{font-size:20px;font-weight:900;color:var(--gold);min-width:46px}
+.award-n{font-size:13px;font-weight:700;color:#fff}
+.award-o{font-size:10px;color:#7A9BB5}
+.cysec-bx{background:rgba(0,138,217,.1);border:1px solid rgba(0,138,217,.22);border-radius:8px;padding:16px 18px;margin-top:14px}
+.cysec-t{font-size:12px;font-weight:700;color:#5CC8FF;margin-bottom:5px}
+.cysec-d{font-size:12px;color:#7A9BB5;line-height:1.6}
+
+/* B10 EDU — midblue with sidebar */
+.edu-g{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
+.edu-body h3{font-size:15px;font-weight:700;color:var(--text);margin:20px 0 7px;padding-left:12px;border-left:3px solid var(--blue)}
+.edu-body h3:first-child{margin-top:0}
+.edu-body p{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:10px}
+.edu-body p strong{color:var(--text)}
+.edu-side{display:flex;flex-direction:column;gap:14px}
+.edu-vid{background:var(--navy);border-radius:10px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.edu-vid::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.1),transparent)}
+.play{width:50px;height:50px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;position:relative;z-index:1}
+.edu-cta{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.edu-cta-t{font-size:13px;font-weight:700;margin-bottom:4px}
+.edu-cta-d{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+
+/* B11 PAYMENTS — offwhite with visual cards */
+.pay-row{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:16px}
+.pay-c{background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 18px;display:flex;align-items:center;justify-content:center;gap:8px;min-width:118px;height:52px;transition:.15s;cursor:pointer}
+.pay-c:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(0,138,217,.1)}
+.pay-c.more{border-style:dashed;color:var(--blue);font-size:12px;font-weight:700}
+.visa-t{font-style:italic;font-weight:900;font-size:18px;color:#1A1F71;letter-spacing:-1px}
+.mc{position:relative;width:32px;height:22px;display:inline-block}
+.mc-r{position:absolute;width:21px;height:21px;border-radius:50%;background:#EB001B;left:0;top:0}
+.mc-b{position:absolute;width:21px;height:21px;border-radius:50%;background:#F79E1B;right:0;top:0}
+.mc-o{position:absolute;left:9px;top:0;width:14px;height:21px;border-radius:4px;background:#FF5F00}
+.pp{font-size:14px;font-weight:900;color:#003087}.pp span{color:#009CDE}
+.sk{background:#8B12AE;color:#fff;border-radius:4px;padding:3px 8px;font-size:12px;font-weight:900}
+.nt{font-size:12px;font-weight:900;color:#C82B35}
+.pay-info{background:var(--blue-lt);border:1px solid var(--border-b);border-radius:8px;padding:13px 18px;font-size:12px;color:var(--muted);line-height:1.65}
+.pay-info strong{color:var(--text)}
+
+/* B12 NEWS */
+.news3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-c{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:.2s;cursor:pointer}
+.news-c:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.news-img{height:100px;background:linear-gradient(135deg,var(--navy),var(--blue-xdk));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:12px;position:relative;overflow:hidden}
+.news-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,rgba(0,0,0,.3))}
+.news-body{padding:14px}
+.news-tag{font-size:9px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.news-t{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4}
+.news-d{font-size:11px;color:var(--light)}
+
+/* B13 FAQ */
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-i{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden;transition:.15s}
+.faq-i.open{border-color:var(--blue)}
+.faq-q{padding:14px 18px;font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:12px}
+.faq-q:hover{background:var(--blue-lt)}
+.faq-i.open .faq-q{color:var(--blue);background:var(--blue-lt)}
+.faq-ico{color:var(--blue);font-size:20px;font-weight:300;flex-shrink:0;line-height:1}
+.faq-a{padding:0 18px 14px 18px;font-size:13px;color:var(--muted);line-height:1.7;display:none}
+.faq-i.open .faq-a{display:block}
+.schema-note{font-size:11px;color:var(--light);margin-top:12px}
+
+/* B14 CROSS-SELL — dark */
+.cross4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cross-c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:22px 16px;text-align:center;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.cross-c::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.04),transparent);pointer-events:none}
+.cross-c:hover{border-color:rgba(0,138,217,.4);background:rgba(0,138,217,.08)}
+.cross-ico{font-size:28px;margin-bottom:11px}
+.cross-t{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px}
+.cross-d{font-size:11px;color:#7A9BB5;line-height:1.5;margin-bottom:12px}
+.cross-lnk{font-size:11px;color:#5CC8FF;font-weight:700}
+
+/* B15 CTA */
+.cta-s{background:var(--navy);padding:56px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-s::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% 50%,rgba(0,138,217,.1),transparent 60%)}
+.cta-h{font-size:34px;font-weight:900;color:#fff;letter-spacing:-.6px;margin-bottom:10px;position:relative}
+.cta-d{font-size:15px;color:#7A9BB5;margin-bottom:28px;position:relative}
+.cta-btns{display:flex;gap:12px;justify-content:center;margin-bottom:20px;position:relative}
+.trust-chips{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:11px;color:#7A9BB5;position:relative}
+.trust-chip{display:flex;align-items:center;gap:5px}
+
+/* B16 DISCLAIMER */
+.disc-s{background:#070F1A;padding:22px 48px;border-top:1px solid rgba(255,255,255,.05)}
+.disc-t{font-size:11px;color:#3A5060;line-height:1.8;max-width:980px}
+.disc-t strong{color:#5B7082}
+.disc-reg{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap}
+.disc-b{display:flex;align-items:center;gap:5px;font-size:11px;color:#3A5060}
+.disc-d{width:4px;height:4px;background:var(--blue);border-radius:50%}
+
+/* EN UNIQUE — pro account */
+.en-unique-wrap{margin:10px 24px;border-radius:12px;overflow:hidden;box-shadow:0 0 0 2px var(--green),var(--shadow-md)}
+.en-bh{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#F0FDF4;border:none;border-radius:12px 12px 0 0;border-bottom:none}
+.en-bn{width:29px;height:29px;background:var(--green);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0}
+.en-bc{border:none;border-radius:0 0 12px 12px;overflow:hidden}
+.en-banner{background:#DCFCE7;border-bottom:1px solid #BBF7D0;padding:10px 20px;font-size:12px;font-weight:700;color:#14532D;display:flex;align-items:center;gap:10px}
+.en-banner span{font-size:11px;font-weight:400;color:var(--muted);margin-left:auto}
+.lever-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.lever-c{border-radius:10px;padding:22px;position:relative;overflow:hidden}
+.lever-c.std{background:var(--offwhite);border:1px solid var(--border)}
+.lever-c.pro{background:var(--blue-lt);border:2px solid var(--blue)}
+.lever-c.inst{background:#ECFDF5;border:1px solid #BBF7D0}
+.lever-tag{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.lever-tag.std{color:var(--muted)}
+.lever-tag.pro{color:var(--blue)}
+.lever-tag.inst{color:var(--green)}
+.lever-val{font-size:26px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;line-height:1}
+.lever-val.std{color:var(--text)}
+.lever-val.pro{color:var(--blue-dk)}
+.lever-val.inst{color:var(--green)}
+.lever-d{font-size:12px;color:var(--muted);line-height:1.55}
+.reg-note{background:#FEF9EC;border:1px solid #FDE68A;border-radius:8px;padding:12px 16px;font-size:11px;color:#78350F;margin-top:16px}
+
+/* SECTION LABEL ribbon */
+.sec-label{display:flex;align-items:center;gap:10px;padding:8px 48px;font-size:11px;font-weight:700;letter-spacing:.4px}
+.sl-white{background:#F0F9FF;color:var(--blue-dk);border-bottom:1px solid var(--border-b)}
+.sl-dark{background:rgba(0,138,217,.12);color:#5CC8FF;border-bottom:1px solid rgba(255,255,255,.08)}
+.sl-green{background:#DCFCE7;color:#14532D;border-bottom:1px solid #BBF7D0}
+.sl-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sl-dot-b{background:var(--blue)}
+.sl-dot-w{background:#5CC8FF}
+.sl-dot-g{background:var(--green)}
+
+/* Dividers */
+.divider{height:1px;background:var(--border);margin:0}
+
+/* FOOTER */
+.footer{background:var(--navy2);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.ft{font-size:11px;color:#3A5060}
+</style>
+</head>
+<body>
+
+<!-- ══════ META ══════ -->
+<div class="meta">
+  <div>
+    <div class="meta-logo">just<b>2</b>trade</div>
+    <div style="font-size:11px;color:#3A5060;margin-top:1px">EN Product Page Mockup · Rush Agency · April 2026</div>
+  </div>
+  <div class="meta-inf">
+    <div class="meta-ttl">🌍 English (Global) — Universal template</div>
+    <div class="meta-sub">Applies to: <strong style="color:#5CC8FF">Forex</strong> · <strong style="color:#4ADE80">Stocks</strong> · <strong style="color:#FCD34D">Bonds</strong> · <strong style="color:#C4B5FD">Futures</strong> · Desktop 1280px</div>
+  </div>
+  <div class="meta-pills">
+    <span class="pill p-en">EN locale</span>
+    <span class="pill p-all">16 universal</span>
+    <span class="pill p-en">+1 EN-only</span>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="leg-t">Legend:</span>
+  <span class="leg-i"><span class="pill p-all">ALL</span> Universal block</span>
+  <span class="leg-i"><span class="pill p-en">EN only</span> English locale only</span>
+  <span class="leg-i"><span class="pill p-new">NEW</span> New block</span>
+  <span class="leg-i"><span class="pill p-note">↔ продукт</span> Content varies by product</span>
+  <span class="leg-i" style="margin-left:auto;font-size:11px">Sample: <strong>Forex</strong> page · Switch tab to preview other products</span>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-t">Page structure</div>
+  <div class="toc-g">
+    <a class="toc-a" href="#b01"><span class="toc-n">01</span>Hero</a>
+    <a class="toc-a" href="#b02"><span class="toc-n">02</span>Ticker + Stats</a>
+    <a class="toc-a" href="#b03"><span class="toc-n">03</span>Instruments Table</a>
+    <a class="toc-a" href="#b04"><span class="toc-n">04</span>Advantages</a>
+    <a class="toc-a" href="#b05"><span class="toc-n">05</span>How It Works</a>
+    <a class="toc-a" href="#b06"><span class="toc-n">06</span>Broker Comparison</a>
+    <a class="toc-a" href="#b07"><span class="toc-n">07</span>Platforms</a>
+    <a class="toc-a" href="#b08"><span class="toc-n">08</span>3 Steps</a>
+    <a class="toc-a" href="#b09"><span class="toc-n">09</span>Trust &amp; Awards</a>
+    <a class="toc-a" href="#b10"><span class="toc-n">10</span>Educational Text</a>
+    <a class="toc-a" href="#b11"><span class="toc-n">11</span>Payments</a>
+    <a class="toc-a" href="#b12"><span class="toc-n">12</span>News</a>
+    <a class="toc-a" href="#b13"><span class="toc-n">13</span>FAQ</a>
+    <a class="toc-a" href="#b14"><span class="toc-n">14</span>Cross-sell</a>
+    <a class="toc-a" href="#b15"><span class="toc-n">15</span>Bottom CTA</a>
+    <a class="toc-a" href="#b16"><span class="toc-n">16</span>Disclaimer</a>
+    <a class="toc-a" href="#u-en"><span class="toc-n" style="color:#4ADE80">EN★</span>Pro Account Block</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B01 · HERO
+═══════════════════════════════════════ -->
+<div id="b01" class="bw">
+  <div class="bh">
+    <div class="bn">01</div>
+    <div><div class="bname">Hero — Page Header</div>
+    <div class="bnote">H1 + subline + 2 CTAs + CySEC trust tag + inline risk disclaimer + right live-panel</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <!-- PRODUCT TABS -->
+    <div class="prod-tab-bar">
+      <div class="prod-tab active" onclick="switchProduct('forex',this)">Forex</div>
+      <div class="prod-tab" onclick="switchProduct('stocks',this)">Stocks</div>
+      <div class="prod-tab" onclick="switchProduct('bonds',this)">Bonds</div>
+      <div class="prod-tab" onclick="switchProduct('futures',this)">Futures</div>
+      <span class="prod-tab-hint">✏ H1, subline, ticker pairs — меняются по продукту</span>
+    </div>
+    <div class="s-hero">
+      <div class="hero-g">
+        <div>
+          <div class="hero-bc">Home › Solutions › <span id="bc-product">Forex Trading</span></div>
+          <h1 class="hero-h1" id="hero-h1">Trade <em style="color:#5CC8FF;font-style:normal">Forex</em><br>with 80+ currency pairs</h1>
+          <p class="hero-sub" id="hero-sub">Access major, minor and exotic pairs on MetaTrader 4 &amp; MT5. Tight spreads from 0.1 pip, leverage up to 1:500, instant execution from 10ms.</p>
+          <div class="cta-row">
+            <button class="btn-p">Open Account</button>
+            <button class="btn-g">Try Demo Free</button>
+          </div>
+          <div class="trust-line"><span class="td"></span>Regulated by CySEC · Licence No. 281/15 · Funds segregated</div>
+          <div class="hero-disc">CFDs involve significant risk of loss. 70% of retail accounts lose money. CySEC lic. 281/15. This is not investment advice.</div>
+          <div class="ann-dk">✏ H1 содержит primary keyword. Subline — 2 предложения: продукт + ключевое УТП. Правая панель: только скрин из терминала j2t с вотермарком, или live mini-виджет котировок. Для Stocks — котировки акций, для Futures — контракты</div>
+        </div>
+        <div class="hero-panel">
+          <div class="hp-top">
+            <div class="hp-live"><span class="hp-dot"></span>Live Market</div>
+            <div class="hp-label" id="hero-panel-label">Forex · Top Pairs</div>
+          </div>
+          <div class="ticker-list" id="hero-tickers">
+            <div class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.08462</span><span class="tk-up">▲ +0.34%</span></div>
+            <div class="tk"><span class="tk-sym">GBP/USD</span><span class="tk-val">1.26318</span><span class="tk-up">▲ +0.21%</span></div>
+            <div class="tk"><span class="tk-sym">USD/JPY</span><span class="tk-val">149.851</span><span class="tk-dn">▼ −0.18%</span></div>
+            <div class="tk"><span class="tk-sym">XAU/USD</span><span class="tk-val">2342.30</span><span class="tk-up">▲ +0.57%</span></div>
+          </div>
+          <div class="hp-chart">
+            <div class="hbar" style="height:35%"></div><div class="hbar" style="height:50%"></div><div class="hbar" style="height:43%"></div><div class="hbar" style="height:66%"></div><div class="hbar" style="height:55%"></div><div class="hbar" style="height:72%"></div><div class="hbar" style="height:60%"></div><div class="hbar hi" style="height:85%"></div><div class="hbar hi" style="height:75%"></div><div class="hbar hi" style="height:90%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B02 · TICKER + STATS BAR
+═══════════════════════════════════════ -->
+<div id="b02" class="bw">
+  <div class="bh">
+    <div class="bn">02</div>
+    <div><div class="bname">Ticker Strip + Stats Bar — Key Numbers</div>
+    <div class="bnote">4 key metrics from J2T rates. Numbers change per product. No third-party live data</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Stocks</div><div class="prod-tab">Bonds</div><div class="prod-tab">Futures</div>
+      <span class="prod-tab-hint">✏ Числа в Stats Bar полностью меняются по продукту</span>
+    </div>
+    <div class="s-stats">
+      <div class="ticker-strip">
+        <div class="ts-i"><span class="ts-sym">EUR/USD</span><span class="ts-val">1.08462</span><span class="tk-up" style="font-size:10px">▲ +0.34%</span></div>
+        <div class="ts-i"><span class="ts-sym">GBP/USD</span><span class="ts-val">1.26318</span><span class="tk-up" style="font-size:10px">▲ +0.21%</span></div>
+        <div class="ts-i"><span class="ts-sym">USD/JPY</span><span class="ts-val">149.851</span><span class="tk-dn" style="font-size:10px">▼ −0.18%</span></div>
+        <div class="ts-i"><span class="ts-sym">XAU/USD</span><span class="ts-val">2342.30</span><span class="tk-up" style="font-size:10px">▲ +0.57%</span></div>
+        <div class="ts-i"><span class="ts-sym">AUD/USD</span><span class="ts-val">0.6471</span><span class="tk-dn" style="font-size:10px">▼ −0.03%</span></div>
+        <span style="font-size:9px;color:rgba(255,255,255,.2);align-self:center;padding:0 18px;margin-left:auto">Indicative · 15s delay</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">70<span class="stat-u">+</span></div><div class="stat-l">Currency pairs</div></div>
+        <div class="stat"><div class="stat-n">0.0<span class="stat-u"> pip</span></div><div class="stat-l">Spreads from</div><div class="stat-hint">* ECN account</div></div>
+        <div class="stat"><div class="stat-n">1:500</div><div class="stat-l">Max leverage</div></div>
+        <div class="stat"><div class="stat-n">10<span class="stat-u">ms</span></div><div class="stat-l">Execution from</div></div>
+      </div>
+      <div class="stats-cta">
+        <a href="#" style="color:#5CC8FF;font-size:13px;font-weight:700">View full fees and commissions →</a>
+        <div class="prod-ann" style="margin-top:0;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.25);color:#FCD34D;padding:5px 12px">Forex: 70+ pairs, 0.0 pip, 1:500 · Stocks: 30,000+ instruments, from $0.01/share · Bonds: Eurobonds, Gov/Corp, 1:3 leverage · Futures: 40+ exchanges, from $1/contract</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B03 · INSTRUMENTS TABLE
+═══════════════════════════════════════ -->
+<div id="b03" class="bw">
+  <div class="bh">
+    <div class="bn">03</div>
+    <div><div class="bname">Instruments Table — Trading Conditions</div>
+    <div class="bnote">Symbol · spread · swap/commission · leverage · 24h change · Trade CTA. Table structure identical, data entirely different per product</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active" onclick="switchTable('forex',this)">Forex</div>
+      <div class="prod-tab" onclick="switchTable('stocks',this)">Stocks</div>
+      <div class="prod-tab" onclick="switchTable('bonds',this)">Bonds</div>
+      <div class="prod-tab" onclick="switchTable('futures',this)">Futures</div>
+      <span class="prod-tab-hint">✏ Таблица полностью меняется — структура та же, данные разные</span>
+    </div>
+    <div class="s-white">
+      <div class="ey">Trading Conditions</div>
+      <h2 class="h2" id="tbl-title">Forex Instruments at Just2Trade</h2>
+      <p class="sub">Real conditions from the J2T tariff sheet. Live prices available after login.</p>
+
+      <!-- FOREX TABLE -->
+      <div id="tbl-forex" class="tbl-wrap">
+        <table class="data-tbl">
+          <thead><tr><th>Instrument</th><th>Spread (typical)</th><th>Swap Long</th><th>Swap Short</th><th>Leverage</th><th>24h Change</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">🇪🇺 EUR/USD <span class="tag-sm tag-forex">Forex</span></td><td class="td-blue">0.1 pip*</td><td>[J2T data]</td><td>[J2T data]</td><td>1:500</td><td class="td-up">▲ +0.34%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">🇬🇧 GBP/USD</td><td class="td-blue">0.3 pip*</td><td>[J2T data]</td><td>[J2T data]</td><td>1:500</td><td class="td-up">▲ +0.21%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">🇯🇵 USD/JPY</td><td class="td-blue">0.2 pip*</td><td>[J2T data]</td><td>[J2T data]</td><td>1:500</td><td class="td-dn">▼ −0.18%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">🥇 XAU/USD</td><td class="td-blue">1.8 pip*</td><td>[J2T data]</td><td>[J2T data]</td><td>1:100</td><td class="td-up">▲ +0.57%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">🇦🇺 AUD/USD</td><td class="td-blue">0.5 pip*</td><td>[J2T data]</td><td>[J2T data]</td><td>1:500</td><td class="td-dn">▼ −0.03%</td><td class="td-cta">Trade →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- STOCKS TABLE -->
+      <div id="tbl-stocks" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Instrument</th><th>Exchange</th><th>Commission</th><th>Margin</th><th>Div. eligible</th><th>24h Change</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">AAPL <span class="tag-sm tag-stocks">Stocks</span></td><td>NASDAQ</td><td class="td-blue">$0.01/share</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +1.2%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">TSLA</td><td>NASDAQ</td><td class="td-blue">$0.01/share</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-dn">▼ −0.8%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">MSFT</td><td>NASDAQ</td><td class="td-blue">$0.01/share</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +0.5%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">VODA.L</td><td>LSE</td><td class="td-blue">£0.10/share</td><td>30%</td><td class="ck" style="font-size:13px">✓</td><td class="td-dn">▼ −0.3%</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">BARC.L</td><td>LSE</td><td class="td-blue">£0.10/share</td><td>30%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +0.9%</td><td class="td-cta">Trade →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- BONDS TABLE -->
+      <div id="tbl-bonds" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Bond / Instrument</th><th>Type</th><th>Yield</th><th>Coupon</th><th>Leverage</th><th>Price</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">US Treasury 10Y <span class="tag-sm tag-bonds">Bonds</span></td><td>Government</td><td class="td-blue">4.35%</td><td>4.25%</td><td>1:3</td><td>98.42</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">German Bund 10Y</td><td>Government</td><td class="td-blue">2.28%</td><td>2.00%</td><td>1:3</td><td>97.15</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">Apple Inc 2030</td><td>Corporate</td><td class="td-blue">4.85%</td><td>4.65%</td><td>1:2</td><td>96.80</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">UK Gilt 10Y</td><td>Government</td><td class="td-blue">3.92%</td><td>3.75%</td><td>1:3</td><td>97.88</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">Eurobond EUR 2027</td><td>Eurobond</td><td class="td-blue">3.50%</td><td>3.25%</td><td>1:2</td><td>99.10</td><td class="td-cta">Trade →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FUTURES TABLE -->
+      <div id="tbl-futures" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Contract</th><th>Exchange</th><th>Commission</th><th>Tick Size</th><th>Margin req.</th><th>Price</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">ES (S&amp;P 500) <span class="tag-sm tag-futures">Futures</span></td><td>CME</td><td class="td-blue">$1.50/side</td><td>0.25 pt</td><td>$13,200</td><td>5,248.75</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">NQ (Nasdaq 100)</td><td>CME</td><td class="td-blue">$1.50/side</td><td>0.25 pt</td><td>$21,500</td><td>18,142.50</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">CL (Crude Oil)</td><td>NYMEX</td><td class="td-blue">$1.50/side</td><td>$0.01</td><td>$6,800</td><td>78.42</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">GC (Gold)</td><td>COMEX</td><td class="td-blue">$1.50/side</td><td>$0.10</td><td>$9,000</td><td>2,342.10</td><td class="td-cta">Trade →</td></tr>
+            <tr><td class="td-sym">FGBL (Bund)</td><td>EUREX</td><td class="td-blue">€1.50/side</td><td>0.01</td><td>€2,400</td><td>130.82</td><td class="td-cta">Trade →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="tbl-note">* Typical conditions — may vary. Current live conditions available after login to the platform.</p>
+      <a href="#" class="lnk-more" id="tbl-lnk">→ View all 70+ Forex instruments</a>
+      <div class="ann">✏ Структура таблицы единая для всех продуктов. Колонки меняются: для Stocks — комиссия и дивиденды, для Bonds — доходность и купон, для Futures — биржа и маржа. Данные заполняются из тарифной сетки j2t — никаких live-API сторонних провайдеров</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B04 · KEY ADVANTAGES
+═══════════════════════════════════════ -->
+<div id="b04" class="bw">
+  <div class="bh">
+    <div class="bn">04</div>
+    <div><div class="bname">Key Advantages — Why Just2Trade</div>
+    <div class="bnote">6 cards. Each = specific verifiable fact. No competitor names, no profit guarantees. 6th card = EN-specific (multilingual 24/5 support)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-offwhite">
+      <div class="ey">Our advantages</div>
+      <h2 class="h2">Why trade with Just2Trade?</h2>
+      <p class="sub">Concrete facts from our trading conditions — not marketing promises.</p>
+      <div class="adv-g">
+        <div class="adv">
+          <div class="adv-ico">📉</div>
+          <div class="adv-t">Spreads from 0.0 pip</div>
+          <div class="adv-d">Ultra-tight spreads on EUR/USD, GBP/USD and USD/JPY on ECN accounts. Low-cost trading for scalpers and HF traders.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">🖥</div>
+          <div class="adv-t">MT4 + MT5 + CQG + Sterling</div>
+          <div class="adv-d">Four leading platforms. MT4 still fully available for all clients — unlike competitors who discontinued it in 2025.</div>
+          <div class="adv-badge">✓ MT4 available</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">⚖️</div>
+          <div class="adv-t">Leverage up to 1:500</div>
+          <div class="adv-d">Up to 1:500 for non-EU clients and professional account holders. Retail EU clients: 1:30 per ESMA rules.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">🛡</div>
+          <div class="adv-t">CySEC Regulated</div>
+          <div class="adv-d">Lime Trading (CY) Ltd, licence No. 281/15. Segregated client funds. ICF compensation up to €20,000. Negative balance protection.</div>
+        </div>
+        <div class="adv green">
+          <div class="adv-ico">⚡</div>
+          <div class="adv-t">Execution from 10ms</div>
+          <div class="adv-d">Servers co-located at NY4 &amp; LD4 (Equinix). 99%+ fill rate. Direct market access available via CQG and Sterling Trader Pro.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">🌍</div>
+          <div class="adv-t">Multilingual support 24/5</div>
+          <div class="adv-d">Support in English, Spanish, Polish and other languages. Chat, email and phone. Active Mon–Fri during market hours.</div>
+        </div>
+      </div>
+      <div class="prod-ann">Advantages одинаковые для всех продуктов. Карточка с «leverage» меняет цифру: Bonds — 1:3, Futures — нет фиксированного лимита (маржа биржи), Stocks — маржинальный счёт</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B05 · HOW IT WORKS
+═══════════════════════════════════════ -->
+<div id="b05" class="bw">
+  <div class="bh">
+    <div class="bn">05</div>
+    <div><div class="bname">How It Works — Trading Mechanics</div>
+    <div class="bnote">3 core concepts. Not "what is X" — but how the mechanics work. Content changes significantly per product</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Stocks</div><div class="prod-tab">Bonds</div><div class="prod-tab">Futures</div>
+      <span class="prod-tab-hint">✏ 3 концепции полностью меняются — механика разная для каждого продукта</span>
+    </div>
+    <div class="s-darkblue">
+      <div class="ey-w">How it works</div>
+      <h2 class="h2w">Forex Trading Mechanics</h2>
+      <p class="subw">Three concepts every trader must understand before the first order.</p>
+      <div class="how3">
+        <div class="how" data-n="01">
+          <div class="how-n">01</div>
+          <div class="how-t">Long &amp; Short Positions</div>
+          <div class="how-d">Buy EUR/USD when you expect euro to strengthen against the dollar. Sell when you expect it to weaken. Profit from both rising and falling markets — 24/5.</div>
+          <a href="#" class="how-lnk">Long vs Short explained →</a>
+        </div>
+        <div class="how" data-n="02">
+          <div class="how-n">02</div>
+          <div class="how-t">Leverage up to 1:500</div>
+          <div class="how-d">Control a $50,000 position with just $100 in margin. Global (non-EU) retail clients can access up to 1:500. Risk scales with position size — always set a Stop Loss.</div>
+          <a href="#" class="how-lnk">Leverage guide →</a>
+        </div>
+        <div class="how" data-n="03">
+          <div class="how-n">03</div>
+          <div class="how-t">Risk Management Tools</div>
+          <div class="how-d">Stop Loss, Take Profit and Trailing Stop are available natively in MT4/MT5. Negative balance protection guaranteed under CySEC licence. Margin call at 50%.</div>
+          <a href="#" class="how-lnk">Order types guide →</a>
+        </div>
+      </div>
+      <div class="how-vis">
+        📱 Platform screenshot · MT4/MT5 interface (English) — Forex chart view<br>
+        <span style="font-size:11px;color:rgba(255,255,255,.2);display:block;margin-top:4px">✏ Только реальный скрин из терминала j2t с вотермарком. Stocks → MT5 Global, Futures → CQG, Bonds → MT5 Bond view</span>
+      </div>
+      <div class="prod-ann" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.22);color:#FCD34D">Forex: Long/Short · Leverage · Risk tools · Stocks: Dividends · Margin · Order routing · Bonds: Yield vs Price · Coupon · Duration risk · Futures: Contract specs · Rollover · DMA</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B06 · BROKER COMPARISON
+═══════════════════════════════════════ -->
+<div id="b06" class="bw">
+  <div class="bh">
+    <div class="bn">06</div>
+    <div><div class="bname">Broker Comparison — Market Positioning</div>
+    <div class="bnote">EN competitors: Pepperstone + IC Markets. J2T always row #1. Data verified quarterly. Key differentiator: MT4 availability + CQG + leverage 1:500</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="ey">Comparison</div>
+      <h2 class="h2">Just2Trade vs. the competition</h2>
+      <p class="sub">Verified data. Quarterly updates. Spreads sourced from official broker platforms under normal market conditions.</p>
+      <div class="comp-wrap">
+        <table class="comp-tbl">
+          <thead><tr><th>Criteria</th><th>Just2Trade</th><th>Pepperstone</th><th>IC Markets</th></tr></thead>
+          <tbody>
+            <tr class="j2t"><td>EUR/USD spread (avg.)</td><td>0.2 pip / 0.0 ECN</td><td>0.6 pip / 0.0 Razor</td><td>0.4 pip / 0.0 Raw</td></tr>
+            <tr><td>Commission (ECN/Raw)</td><td><strong>$5/lot RT</strong></td><td>$3.50/lot RT</td><td>$6/lot RT</td></tr>
+            <tr class="j2t"><td>MT4 available (2025+)</td><td class="ck">✓ Yes</td><td class="ck">✓ Yes</td><td class="ck">✓ Yes</td></tr>
+            <tr><td>MT5 available</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr class="j2t"><td>CQG Platform</td><td class="ck">✓</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+            <tr><td>Sterling Trader Pro</td><td class="ck">✓</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+            <tr class="j2t"><td>Leverage (non-EU max)</td><td><strong>1:500</strong></td><td>1:200</td><td>1:500</td></tr>
+            <tr><td>Minimum deposit</td><td><strong>$100</strong></td><td>$0</td><td>$200</td></tr>
+            <tr class="j2t"><td>Real stocks (non-CFD)</td><td class="ck">✓</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+            <tr><td>Regulation</td><td><strong>CySEC No. 281/15</strong></td><td>FCA, ASIC, CySEC</td><td>ASIC, CySEC</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="comp-note">Data as of April 2026. Spreads from official platforms under normal conditions.</p>
+      <div class="prod-ann">Сравнение одинаковое для всех продуктов. Строки меняются по продукту: для Stocks добавить «Real share dealing» · для Bonds — «Eurobond access» · для Futures — «DMA exchanges count»</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B07 · PLATFORM SHOWCASE
+═══════════════════════════════════════ -->
+<div id="b07" class="bw">
+  <div class="bh">
+    <div class="bn">07</div>
+    <div><div class="bname">Platform Showcase — Trading Platforms</div>
+    <div class="bnote">Platforms shown differ by product. Forex → MT4+MT5+CQG. Stocks → MT5 Global+Sterling. Bonds → MT5. Futures → CQG (primary)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Stocks</div><div class="prod-tab">Bonds</div><div class="prod-tab">Futures</div>
+      <span class="prod-tab-hint">✏ Набор платформ меняется по продукту</span>
+    </div>
+    <div class="s-navy2">
+      <div class="ey-w">Platforms</div>
+      <h2 class="h2w">Trade on the platform you prefer</h2>
+      <p class="subw">MT4, MT5, CQG and Sterling Trader Pro — professional tools for every trading style.</p>
+      <div class="plat3">
+        <div class="plat feat">
+          <div class="plat-top">
+            <div><div class="plat-tag-b">FOREX · CFD</div><div class="plat-name">MetaTrader 4</div><div class="plat-sub">Fully available — when others discontinued it</div></div>
+            <div class="pop-badge">Popular</div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>30+ built-in technical indicators</li>
+              <li>Expert Advisors (automated trading)</li>
+              <li>Desktop, iOS, Android, WebTrader</li>
+              <li>One-click trading, custom scripts</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Download MT4</button>
+              <button class="btn-sm btn-sm-g">WebTrader</button>
+            </div>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-top">
+            <div><div class="plat-tag-b">MULTI-ASSET</div><div class="plat-name">MetaTrader 5</div><div class="plat-sub">Stocks, forex &amp; futures from one account</div></div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>80+ indicators, 21 timeframes</li>
+              <li>Order depth (DOM) &amp; L2 data</li>
+              <li>Multi-currency backtesting</li>
+              <li>Web + Mobile available</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Open MT5 Account</button>
+              <button class="btn-sm btn-sm-g">WebTrader</button>
+            </div>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-top">
+            <div><div class="plat-tag-g">FUTURES · PRO</div><div class="plat-name">CQG</div><div class="plat-sub">DMA · CME, EUREX, 40+ exchanges</div></div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>Direct market access (DMA)</li>
+              <li>Level 2 premium data included</li>
+              <li>API for algorithmic strategies</li>
+              <li>Execution from 10ms</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Download CQG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-ann" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.22);color:#FCD34D;margin-top:20px">Forex: MT4 + MT5 + CQG · Stocks: MT5 Global + Sterling Trader Pro · Bonds: MT5 (Bond Scanner view) · Futures: CQG (главная) + MT5. Sterling Trader Pro показывается только для Stocks</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B08 · 3 STEPS
+═══════════════════════════════════════ -->
+<div id="b08" class="bw">
+  <div class="bh">
+    <div class="bn">08</div>
+    <div><div class="bname">3 Steps to Start — Conversion Block</div>
+    <div class="bnote">Step 1 title and detail vary by product (account type). Steps 2–3 universal. Demo callout mandatory</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ шаг 1</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Stocks</div><div class="prod-tab">Bonds</div><div class="prod-tab">Futures</div>
+      <span class="prod-tab-hint">✏ Шаг 1 — название и текст меняются по типу счёта</span>
+    </div>
+    <div class="steps-split">
+      <div class="steps-left">
+        <div class="ey">Get started</div>
+        <h2 class="h2">Start trading Forex<br>in 3 simple steps</h2>
+        <p class="sub">No paperwork. Full process online in under 10 minutes.</p>
+        <div class="step-list">
+          <div class="step-i">
+            <div class="step-c">01</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Open a Forex Account</div>
+              <div class="step-d">Complete the online form and verify your identity. Takes under 10 minutes. No documents to print or mail.</div>
+              <div class="step-hint">Forex &amp; CFD account · MT4 or MT5 access</div>
+            </div>
+          </div>
+          <div class="step-i">
+            <div class="step-c">02</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Fund Your Account</div>
+              <div class="step-d">Deposit via bank transfer, card or e-wallet. Minimum deposit from <strong>[J2T amount]</strong>. Account in USD, EUR or GBP.</div>
+              <div class="step-hint">20+ payment methods · no deposit fee</div>
+            </div>
+          </div>
+          <div class="step-i" style="padding-bottom:0">
+            <div class="step-c">03</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Place Your First Trade</div>
+              <div class="step-d">Log into MT4 or MT5, select a currency pair and execute your first order. Or practice first on the demo.</div>
+              <div class="step-hint">Demo: $10,000 virtual · unlimited time</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-p" style="margin-top:28px;padding:14px 32px;font-size:15px">Open Account Now →</button>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">or <a href="#">try the demo account free</a></div>
+        <div class="ann">✏ <strong>[J2T amount]</strong> — заполнить актуальным мин. депозитом от команды продукта · Шаг 1 по продуктам: <strong>Stocks</strong> → «Open MT5 Global Account» · <strong>Futures</strong> → «Open CQG Account» · <strong>Bonds</strong> → «Open MT5 Account»</div>
+      </div>
+      <div class="steps-right">
+        <div class="steps-r-title">Try before you commit</div>
+        <div class="steps-r-sub">No deposit required. No time limit.</div>
+        <button class="btn-g" style="width:100%;padding:14px;font-size:15px;text-align:center">Open Free Demo Account →</button>
+        <div class="demo-box">
+          <div class="demo-box-t">Demo account includes:</div>
+          <div class="demo-box-d">
+            ✓ $10,000 virtual funds<br>
+            ✓ Full MT4 &amp; MT5 access<br>
+            ✓ Real market conditions<br>
+            ✓ Unlimited time — no expiry<br>
+            ✓ Switch to live when ready
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:8px">No credit card required to open demo</div>
+        </div>
+        <div class="ann-dk">✏ Правая колонка — скрин формы регистрации или анимация процесса. Только из интерфейса j2t с вотермарком</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B09 · TRUST & AWARDS
+═══════════════════════════════════════ -->
+<div id="b09" class="bw">
+  <div class="bh">
+    <div class="bn">09</div>
+    <div><div class="bname">Trust &amp; Awards — Credibility Section</div>
+    <div class="bnote">Stats + 4 latest awards + CySEC explanation box. Identical across all products</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-navy">
+      <div class="ey-w">Trust &amp; Regulation</div>
+      <h2 class="h2w">Why traders choose Just2Trade</h2>
+      <div class="trust-g">
+        <div>
+          <div class="trust-stats">
+            <div class="t-stat"><div class="t-n">155K+</div><div class="t-l">Active clients</div></div>
+            <div class="t-stat"><div class="t-n">130</div><div class="t-l">Countries</div></div>
+            <div class="t-stat"><div class="t-n">2016</div><div class="t-l">Year founded</div></div>
+            <div class="t-stat"><div class="t-n">€20K</div><div class="t-l">ICF protection</div></div>
+          </div>
+          <div class="cysec-bx">
+            <div class="cysec-t">🛡 CySEC · Licence No. 281/15</div>
+            <div class="cysec-d">CySEC is the Cyprus Securities and Exchange Commission, supervised by ESMA (EU). It enforces the same client protections as FCA (UK) or BaFin (Germany): segregated funds, negative balance protection and ICF compensation up to €20,000 per client.</div>
+          </div>
+        </div>
+        <div>
+          <div class="awards">
+            <div class="award"><div class="award-yr">2025</div><div><div class="award-n">Best MT5 Broker</div><div class="award-o">WorldFinance.com</div></div></div>
+            <div class="award"><div class="award-yr">2024</div><div><div class="award-n">Best Mobile Trading Platform</div><div class="award-o">WorldFinance.com</div></div></div>
+            <div class="award"><div class="award-yr">2024</div><div><div class="award-n">Best Multi-Asset Broker</div><div class="award-o">BrokersView Expo</div></div></div>
+            <div class="award"><div class="award-yr">2023</div><div><div class="award-n">Top 10 FX Brokers Worldwide</div><div class="award-o">Forextop</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B10 · EDUCATIONAL TEXT
+═══════════════════════════════════════ -->
+<div id="b10" class="bw">
+  <div class="bh">
+    <div class="bn">10</div>
+    <div><div class="bname">Educational Text — SEO Content with Keys and Intents</div>
+    <div class="bnote">200–400 words. 2–3 H3 headings. For experienced traders, not beginners. 1–2 internal links to J2T blog. No investment advice</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="edu-g">
+        <div class="edu-body">
+          <div class="ey">About Forex Trading</div>
+          <h2 class="h2" style="margin-bottom:20px">What is Forex trading and how does it work?</h2>
+          <h3>How does the forex market function?</h3>
+          <p>The forex (Foreign Exchange) market is the world's largest and most liquid financial market, with a daily turnover exceeding <strong>$6.6 trillion</strong>. Currency prices are driven by global supply and demand, shaped by interest rate decisions from the <strong>Fed, ECB and Bank of England</strong>, inflation data, employment reports and geopolitical events.</p>
+          <h3>How does trading EUR/USD work with Just2Trade?</h3>
+          <p>When you trade EUR/USD on the J2T platform, you simultaneously buy euros and sell US dollars. If the euro strengthens, your long position gains value. Access is via <strong>MT4 or MT5</strong> — available on desktop and mobile. For global (non-EU) clients, leverage of up to <strong>1:500</strong> is available. <a href="#">Read: MT4 vs MT5 — which is right for you? →</a></p>
+          <h3>Why Just2Trade stands out for global traders</h3>
+          <p>J2T maintains full MT4 access for all clients, offers CQG for futures and provides real (non-CFD) stock trading via Sterling Trader Pro — a combination unavailable at most retail brokers. Non-EU clients benefit from higher leverage tiers and a broader account type selection. <a href="#">See all 70+ Forex instruments →</a></p>
+          <div class="ann">✏ EN текст — глобальный фокус, акцент на 1:500 leverage, MT4 доступность, multi-platform. Не упоминать конкурентов по имени. 1–2 линка на блог j2t. Аудитория — опытный трейдер, знает терминологию</div>
+          <div class="prod-ann" style="margin-top:10px">Stocks: дивиденды, маржинальная торговля, типы ордеров, DMA · Bonds: доходность vs цена, купон, длительность, Eurobonds · Futures: спецификации контрактов, ролловер, DMA на биржу</div>
+        </div>
+        <div class="edu-side">
+          <div class="edu-vid">
+            <div class="play">▶</div>
+          </div>
+          <div class="edu-cta">
+            <div class="edu-cta-t">Practice risk-free with a demo account</div>
+            <div class="edu-cta-d">$10,000 virtual funds. Full platform access. No deposit required. No time limit.</div>
+            <button class="btn-p">Open Demo Account →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B11 · PAYMENT METHODS
+═══════════════════════════════════════ -->
+<div id="b11" class="bw">
+  <div class="bh">
+    <div class="bn">11</div>
+    <div><div class="bname">Payment Methods — Deposits &amp; Withdrawals</div>
+    <div class="bnote">EN: Neteller + Wire transfer prominent. No deposit fee. Same block across all products</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-white">
+      <div class="ey">Deposits &amp; Withdrawals</div>
+      <h2 class="h2">Fund your account your way</h2>
+      <p class="sub">20+ payment methods. No deposit fee. Withdrawals processed in 1–3 business days.</p>
+      <div class="pay-row">
+        <div class="pay-c"><span class="visa-t">VISA</span></div>
+        <div class="pay-c">
+          <div class="mc"><div class="mc-r"></div><div class="mc-b"></div><div class="mc-o"></div></div>
+          <span style="font-size:13px;font-weight:700;color:var(--text)">Mastercard</span>
+        </div>
+        <div class="pay-c"><span class="pp">Pay<span>Pal</span></span></div>
+        <div class="pay-c"><span class="sk">S</span><span style="font-size:13px;font-weight:800;color:#8B12AE">krill</span></div>
+        <div class="pay-c"><span class="nt">NETELLER</span></div>
+        <div class="pay-c"><span style="font-size:20px">🏦</span><span style="font-size:11px;font-weight:700;color:var(--muted);line-height:1.2;text-align:center">Bank<br>Transfer</span></div>
+        <div class="pay-c"><span style="font-size:20px">💳</span><span style="font-size:11px;font-weight:700;color:var(--muted);line-height:1.2;text-align:center">Wire<br>Transfer</span></div>
+        <div class="pay-c more">+ 13 more →</div>
+      </div>
+      <div class="pay-info">
+        <strong>No deposit fee.</strong> Minimum deposit from <strong>[J2T amount]</strong>. Withdrawals via the same method used for deposit. Bank and wire transfer recommended for amounts over $500. Processing time: 1–3 business days. No commission on most withdrawal methods.
+      </div>
+      <div class="ann" style="margin-top:12px">✏ EN-версия: Neteller и Wire Transfer выделить визуально как приоритетные. Логотипы — строго официальные, без изменения цветов (brand guidelines платёжных систем). [J2T amount] — заполнить из тарифов</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B12 · NEWS & ANALYSIS
+═══════════════════════════════════════ -->
+<div id="b12" class="bw">
+  <div class="bh">
+    <div class="bn">12</div>
+    <div><div class="bname">News &amp; Analysis — Latest Market Content</div>
+    <div class="bnote">3 latest articles from J2T blog on the product topic. Link to tagged blog section. EN: global market focus</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-offwhite">
+      <div class="ey">Market Insights</div>
+      <h2 class="h2">Latest Forex analysis &amp; news</h2>
+      <div class="news3">
+        <div class="news-c">
+          <div class="news-img">[ Article image ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Analysis</div>
+            <div class="news-t">EUR/USD: What to watch before the Fed decision this week</div>
+            <div class="news-d">April 15, 2026</div>
+          </div>
+        </div>
+        <div class="news-c">
+          <div class="news-img">[ Article image ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Strategy</div>
+            <div class="news-t">5 most common forex trading mistakes — and how to avoid them</div>
+            <div class="news-d">April 12, 2026</div>
+          </div>
+        </div>
+        <div class="news-c">
+          <div class="news-img">[ Article image ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Education</div>
+            <div class="news-t">How do forex swaps work? A complete guide for active traders</div>
+            <div class="news-d">April 10, 2026</div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="lnk-more">See all market analysis and news →</a>
+      <div class="prod-ann" style="margin-top:12px">Forex: валютные пары, ЦБ, макро · Stocks: отчёты компаний, дивиденды, IPO · Bonds: ставки, инфляция, суверенный долг · Futures: commodity report, rollover dates, contract expiry</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B13 · FAQ ACCORDION
+═══════════════════════════════════════ -->
+<div id="b13" class="bw">
+  <div class="bh">
+    <div class="bn">13</div>
+    <div><div class="bname">FAQ Accordion — Frequently Asked Questions</div>
+    <div class="bnote">5–8 questions based on real EN search queries. FAQPage JSON-LD schema required on all 4 product pages. 1–2 internal links in answers</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="ey">FAQ</div>
+      <h2 class="h2">Frequently asked questions about Forex trading</h2>
+      <div class="faq-list">
+        <div class="faq-i open">
+          <div class="faq-q">What is the minimum deposit to start trading Forex? <span class="faq-ico">−</span></div>
+          <div class="faq-a">Just2Trade offers several account types with different minimum deposit requirements. The standard Forex &amp; CFD account requires a minimum deposit of <strong>[J2T amount]</strong>. The ECN account requires a higher initial deposit. A free demo account is available with no deposit — $10,000 virtual funds, unlimited duration, full platform access.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">What leverage is available for global (non-EU) forex traders? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Non-EU retail clients can access leverage up to 1:500 on major currency pairs. Leverage varies by instrument: indices up to 1:200, commodities up to 1:100. EU-resident clients are subject to ESMA limits (1:30 on major pairs). Professional account classification is also available for eligible clients.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">Which trading platforms are available at Just2Trade? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Just2Trade provides access to MetaTrader 4, MetaTrader 5, CQG Integrated Client and Sterling Trader Pro. MT4 remains fully available for all new and existing clients — unlike competitors who discontinued it. Each platform is available on desktop, web browser and mobile (iOS/Android).</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">Are my funds safe with Just2Trade? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Yes. Just2Trade is regulated by CySEC (licence No. 281/15), part of the European regulatory framework supervised by ESMA. Client funds are held in segregated bank accounts, fully separate from company capital. ICF compensation covers clients up to €20,000. Negative balance protection is mandatory under CySEC rules.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">Does Just2Trade offer a free demo account? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Yes. A free demo account is available with $10,000 virtual funds, no time limit and no deposit required. It provides access to full MT4 and MT5 platforms with real market conditions, allowing you to test strategies and learn the platform before committing real capital.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">Can I trade real stocks (not CFDs) at Just2Trade? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Yes. Via Sterling Trader Pro and MT5 Global, Just2Trade provides direct access to real (non-CFD) share trading on major exchanges including NYSE, NASDAQ, LSE and 20+ other global markets. Real share trading includes dividend eligibility and actual ownership of shares — unlike CFD products.</div>
+        </div>
+      </div>
+      <p class="schema-note">✓ FAQPage JSON-LD schema markup — implemented by development team on all 4 product pages. Required for Featured Snippet eligibility in Google EN SERPs.</p>
+      <div class="prod-ann" style="margin-top:10px">FAQ вопросы полностью разные по продуктам. Forex: leverage, spreads, pairs · Stocks: dividends, DMA, real vs CFD · Bonds: yield, coupon, minimum lot · Futures: rollover, DMA exchanges, margin calls</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B14 · CROSS-SELL
+═══════════════════════════════════════ -->
+<div id="b14" class="bw">
+  <div class="bh">
+    <div class="bn">14</div>
+    <div><div class="bname">Cross-sell — Related Products</div>
+    <div class="bnote">4 cards — other J2T product pages. Anchor text per internal linking rules. On Forex page → Stocks / Bonds / Futures / MT5 Global</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-grad" style="padding:36px 48px">
+      <div class="ey-w" style="text-align:center;margin-bottom:6px">Explore more</div>
+      <h2 class="h2w" style="text-align:center;margin-bottom:28px">Other products at Just2Trade</h2>
+      <div class="cross4">
+        <div class="cross-c"><div class="cross-ico">📈</div><div class="cross-t">Stocks</div><div class="cross-d">Real shares from 20+ global exchanges. NYSE, NASDAQ, LSE and more.</div><a href="#" class="cross-lnk">Learn more →</a></div>
+        <div class="cross-c"><div class="cross-ico">🏦</div><div class="cross-t">Bonds</div><div class="cross-d">Government and corporate bonds. Eurobonds. Coupon payments included.</div><a href="#" class="cross-lnk">Learn more →</a></div>
+        <div class="cross-c"><div class="cross-ico">📊</div><div class="cross-t">Futures</div><div class="cross-d">40+ global exchanges via CQG. CME, EUREX, NYMEX and more.</div><a href="#" class="cross-lnk">Learn more →</a></div>
+        <div class="cross-c"><div class="cross-ico">⚡</div><div class="cross-t">MT5 Global</div><div class="cross-d">9,000+ instruments from a single multi-asset account.</div><a href="#" class="cross-lnk">Learn more →</a></div>
+      </div>
+      <div class="ann-dk" style="margin-top:20px;text-align:center">✏ Anchor-тексты строго по правилам внутренней перелинковки (редполитика §4). На каждой продуктовой странице — 3 других продукта + MT5 Global</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B15 · BOTTOM CTA
+═══════════════════════════════════════ -->
+<div id="b15" class="bw">
+  <div class="bh">
+    <div class="bn">15</div>
+    <div><div class="bname">Bottom CTA — Final Conversion Block</div>
+    <div class="bnote">H2 is product-specific. Subline = 1 sentence with key USP. All 5 major competitors have this block — critical for conversion</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ H2</span></div>
+  </div>
+  <div class="bc">
+    <div class="cta-s">
+      <h2 class="cta-h">Open a <em style="color:#5CC8FF;font-style:normal">Forex</em> Account<br>and start trading today</h2>
+      <p class="cta-d">Join 155,000+ traders from 130 countries. Account open in under 10 minutes. No paperwork.</p>
+      <div class="cta-btns">
+        <button class="btn-p" style="padding:15px 36px;font-size:15px">Open Account</button>
+        <button class="btn-g" style="padding:15px 36px;font-size:15px">Try Demo Free →</button>
+      </div>
+      <div class="trust-chips">
+        <span class="trust-chip"><span class="td"></span>CySEC regulated · 281/15</span>
+        <span class="trust-chip"><span class="td"></span>Segregated funds</span>
+        <span class="trust-chip"><span class="td"></span>Negative balance protection</span>
+        <span class="trust-chip"><span class="td"></span>Multilingual support 24/5</span>
+      </div>
+      <div class="prod-ann" style="position:relative;z-index:1;margin-top:20px;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.2);color:#FCD34D">H2 меняется по продукту: Stocks → «Open a Stocks Account» · Bonds → «Start Trading Bonds» · Futures → «Open a Futures Account with CQG»</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     B16 · RISK DISCLAIMER
+═══════════════════════════════════════ -->
+<div id="b16" class="bw">
+  <div class="bh">
+    <div class="bn">16</div>
+    <div><div class="bname">Risk Disclaimer — Required on Every Page</div>
+    <div class="bnote">Text from approved editorial policy template. [X]% confirmed by Legal before publish. Stocks/Bonds: remove CFD clause</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-req">⚠ REQUIRED</span></div>
+  </div>
+  <div class="bc">
+    <div class="disc-s">
+      <p class="disc-t"><strong>Risk Warning:</strong> CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. <strong>[X]%</strong> of retail investor accounts lose money when trading CFDs with this provider. You should consider whether you understand how CFDs work and whether you can afford to take the high risk of losing your money. <strong>Lime Trading (CY) Ltd is authorised and regulated by the Cyprus Securities and Exchange Commission (CySEC) under licence number 281/15.</strong> This material does not constitute investment advice. Trading involves risk. Past performance is not indicative of future results.</p>
+      <div class="disc-reg">
+        <div class="disc-b"><span class="disc-d"></span>CySEC · Licence No. 281/15</div>
+        <div class="disc-b"><span class="disc-d"></span>ICF protection up to €20,000</div>
+        <div class="disc-b"><span class="disc-d"></span>ESMA regulations apply</div>
+        <div class="disc-b"><span class="disc-d"></span>Negative balance protection</div>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:#1A3040">✏ [X]% — заполнить актуальным процентом от compliance до публикации. Stocks/Bonds страницы: убрать «CFDs are complex instruments...» и заменить на общий инвестиционный дисклеймер. Текст не менять без согласования с юристом</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     ★ EN-ONLY BLOCK: PRO ACCOUNT + LEVERAGE
+══════════════════════════════════════════ -->
+<div style="margin:24px 24px 10px;padding:14px 18px;background:linear-gradient(90deg,#0D2416,#0F3020);border-radius:10px;border:1px solid rgba(22,163,74,.25)">
+  <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#4ADE80;margin-bottom:3px">★ EN-only structural block — not present in PL or ES versions</div>
+  <div style="font-size:12px;color:#5B7082;line-height:1.5">Этот блок существует <strong style="color:#4ADE80">только в английской (глобальной) версии</strong>. Показывать плечо выше 1:30 на PL или ES страницах — прямое нарушение требований CySEC/ESMA. Контент согласовать с compliance перед публикацией.</div>
+</div>
+
+<div id="u-en" class="en-unique-wrap">
+  <div class="en-bh">
+    <div class="en-bn">EN</div>
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:700;color:#14532D">🌍 EN Only — Professional Account &amp; Leverage Tiers</div>
+      <div style="font-size:11px;color:var(--muted);max-width:500px;line-height:1.4;margin-top:2px">Addresses global audience's access to higher leverage. Legally prohibited content for EU-regulated PL/ES versions</div>
+    </div>
+    <div style="display:flex;gap:5px"><span class="pill p-en">EN only</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="en-bc">
+    <div class="en-banner">
+      <span>⚖️</span>
+      <strong>This block exists only in the EN (Global) version of the site</strong> — showing leverage beyond 1:30 to EU-regulated audiences (PL, ES) is prohibited under ESMA rules
+      <span>✏ Юридически недопустимо на PL или ES · Согласовать с compliance</span>
+    </div>
+    <div class="s-white">
+      <div class="ey-g">Account types</div>
+      <h2 class="h2">Choose the account that matches your trading level</h2>
+      <p class="sub">Different account types for different trader profiles. All include MT4 &amp; MT5 access, negative balance protection and segregated client funds.</p>
+      <div class="lever-g">
+        <div class="lever-c std">
+          <div class="lever-tag std">Standard</div>
+          <div class="lever-val std">1:100</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin:6px 0 4px">Forex &amp; CFD Standard</div>
+          <div class="lever-d">Available to global retail clients. Suitable for beginners and intermediate traders. Full MT4/MT5 access included.</div>
+          <div style="margin-top:14px;font-size:12px;color:var(--muted)">Min. deposit: <strong>[J2T amount]</strong></div>
+          <button class="btn-o" style="margin-top:12px;width:100%">Open Account</button>
+        </div>
+        <div class="lever-c pro">
+          <div class="lever-tag pro">ECN Pro · Most popular</div>
+          <div class="lever-val pro">1:200</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-dk);margin:6px 0 4px">ECN Pro Account</div>
+          <div class="lever-d">Raw spreads from 0.0 pip + commission. Direct liquidity access. For active and professional traders looking for maximum execution quality.</div>
+          <div style="margin-top:14px;font-size:12px;color:var(--muted)">Min. deposit: <strong>$500</strong></div>
+          <button class="btn-p" style="margin-top:12px;width:100%">Open ECN Account</button>
+        </div>
+        <div class="lever-c inst">
+          <div class="lever-tag inst">Institutional</div>
+          <div class="lever-val inst">1:500</div>
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin:6px 0 4px">Institutional Account</div>
+          <div class="lever-d">For professional and institutional clients. Subject to eligibility assessment and suitability review. API access available.</div>
+          <div style="margin-top:14px;font-size:12px;color:var(--muted)">Min. deposit: <strong>$10,000</strong></div>
+          <button class="btn-o" style="margin-top:12px;width:100%;border-color:var(--green);color:var(--green)">Contact Us</button>
+        </div>
+      </div>
+      <div class="reg-note">⚠ <strong>Regulatory note:</strong> Leverage limits depend on client classification and country of residence. EU residents under CySEC/ESMA regulation are limited to 1:30 (retail). Non-EU clients and those reclassified as professional investors may access higher leverage tiers subject to applicable regulations and eligibility criteria.</div>
+      <div class="ann" style="margin-top:14px">✏ Этот блок — только EN. Цифры leverage и мин. депозиты заполнить из тарифной сетки j2t. «Professional account» — текст и условия согласовать с compliance перед публикацией. Для Stocks/Bonds/Futures: блок адаптируется (другие типы счётов), но остаётся EN-only</div>
+      <div class="prod-ann">Stocks EN: «Standard» vs «DMA Pro» vs «Institutional» · Bonds EN: «Retail» vs «Professional» · Futures EN: «Standard CQG» vs «Professional DMA» — типы счётов разные, структура блока та же</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="ft">Rush Agency · J2T EN Product Page Mockup · April 2026 · Applies to: Forex / Stocks / Bonds / Futures</div>
+  <div style="display:flex;gap:6px"><span class="pill p-en">EN v1.0</span><span class="pill p-new">For approval</span></div>
+</div>
+
+<script>
+// Product data
+const products = {
+  forex:   { bc:'Forex Trading', h1:'Trade <em style="color:#5CC8FF;font-style:normal">Forex</em><br>with 70+ currency pairs', sub:'Access major, minor and exotic currency pairs on MetaTrader 4 & MT5. Tight spreads from 0.0 pip, leverage up to 1:500, instant execution from 10ms.', label:'Forex · Top Pairs', tickers:`<div class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.08462</span><span class="tk-up">▲ +0.34%</span></div><div class="tk"><span class="tk-sym">GBP/USD</span><span class="tk-val">1.26318</span><span class="tk-up">▲ +0.21%</span></div><div class="tk"><span class="tk-sym">USD/JPY</span><span class="tk-val">149.851</span><span class="tk-dn">▼ −0.18%</span></div><div class="tk"><span class="tk-sym">XAU/USD</span><span class="tk-val">2342.30</span><span class="tk-up">▲ +0.57%</span></div>` },
+  stocks:  { bc:'Global Stocks', h1:'Trade <em style="color:#4ADE80;font-style:normal">Stocks</em><br>on 20+ global exchanges', sub:'Real share trading on NYSE, NASDAQ, LSE and 20+ exchanges. DMA access via Sterling Trader Pro. Dividends included. From $0.01/share commission.', label:'Stocks · Top Movers', tickers:`<div class="tk"><span class="tk-sym">AAPL</span><span class="tk-val">$182.40</span><span class="tk-up">▲ +1.2%</span></div><div class="tk"><span class="tk-sym">TSLA</span><span class="tk-val">$204.75</span><span class="tk-dn">▼ −0.8%</span></div><div class="tk"><span class="tk-sym">MSFT</span><span class="tk-val">$415.20</span><span class="tk-up">▲ +0.5%</span></div><div class="tk"><span class="tk-sym">NVDA</span><span class="tk-val">$867.10</span><span class="tk-up">▲ +2.1%</span></div>` },
+  bonds:   { bc:'Bonds & Eurobonds', h1:'Invest in <em style="color:#FCD34D;font-style:normal">Bonds</em><br>and fixed income markets', sub:'Government and corporate bonds, Eurobonds and fixed income instruments. Coupon payments, competitive spreads. Leverage up to 1:3 for qualified clients.', label:'Bonds · Live Yields', tickers:`<div class="tk"><span class="tk-sym">US 10Y</span><span class="tk-val">4.35%</span><span class="tk-dn">▼ −0.04%</span></div><div class="tk"><span class="tk-sym">Bund 10Y</span><span class="tk-val">2.28%</span><span class="tk-up">▲ +0.02%</span></div><div class="tk"><span class="tk-sym">UK Gilt</span><span class="tk-val">3.92%</span><span class="tk-dn">▼ −0.01%</span></div><div class="tk"><span class="tk-sym">EUR Bond</span><span class="tk-val">3.50%</span><span class="tk-up">▲ +0.03%</span></div>` },
+  futures: { bc:'Global Futures', h1:'Trade <em style="color:#C4B5FD;font-style:normal">Futures</em><br>on 40+ global exchanges', sub:'Access CME, EUREX, NYMEX and 40+ derivative exchanges via CQG. Direct market access (DMA). Execution from 10ms. From $1.50/side commission.', label:'Futures · Top Contracts', tickers:`<div class="tk"><span class="tk-sym">ES (S&amp;P)</span><span class="tk-val">5,248.75</span><span class="tk-up">▲ +0.6%</span></div><div class="tk"><span class="tk-sym">NQ (Nasdaq)</span><span class="tk-val">18,142.50</span><span class="tk-up">▲ +0.9%</span></div><div class="tk"><span class="tk-sym">CL (Oil)</span><span class="tk-val">78.42</span><span class="tk-dn">▼ −0.4%</span></div><div class="tk"><span class="tk-sym">GC (Gold)</span><span class="tk-val">2,342.10</span><span class="tk-up">▲ +0.5%</span></div>` },
+};
+const tblLinks = { forex:'→ View all 70+ Forex instruments', stocks:'→ View all 30,000+ stock instruments', bonds:'→ View all Bond instruments', futures:'→ View all Futures contracts' };
+const tblTitles = { forex:'Forex Instruments at Just2Trade', stocks:'Global Stock Instruments at Just2Trade', bonds:'Bond Instruments at Just2Trade', futures:'Futures Contracts at Just2Trade' };
+
+function switchProduct(prod, tab) {
+  const d = products[prod];
+  if(!d) return;
+  document.getElementById('bc-product').textContent = d.bc;
+  document.getElementById('hero-h1').innerHTML = d.h1;
+  document.getElementById('hero-sub').textContent = d.sub;
+  document.getElementById('hero-panel-label').textContent = d.label;
+  document.getElementById('hero-tickers').innerHTML = d.tickers;
+  if(tab){ tab.closest('.prod-tab-bar').querySelectorAll('.prod-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); }
+}
+
+function switchTable(prod, tab) {
+  ['forex','stocks','bonds','futures'].forEach(p=>{
+    const el = document.getElementById('tbl-'+p);
+    if(el) el.style.display = p===prod ? 'block' : 'none';
+  });
+  const tt = document.getElementById('tbl-title');
+  if(tt) tt.textContent = tblTitles[prod];
+  const tl = document.getElementById('tbl-lnk');
+  if(tl) tl.textContent = tblLinks[prod];
+  if(tab){ tab.closest('.prod-tab-bar').querySelectorAll('.prod-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); }
+}
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const i = q.parentElement;
+    const isOpen = i.classList.contains('open');
+    document.querySelectorAll('.faq-i').forEach(x=>{x.classList.remove('open'); x.querySelector('.faq-ico').textContent='+';});
+    if(!isOpen){ i.classList.add('open'); q.querySelector('.faq-ico').textContent='−'; }
+  });
+});
+</script>
+</body>
+</html>

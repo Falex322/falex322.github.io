@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J2T — ES Product Page Mockup</title>
+<style>
+:root{
+  --blue:#008AD9; --blue-dk:#146595; --blue-xdk:#0B3D5C;
+  --blue-lt:#E8F4FC; --blue-md:#C8E4F5;
+  --navy:#091624; --navy2:#0D1F30; --navy3:#132840;
+  --border:#E0E0E0; --border-b:rgba(0,138,217,.22);
+  --white:#fff; --offwhite:#F7FAFD; --midblue:#EBF5FC;
+  --text:#0D1F30; --muted:#5B7082; --light:#8BAABB;
+  --green:#16A34A; --red:#DC2626; --gold:#D97706;
+  --radius:10px; --shadow:0 2px 14px rgba(0,0,0,.07);
+  --shadow-md:0 4px 24px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',system-ui,sans-serif;background:#DDE4EC;color:var(--text);font-size:14px;line-height:1.6}
+a{color:var(--blue);text-decoration:none}
+.meta{background:var(--navy);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--blue);position:sticky;top:0;z-index:300}
+.meta-logo{font-size:19px;font-weight:900;color:#fff;letter-spacing:-1px}.meta-logo b{color:var(--blue)}
+.meta-inf{text-align:center}
+.meta-ttl{font-size:13px;font-weight:700;color:#fff}
+.meta-sub{font-size:11px;color:#7A9BB5;margin-top:1px}
+.meta-pills{display:flex;gap:6px}
+.pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.4px;white-space:nowrap}
+.p-pl{background:rgba(220,38,38,.18);color:#FCA5A5;border:1px solid rgba(220,38,38,.35)}
+.p-all{background:rgba(0,138,217,.18);color:#5CC8FF;border:1px solid rgba(0,138,217,.35)}
+.p-new{background:rgba(139,92,246,.18);color:#C4B5FD;border:1px solid rgba(139,92,246,.35)}
+.p-req{background:rgba(220,38,38,.18);color:#FCA5A5;border:1px solid rgba(220,38,38,.35)}
+.p-note{background:rgba(217,119,6,.18);color:#FCD34D;border:1px solid rgba(217,119,6,.35)}
+.legend{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin:14px 24px;padding:11px 18px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--muted)}
+.leg-t{font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text)}
+.leg-i{display:flex;align-items:center;gap:5px}
+.toc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin:0 24px 14px;padding:14px 18px}
+.toc-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:9px}
+.toc-g{display:grid;grid-template-columns:repeat(5,1fr);gap:3px 12px}
+.toc-a{font-size:11px;color:var(--blue);padding:3px 0;display:flex;align-items:center;gap:4px}
+.toc-n{font-size:10px;color:var(--light);min-width:18px}
+.bw{margin:10px 24px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.bh{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#fff;border:1px solid var(--border);border-bottom:none;border-radius:12px 12px 0 0}
+.bn{width:29px;height:29px;background:var(--navy);color:#5CC8FF;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0}
+.bname{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.bnote{font-size:11px;color:var(--muted);max-width:500px;line-height:1.4}
+.bpills{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
+.bc{border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+.prod-tab-bar{background:var(--navy2);padding:0 32px;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.07)}
+.prod-tab{padding:10px 20px;font-size:12px;font-weight:700;color:#7A9BB5;cursor:pointer;border-bottom:2px solid transparent;transition:.15s}
+.prod-tab.active{color:#fff;border-bottom-color:var(--blue)}
+.prod-tab:hover:not(.active){color:#aaa}
+.prod-tab-hint{font-size:10px;color:#3A5060;padding:10px 32px;align-self:center;margin-left:auto;white-space:nowrap}
+.ann{background:rgba(0,138,217,.06);border:1px dashed rgba(0,138,217,.28);border-radius:7px;padding:8px 12px;font-size:11px;color:#0B4F7A;margin-top:10px;line-height:1.55}
+.ann::before{content:"✏ "}
+.ann-dk{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.18);border-radius:7px;padding:8px 12px;font-size:11px;color:#7A9BB5;margin-top:10px;line-height:1.55}
+.ann-dk::before{content:"✏ "}
+.prod-ann{background:rgba(217,119,6,.08);border:1px dashed rgba(217,119,6,.3);border-radius:7px;padding:8px 12px;font-size:11px;color:#7C4C0A;margin-top:8px;line-height:1.55}
+.prod-ann::before{content:"↔ продукт: "}
+.ey{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:var(--blue);margin-bottom:5px}
+.ey-w{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:#5CC8FF;margin-bottom:5px}
+.ey-r{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px;color:#FCA5A5;margin-bottom:5px}
+.h2{font-size:26px;font-weight:900;color:var(--text);letter-spacing:-.5px;line-height:1.2;margin-bottom:8px}
+.h2w{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px}
+.sub{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px;max-width:560px}
+.subw{font-size:14px;color:#7A9BB5;line-height:1.65;margin-bottom:28px}
+/* HERO */
+.s-hero{background:var(--navy);padding:56px 48px;position:relative;overflow:hidden}
+.s-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,138,217,.08) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.s-hero::after{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,138,217,.12),transparent 70%);pointer-events:none}
+.hero-g{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;z-index:1}
+.hero-bc{font-size:12px;color:#5A7A90;margin-bottom:14px}
+.hero-bc span{color:#5CC8FF}
+.hero-h1{font-size:42px;font-weight:900;color:#fff;line-height:1.12;letter-spacing:-1px;margin-bottom:16px}
+.hero-sub{font-size:15px;color:#7A9BB5;line-height:1.65;margin-bottom:26px;max-width:440px}
+.trust-line{display:flex;align-items:center;gap:6px;font-size:12px;color:#7A9BB5;margin-top:14px}
+.td{width:7px;height:7px;background:#16A34A;border-radius:50%}
+.hero-disc{font-size:11px;color:#3A5A6E;border-top:1px solid rgba(255,255,255,.07);padding-top:14px;margin-top:18px;line-height:1.6}
+.hero-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden}
+.hp-top{background:rgba(0,138,217,.1);border-bottom:1px solid rgba(255,255,255,.07);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.hp-live{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#5CC8FF}
+.hp-dot{width:6px;height:6px;background:#16A34A;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hp-label{font-size:11px;color:#3A5060}
+.ticker-list{padding:8px 0}
+.tk{display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
+.tk:last-child{border-bottom:none}
+.tk-sym{font-size:13px;font-weight:700;color:#fff;width:85px}
+.tk-val{font-size:13px;color:#B8D0E0;flex:1;text-align:right}
+.tk-up{font-size:11px;font-weight:700;color:#16A34A;width:60px;text-align:right}
+.tk-dn{font-size:11px;font-weight:700;color:#DC2626;width:60px;text-align:right}
+.hp-chart{height:70px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-end;padding:8px 18px;gap:4px}
+.hbar{border-radius:2px 2px 0 0;flex:1;background:rgba(0,138,217,.4)}
+.hbar.hi{background:var(--blue)}
+/* STATS */
+.s-stats{background:linear-gradient(135deg,var(--blue-dk) 0%,var(--blue-xdk) 100%);padding:0}
+.ticker-strip{display:flex;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.15)}
+.ts-i{display:flex;align-items:center;gap:8px;padding:8px 18px;border-right:1px solid rgba(255,255,255,.06);font-size:11px;white-space:nowrap}
+.ts-sym{font-weight:700;color:#fff}
+.ts-val{color:#8BAABB}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:24px 16px;border-right:1px solid rgba(255,255,255,.1)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:34px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.stat-u{font-size:18px;color:rgba(255,255,255,.5);font-weight:400}
+.stat-l{font-size:11px;color:rgba(255,255,255,.5);margin-top:5px;letter-spacing:.2px}
+.stat-hint{font-size:9px;color:rgba(255,255,255,.25);margin-top:2px}
+.stats-cta{padding:12px 48px;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06)}
+/* SECTIONS */
+.s-white{background:#fff;padding:44px 48px}
+.s-offwhite{background:var(--offwhite);padding:44px 48px}
+.s-midblue{background:var(--midblue);padding:44px 48px}
+.s-darkblue{background:linear-gradient(160deg,var(--blue-xdk),var(--navy2));padding:44px 48px}
+.s-navy{background:var(--navy);padding:44px 48px}
+.s-navy2{background:var(--navy2);padding:44px 48px}
+.s-grad{background:linear-gradient(135deg,var(--navy),var(--blue-xdk));padding:44px 48px}
+/* TABLE */
+.data-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.data-tbl thead tr{background:linear-gradient(90deg,var(--navy2),var(--blue-xdk))}
+.data-tbl th{padding:12px 16px;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#8BAABB}
+.data-tbl td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.data-tbl tbody tr:nth-child(even){background:#FAFCFF}
+.data-tbl tbody tr:hover{background:var(--blue-lt)}
+.td-sym{font-weight:700;color:var(--text)}
+.td-blue{color:var(--blue);font-weight:700}
+.td-up{color:var(--green);font-weight:700;font-size:12px}
+.td-dn{color:var(--red);font-weight:700;font-size:12px}
+.td-cta{color:var(--blue);font-weight:700;cursor:pointer}
+.td-cta:hover{text-decoration:underline}
+.tag-sm{font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;vertical-align:middle;margin-left:4px}
+.tag-forex{background:#E8F4FC;color:var(--blue-dk)}
+.tag-pl{background:#FFEAEA;color:#8B1A1A}
+.tbl-note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+.lnk-more{color:var(--blue);font-size:13px;font-weight:700;margin-top:14px;display:inline-block}
+.tbl-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.loc-box{background:var(--blue-lt);border:1px solid var(--border-b);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--blue-dk);margin-top:12px;line-height:1.6}
+/* ADV */
+.adv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.adv{background:#fff;border:1px solid var(--border);border-radius:10px;padding:22px;position:relative;overflow:hidden;transition:.2s}
+.adv::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+.adv:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.adv.red-acc::before{background:var(--red)}
+.adv-ico{width:42px;height:42px;border-radius:10px;background:var(--blue-lt);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:13px}
+.adv.red-acc .adv-ico{background:#FEE2E2}
+.adv-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.adv-d{font-size:12px;color:var(--muted);line-height:1.55}
+.adv-badge{font-size:10px;font-weight:700;color:var(--green);margin-top:6px}
+/* HOW */
+.how3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px}
+.how{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:24px;position:relative;overflow:hidden}
+.how::after{content:attr(data-n);position:absolute;right:16px;top:12px;font-size:60px;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+.how-n{width:36px;height:36px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;margin-bottom:14px}
+.how-t{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.how-d{font-size:12px;color:#7A9BB5;line-height:1.6}
+.how-lnk{font-size:11px;color:#5CC8FF;margin-top:10px;display:block}
+.how-vis{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:24px;text-align:center;color:#3A5A6E;font-size:12px;line-height:1.8}
+/* COMPARISON */
+.comp-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.comp-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.comp-tbl thead tr{background:var(--navy)}
+.comp-tbl th{padding:12px 18px;text-align:left;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#7A9BB5}
+.comp-tbl th:first-child{color:#B8D0E0}
+.comp-tbl td{padding:13px 18px;border-bottom:1px solid var(--border)}
+.comp-tbl tr:last-child td{border-bottom:none}
+.comp-tbl tr.j2t td{background:linear-gradient(90deg,#EBF5FC,#F5F9FD)}
+.comp-tbl tr.j2t td:first-child{border-left:3px solid var(--blue);font-weight:800;color:var(--blue-dk)}
+.comp-tbl td:first-child{font-weight:600;color:var(--text)}
+.ck{color:var(--green);font-weight:800;font-size:15px}
+.cx{color:var(--red);font-weight:700}
+.comp-note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+/* PLATFORMS */
+.plat3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;overflow:hidden;transition:.2s}
+.plat:hover{border-color:rgba(0,138,217,.5)}
+.plat.feat{border-color:rgba(0,138,217,.4);background:rgba(0,138,217,.07)}
+.plat-top{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;justify-content:space-between}
+.plat-tag-b{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;background:rgba(0,138,217,.2);color:#5CC8FF;padding:3px 8px;border-radius:4px}
+.plat-tag-g{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;background:rgba(22,163,74,.2);color:#4ADE80;padding:3px 8px;border-radius:4px}
+.plat-name{font-size:17px;font-weight:900;color:#fff;margin-top:7px}
+.plat-sub{font-size:11px;color:#7A9BB5;margin-top:3px}
+.plat-body{padding:16px 20px}
+.plat-feat{list-style:none}
+.plat-feat li{font-size:12px;color:#7A9BB5;padding:4px 0;padding-left:14px;position:relative}
+.plat-feat li::before{content:'·';position:absolute;left:0;color:#5CC8FF}
+.plat-btns{display:flex;gap:8px;margin-top:14px}
+.pop-badge{font-size:9px;font-weight:800;background:rgba(0,138,217,.25);color:#5CC8FF;padding:3px 8px;border-radius:4px;align-self:flex-start;margin-top:2px}
+.btn-p{background:var(--blue);color:#fff;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:700;border:none;cursor:pointer;display:inline-block;transition:.15s}
+.btn-p:hover{background:var(--blue-dk)}
+.btn-g{background:transparent;color:#fff;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:600;border:1.5px solid rgba(255,255,255,.28);cursor:pointer;display:inline-block}
+.btn-o{background:transparent;color:var(--blue);padding:11px 24px;border-radius:7px;font-size:14px;font-weight:600;border:1.5px solid var(--blue);cursor:pointer;display:inline-block}
+.btn-sm{font-size:12px;font-weight:700;padding:8px 14px;border-radius:6px;cursor:pointer}
+.btn-sm-s{background:var(--blue);color:#fff;border:none}
+.btn-sm-g{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* STEPS */
+.steps-split{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:420px}
+.steps-left{background:#fff;padding:44px 48px}
+.steps-right{background:linear-gradient(160deg,var(--blue),var(--blue-dk));padding:44px 48px;display:flex;flex-direction:column;justify-content:center}
+.step-list{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.step-i{display:flex;gap:18px;padding-bottom:24px;position:relative}
+.step-i:not(:last-child)::after{content:'';position:absolute;left:16px;top:36px;bottom:0;width:1px;background:var(--border)}
+.step-c{width:34px;height:34px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--blue);flex-shrink:0;background:#fff;z-index:1;position:relative}
+.step-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.step-d{font-size:12px;color:var(--muted);line-height:1.55}
+.step-hint{font-size:10px;color:var(--light);margin-top:3px}
+.steps-r-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+.steps-r-sub{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.demo-box{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:20px;margin-top:16px}
+.demo-box-t{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.demo-box-d{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:12px;line-height:1.5}
+/* TRUST */
+.trust-g{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.t-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.t-stat::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.06),transparent)}
+.t-n{font-size:30px;font-weight:900;color:#5CC8FF;letter-spacing:-1px}
+.t-l{font-size:11px;color:#7A9BB5;margin-top:3px}
+.awards{display:flex;flex-direction:column;gap:10px}
+.award{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:12px 16px;position:relative;overflow:hidden}
+.award::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold)}
+.award-yr{font-size:20px;font-weight:900;color:var(--gold);min-width:46px}
+.award-n{font-size:13px;font-weight:700;color:#fff}
+.award-o{font-size:10px;color:#7A9BB5}
+.cysec-bx{background:rgba(0,138,217,.1);border:1px solid rgba(0,138,217,.22);border-radius:8px;padding:16px 18px;margin-top:14px}
+.cysec-t{font-size:12px;font-weight:700;color:#5CC8FF;margin-bottom:5px}
+.cysec-d{font-size:12px;color:#7A9BB5;line-height:1.6}
+/* EDU */
+.edu-g{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
+.edu-body h3{font-size:15px;font-weight:700;color:var(--text);margin:20px 0 7px;padding-left:12px;border-left:3px solid var(--blue)}
+.edu-body h3:first-child{margin-top:0}
+.edu-body p{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:10px}
+.edu-body p strong{color:var(--text)}
+.edu-side{display:flex;flex-direction:column;gap:14px}
+.edu-vid{background:var(--navy);border-radius:10px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.edu-vid::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.1),transparent)}
+.play{width:50px;height:50px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;position:relative;z-index:1}
+.edu-cta{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.edu-cta-t{font-size:13px;font-weight:700;margin-bottom:4px}
+.edu-cta-d{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+/* PAYMENTS */
+.pay-row{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:16px}
+.pay-c{background:#fff;border:1px solid var(--border);border-radius:9px;padding:10px 18px;display:flex;align-items:center;justify-content:center;gap:8px;min-width:118px;height:52px;transition:.15s;cursor:pointer}
+.pay-c:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(0,138,217,.1)}
+.pay-c.more{border-style:dashed;color:var(--blue);font-size:12px;font-weight:700}
+.visa-t{font-style:italic;font-weight:900;font-size:18px;color:#1A1F71;letter-spacing:-1px}
+.mc{position:relative;width:32px;height:22px;display:inline-block}
+.mc-r{position:absolute;width:21px;height:21px;border-radius:50%;background:#EB001B;left:0;top:0}
+.mc-b{position:absolute;width:21px;height:21px;border-radius:50%;background:#F79E1B;right:0;top:0}
+.mc-o{position:absolute;left:9px;top:0;width:14px;height:21px;border-radius:4px;background:#FF5F00}
+.pp{font-size:14px;font-weight:900;color:#003087}.pp span{color:#009CDE}
+.sk{background:#8B12AE;color:#fff;border-radius:4px;padding:3px 8px;font-size:12px;font-weight:900}
+.p24{font-size:13px;font-weight:900;color:#C0272D}
+.pay-info{background:var(--blue-lt);border:1px solid var(--border-b);border-radius:8px;padding:13px 18px;font-size:12px;color:var(--muted);line-height:1.65}
+.pay-info strong{color:var(--text)}
+/* NEWS */
+.news3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-c{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:.2s;cursor:pointer}
+.news-c:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.news-img{height:100px;background:linear-gradient(135deg,var(--navy),var(--blue-xdk));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:12px}
+.news-body{padding:14px}
+.news-tag{font-size:9px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.news-t{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4}
+.news-d{font-size:11px;color:var(--light)}
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-i{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden;transition:.15s}
+.faq-i.open{border-color:var(--blue)}
+.faq-q{padding:14px 18px;font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:12px}
+.faq-q:hover{background:var(--blue-lt)}
+.faq-i.open .faq-q{color:var(--blue);background:var(--blue-lt)}
+.faq-ico{color:var(--blue);font-size:20px;font-weight:300;flex-shrink:0;line-height:1}
+.faq-a{padding:0 18px 14px 18px;font-size:13px;color:var(--muted);line-height:1.7;display:none}
+.faq-i.open .faq-a{display:block}
+.schema-note{font-size:11px;color:var(--light);margin-top:12px}
+/* CROSS */
+.cross4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cross-c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:22px 16px;text-align:center;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.cross-c::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,138,217,.04),transparent);pointer-events:none}
+.cross-c:hover{border-color:rgba(0,138,217,.4);background:rgba(0,138,217,.08)}
+.cross-ico{font-size:28px;margin-bottom:11px}
+.cross-t{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px}
+.cross-d{font-size:11px;color:#7A9BB5;line-height:1.5;margin-bottom:12px}
+.cross-lnk{font-size:11px;color:#5CC8FF;font-weight:700}
+/* CTA */
+.cta-s{background:var(--navy);padding:56px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-s::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% 50%,rgba(0,138,217,.1),transparent 60%)}
+.cta-h{font-size:34px;font-weight:900;color:#fff;letter-spacing:-.6px;margin-bottom:10px;position:relative}
+.cta-d{font-size:15px;color:#7A9BB5;margin-bottom:28px;position:relative}
+.cta-btns{display:flex;gap:12px;justify-content:center;margin-bottom:20px;position:relative}
+.trust-chips{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:11px;color:#7A9BB5;position:relative}
+.trust-chip{display:flex;align-items:center;gap:5px}
+/* DISCLAIMER */
+.disc-s{background:#070F1A;padding:22px 48px;border-top:1px solid rgba(255,255,255,.05)}
+.disc-t{font-size:11px;color:#3A5060;line-height:1.8;max-width:980px}
+.disc-t strong{color:#5B7082}
+.disc-reg{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap}
+.disc-b{display:flex;align-items:center;gap:5px;font-size:11px;color:#3A5060}
+.disc-d{width:4px;height:4px;background:var(--blue);border-radius:50%}
+/* ES UNIQUE */
+.es-unique-wrap{margin:10px 24px;border-radius:12px;overflow:hidden;box-shadow:0 0 0 2px var(--gold),var(--shadow-md)}
+.es-bh{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#FFFDF5;border:none;border-radius:12px 12px 0 0}
+.es-bn{width:29px;height:29px;background:var(--gold);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0}
+.es-bc{border:none;border-radius:0 0 12px 12px;overflow:hidden}
+.es-banner{background:#FFFBEB;border-bottom:1px solid #FDE68A;padding:10px 20px;font-size:12px;font-weight:700;color:#78350F;display:flex;align-items:center;gap:10px}
+.es-banner span{font-size:11px;font-weight:400;color:var(--muted);margin-left:auto}
+.latam-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.latam-c{background:var(--offwhite);border:1px solid var(--border);border-radius:10px;padding:20px;transition:.2s}
+.latam-c:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(217,119,6,.1)}
+.latam-ico{font-size:22px;margin-bottom:10px}
+.latam-t{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.latam-d{font-size:12px;color:var(--muted);line-height:1.55}
+.footer{background:var(--navy2);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.ft{font-size:11px;color:#3A5060}
+</style>
+</head>
+<body>
+
+<!-- META -->
+<div class="meta">
+  <div>
+    <div class="meta-logo">just<b>2</b>trade</div>
+    <div style="font-size:11px;color:#3A5060;margin-top:1px">ES Product Page Mockup · Rush Agency · Abril 2026</div>
+  </div>
+  <div class="meta-inf">
+    <div class="meta-ttl">🇪🇸 Spanish (ES) — Universal template</div>
+    <div class="meta-sub">Aplicable a: <strong style="color:#5CC8FF">Forex</strong> · <strong style="color:#4ADE80">Acciones</strong> · <strong style="color:#FCD34D">Bonos</strong> · <strong style="color:#C4B5FD">Futuros</strong> · Desktop 1280px</div>
+  </div>
+  <div class="meta-pills">
+    <span class="pill p-es">ES locale</span>
+    <span class="pill p-all">16 universal</span>
+    <span class="pill p-es">+1 ES-only</span>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="leg-t">Легенда:</span>
+  <span class="leg-i"><span class="pill p-all">ALL</span> Блок на каждой локали</span>
+  <span class="leg-i"><span class="pill p-es">ES only</span> Только испанская версия</span>
+  <span class="leg-i"><span class="pill p-new">NEW</span> Новый блок</span>
+  <span class="leg-i"><span class="pill p-note">↔ продукт</span> Контент меняется по продукту</span>
+  <span class="leg-i" style="margin-left:auto;font-size:11px">Пример: страница <strong>Forex</strong> · переключай вкладку для просмотра других продуктов</span>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-t">Структура страницы</div>
+  <div class="toc-g">
+    <a class="toc-a" href="#b01"><span class="toc-n">01</span>Hero</a>
+    <a class="toc-a" href="#b02"><span class="toc-n">02</span>Бегущая строка + Статистика</a>
+    <a class="toc-a" href="#b03"><span class="toc-n">03</span>Таблица инструментов</a>
+    <a class="toc-a" href="#b04"><span class="toc-n">04</span>Преимущества</a>
+    <a class="toc-a" href="#b05"><span class="toc-n">05</span>Как это работает</a>
+    <a class="toc-a" href="#b06"><span class="toc-n">06</span>Сравнение брокеров</a>
+    <a class="toc-a" href="#b07"><span class="toc-n">07</span>Платформы</a>
+    <a class="toc-a" href="#b08"><span class="toc-n">08</span>3 шага</a>
+    <a class="toc-a" href="#b09"><span class="toc-n">09</span>Доверие и награды</a>
+    <a class="toc-a" href="#b10"><span class="toc-n">10</span>Образовательный текст</a>
+    <a class="toc-a" href="#b11"><span class="toc-n">11</span>Платежи</a>
+    <a class="toc-a" href="#b12"><span class="toc-n">12</span>Новости</a>
+    <a class="toc-a" href="#b13"><span class="toc-n">13</span>FAQ</a>
+    <a class="toc-a" href="#b14"><span class="toc-n">14</span>Cross-sell</a>
+    <a class="toc-a" href="#b15"><span class="toc-n">15</span>Нижний CTA</a>
+    <a class="toc-a" href="#b16"><span class="toc-n">16</span>Дисклеймер</a>
+    <a class="toc-a" href="#u-es"><span class="toc-n" style="color:#FCD34D">ES★</span>Блок доверия LATAM</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B01 · HERO
+═══════════════════════ -->
+<div id="b01" class="bw">
+  <div class="bh">
+    <div class="bn">01</div>
+    <div><div class="bname">Hero — Шапка страницы</div>
+    <div class="bnote">H1 + подзаголовок + 2 CTA + CySEC trust badge + инлайн дисклеймер + правая колонка с панелью котировок</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active" onclick="switchProduct('forex',this)">Forex</div>
+      <div class="prod-tab" onclick="switchProduct('acciones',this)">Acciones</div>
+      <div class="prod-tab" onclick="switchProduct('bonos',this)">Bonos</div>
+      <div class="prod-tab" onclick="switchProduct('futuros',this)">Futuros</div>
+      <span class="prod-tab-hint">✏ H1, подзаголовок, пары в панели — меняются по продукту</span>
+    </div>
+    <div class="s-hero">
+      <div class="hero-g">
+        <div>
+          <div class="hero-bc">Inicio › Soluciones › <span id="bc-product">Trading de Forex</span></div>
+          <h1 class="hero-h1" id="hero-h1">Opera en <em style="color:#5CC8FF;font-style:normal">Forex</em><br>con más de 70 pares de divisas</h1>
+          <p class="hero-sub" id="hero-sub">Just2Trade ofrece trading en Forex a través de MetaTrader 4 y MT5. Spreads desde 0.1 pip, apalancamiento hasta 1:30, ejecución desde 10ms. Pares LATAM disponibles: USD/MXN, USD/ARS.</p>
+          <div class="cta-row">
+            <button class="btn-p">Abrir Cuenta</button>
+            <button class="btn-g">Probar Demo Gratis</button>
+          </div>
+          <div class="trust-line"><span class="td"></span>Regulado por CySEC · Licencia N.° 281/15 · Fondos segregados</div>
+          <div class="hero-disc">Los CFDs conllevan un alto riesgo de pérdida. El [X]% de las cuentas minoristas pierde dinero. Licencia CySEC 281/15. Este contenido no constituye asesoramiento de inversión.</div>
+          <div class="ann-dk">✏ H1 содержит primary keyword «Handel Forex». Подзаголовок — 2 предложения: продукт + ключевое USP. Правая колонка: только скриншот из терминала j2t с вотермарком или mini-виджет котировок. Для Akcje — котировки акций, для Futures — контракты</div>
+        </div>
+        <div class="hero-panel">
+          <div class="hp-top">
+            <div class="hp-live"><span class="hp-dot"></span>Mercado en vivo</div>
+            <div class="hp-label" id="hero-panel-label">Forex · Principales pares</div>
+          </div>
+          <div class="ticker-list" id="hero-tickers">
+            <div class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.08462</span><span class="tk-up">▲ +0.34%</span></div>
+            <div class="tk"><span class="tk-sym">GBP/USD</span><span class="tk-val">1.26318</span><span class="tk-up">▲ +0.21%</span></div>
+            <div class="tk"><span class="tk-sym">USD/MXN</span><span class="tk-val">17.2285</span><span class="tk-dn">▼ −0.42%</span></div>
+            <div class="tk"><span class="tk-sym">USD/ARS</span><span class="tk-val">945.50</span><span class="tk-dn">▼ −0.09%</span></div>
+          </div>
+          <div class="hp-chart">
+            <div class="hbar" style="height:38%"></div><div class="hbar" style="height:54%"></div><div class="hbar" style="height:46%"></div><div class="hbar" style="height:70%"></div><div class="hbar" style="height:58%"></div><div class="hbar" style="height:75%"></div><div class="hbar" style="height:63%"></div><div class="hbar hi" style="height:82%"></div><div class="hbar hi" style="height:72%"></div><div class="hbar hi" style="height:88%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B02 · TICKER + STATS
+═══════════════════════ -->
+<div id="b02" class="bw">
+  <div class="bh">
+    <div class="bn">02</div>
+    <div><div class="bname">Бегущая строка + Статистика — Ключевые числа</div>
+    <div class="bnote">4 ключевых показателя из тарифов J2T. Числа меняются по продукту. Без внешних live-данных. Плечо: max 1:30 (ESMA/CySEC)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Acciones</div><div class="prod-tab">Bonos</div><div class="prod-tab">Futuros</div>
+      <span class="prod-tab-hint">✏ Числа в Stats Bar полностью меняются по продукту · PL: плечо max 1:30 (ESMA/CySEC)</span>
+    </div>
+    <div class="s-stats">
+      <div class="ticker-strip">
+        <div class="ts-i"><span class="ts-sym">EUR/USD</span><span class="ts-val">1.08462</span><span class="tk-up" style="font-size:10px">▲ +0.34%</span></div>
+        <div class="ts-i"><span class="ts-sym">GBP/USD</span><span class="ts-val">1.26318</span><span class="tk-up" style="font-size:10px">▲ +0.21%</span></div>
+        <div class="ts-i"><span class="ts-sym">USD/MXN</span><span class="ts-val">17.2285</span><span class="tk-dn" style="font-size:10px">▼ −0.42%</span></div>
+        <div class="ts-i"><span class="ts-sym">USD/ARS</span><span class="ts-val">945.50</span><span class="tk-dn" style="font-size:10px">▼ −0.09%</span></div>
+        <div class="ts-i"><span class="ts-sym">USD/JPY</span><span class="ts-val">149.851</span><span class="tk-dn" style="font-size:10px">▼ −0.18%</span></div>
+        <span style="font-size:9px;color:rgba(255,255,255,.2);align-self:center;padding:0 18px;margin-left:auto">Orientativo · retardo 15s</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">80<span class="stat-u">+</span></div><div class="stat-l">Pares de divisas</div></div>
+        <div class="stat"><div class="stat-n">0,1<span class="stat-u"> pip</span></div><div class="stat-l">Spread típico</div><div class="stat-hint">* condiciones de mercado</div></div>
+        <div class="stat"><div class="stat-n">1:30</div><div class="stat-l">Apalancamiento máx. (retail UE)</div></div>
+        <div class="stat"><div class="stat-n">10<span class="stat-u">ms</span></div><div class="stat-l">Ejecución desde</div></div>
+      </div>
+      <div class="stats-cta">
+        <a href="#" style="color:#5CC8FF;font-size:13px;font-weight:700">Ver tabla completa de tarifas y comisiones →</a>
+        <div class="prod-ann" style="margin-top:0;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.25);color:#FCD34D;padding:5px 12px">Forex: 70+ pares, 0.1 pip, 1:30 · Acciones: 30,000+ instrumentos, desde $0.01/acción · Bonos: Eurobonos, Gov/Corp, apalancamiento 1:3 · Futuros: 40+ bolsas, desde $1.50/contrato</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B03 · INSTRUMENTS TABLE
+═══════════════════════ -->
+<div id="b03" class="bw">
+  <div class="bh">
+    <div class="bn">03</div>
+    <div><div class="bname">Таблица инструментов — Торговые условия</div>
+    <div class="bnote">Символ · спред · своп · плечо · изменение 24ч · Торговать. Одинаковая структура, разные данные по продукту. ES: выделить пары LATAM (USD/MXN, USD/ARS, USD/COP)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active" onclick="switchTable('forex',this)">Forex</div>
+      <div class="prod-tab" onclick="switchTable('acciones',this)">Acciones</div>
+      <div class="prod-tab" onclick="switchTable('bonos',this)">Bonos</div>
+      <div class="prod-tab" onclick="switchTable('futuros',this)">Futuros</div>
+      <span class="prod-tab-hint">✏ Таблица меняется полностью — структура та же, данные разные</span>
+    </div>
+    <div class="s-white">
+      <div class="ey">Condiciones de trading</div>
+      <h2 class="h2" id="tbl-title">Instrumentos Forex en Just2Trade</h2>
+      <p class="sub">Condiciones reales del tarifario J2T. Precios en tiempo real disponibles al iniciar sesión en la plataforma.</p>
+
+      <!-- FOREX TABLE -->
+      <div id="tbl-forex" class="tbl-wrap">
+        <table class="data-tbl">
+          <thead><tr><th>Instrumento</th><th>Spread típico</th><th>Swap largo</th><th>Swap corto</th><th>Apalancamiento</th><th>Cambio 24h</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">🇪🇺 EUR/USD</td><td class="td-blue">0.1 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:30</td><td class="td-up">▲ +0.34%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">🇬🇧 GBP/USD</td><td class="td-blue">0.3 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:30</td><td class="td-up">▲ +0.21%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">🇯🇵 USD/JPY</td><td class="td-blue">0.2 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:30</td><td class="td-dn">▼ −0.18%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">🥇 XAU/USD</td><td class="td-blue">1.8 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:10</td><td class="td-up">▲ +0.57%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">🇲🇽 USD/MXN <span class="tag-sm tag-pl" style="background:#FFF8EC;color:#92600A">ES</span></td><td class="td-blue">0.9 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:20</td><td class="td-dn">▼ −0.42%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">🇦🇷 USD/ARS <span class="tag-sm tag-pl" style="background:#FFF8EC;color:#92600A">ES</span></td><td class="td-blue">1.2 pip*</td><td>[J2T datos]</td><td>[J2T datos]</td><td>1:20</td><td class="td-dn">▼ −0.09%</td><td class="td-cta">Operar →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- AKCJE TABLE -->
+      <div id="tbl-acciones" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Instrumento</th><th>Bolsa</th><th>Comisión</th><th>Margen</th><th>Dividendo</th><th>Cambio 24h</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">AAPL <span class="tag-sm tag-forex">Acciones</span></td><td>NASDAQ</td><td class="td-blue">$0.01/acción</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +1,2%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">TSLA</td><td>NASDAQ</td><td class="td-blue">$0.01/acción</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-dn">▼ −0,8%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">MSFT</td><td>NASDAQ</td><td class="td-blue">$0.01/acción</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +0,5%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">AMZN</td><td>NASDAQ</td><td class="td-blue">$0.01/acción</td><td>25%</td><td class="ck" style="font-size:13px">✓</td><td class="td-up">▲ +0,7%</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">GOOGL</td><td>NASDAQ</td><td class="td-blue">$0.01/acción</td><td>25%</td><td class="cx">—</td><td class="td-dn">▼ −1,1%</td><td class="td-cta">Operar →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- OBLIGACJE TABLE -->
+      <div id="tbl-bonos" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Bono / Instrumento</th><th>Tipo</th><th>Rendimiento</th><th>Cupón</th><th>Apalancamiento</th><th>Precio</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">US Treasury 10Y</td><td>Gubernamental</td><td class="td-blue">4,35%</td><td>4,25%</td><td>1:3</td><td>98,42</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">Bund Alemania 10Y</td><td>Gubernamental</td><td class="td-blue">2,28%</td><td>2,00%</td><td>1:3</td><td>97,15</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">Apple Inc 2030</td><td>Corporativo</td><td class="td-blue">4,85%</td><td>4,65%</td><td>1:2</td><td>96,80</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">Eurobond EUR 2027</td><td>Eurobono</td><td class="td-blue">3,50%</td><td>3,25%</td><td>1:2</td><td>99,10</td><td class="td-cta">Operar →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FUTURES TABLE -->
+      <div id="tbl-futuros" class="tbl-wrap" style="display:none">
+        <table class="data-tbl">
+          <thead><tr><th>Contrato</th><th>Bolsa</th><th>Comisión</th><th>Tick</th><th>Margen req.</th><th>Precio</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td class="td-sym">ES (S&P 500)</td><td>CME</td><td class="td-blue">$1.50/lado</td><td>0,25 pkt</td><td>13 200$</td><td>5 248,75</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">NQ (Nasdaq 100)</td><td>CME</td><td class="td-blue">$1.50/lado</td><td>0,25 pkt</td><td>21 500$</td><td>18 142,50</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">CL (Ropa WTI)</td><td>NYMEX</td><td class="td-blue">$1.50/lado</td><td>0,01$</td><td>6 800$</td><td>78,42</td><td class="td-cta">Operar →</td></tr>
+            <tr><td class="td-sym">FGBL (Bund)</td><td>EUREX</td><td class="td-blue">€1.50/lado</td><td>0,01</td><td>2 400€</td><td>130,82</td><td class="td-cta">Operar →</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="tbl-note">* Spreads típicos — pueden variar según las condiciones del mercado. Condiciones actuales disponibles tras iniciar sesión.</p>
+      <a href="#" class="lnk-more" id="tbl-lnk">→ Ver todos los 70+ pares de divisas</a>
+      <div class="ann">✏ Структура таблицы идентична для всех продуктов. Колонки меняются: для Acciones — комиссия и дивиденды, для Bonos — доходность и купон, для Futuros — биржа и маржа. Данные из тарифной сетки j2t — никаких live-API внешних источников. Строки с тегом <strong>ES</strong> — пары/инструменты LATAM-рынка (USD/MXN, USD/ARS, USD/COP)</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B04 · ADVANTAGES
+═══════════════════════ -->
+<div id="b04" class="bw">
+  <div class="bh">
+    <div class="bn">04</div>
+    <div><div class="bname">Преимущества — Почему Just2Trade</div>
+    <div class="bnote">6 карточек. Каждая = конкретный верифицируемый факт. Без сравнения с конкурентами, без гарантий прибыли. 6-я карточка — ES-специфичная (поддержка на испанском)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-offwhite">
+      <div class="ey">Nuestras ventajas</div>
+      <h2 class="h2">¿Por qué operar con Just2Trade?</h2>
+      <p class="sub">Datos concretos de nuestras condiciones de trading — sin promesas de marketing.</p>
+      <div class="adv-g">
+        <div class="adv">
+          <div class="adv-ico">📉</div>
+          <div class="adv-t">Spreads desde 0.1 pip</div>
+          <div class="adv-d">Costes de transacción reducidos en los principales pares EUR/USD, GBP/USD y USD/JPY. Ideal para scalping y trading de alta frecuencia.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">🖥</div>
+          <div class="adv-t">MT4 + MT5 + CQG</div>
+          <div class="adv-d">Acceso a cuatro plataformas líderes. MT4 completamente disponible para todos los clientes — a diferencia de competidores que lo han retirado.</div>
+          <div class="adv-badge">✓ MT4 disponible (XTB lo cerró en 2025)</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">⚖️</div>
+          <div class="adv-t">Apalancamiento hasta 1:30</div>
+          <div class="adv-d">Apalancamiento máximo para clientes minoristas según regulación CySEC/ESMA. Cuenta profesional — límites más altos previa evaluación.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">🛡</div>
+          <div class="adv-t">Regulado por CySEC</div>
+          <div class="adv-d">Lime Trading (CY) Ltd, licencia N.° 281/15. Fondos de clientes en cuentas segregadas. Protección ICF hasta €20.000. Protección de saldo negativo.</div>
+        </div>
+        <div class="adv">
+          <div class="adv-ico">⚡</div>
+          <div class="adv-t">Ejecución desde 10ms</div>
+          <div class="adv-d">Servidores en NY4 y LD4 (Equinix). Tasa de ejecución 99%+. Acceso directo al mercado (DMA) vía CQG y Sterling Trader Pro.</div>
+        </div>
+        <div class="adv red-acc">
+          <div style="font-size:9px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">🇪🇸 ES locale only</div>
+          <div class="adv-ico">🗣</div>
+          <div class="adv-t">Soporte 24/5 en español</div>
+          <div class="adv-d">Atención al cliente en español por chat en vivo, correo y teléfono. Equipo especializado en horario de mercados europeos y LATAM.</div>
+          <div class="ann" style="background:rgba(220,38,38,.06);border-color:rgba(220,38,38,.25);color:#7F1D1D">✏ Для EN: «Multilingual support 24/5» · Для PL: «Soporte 24/5 en español». Карточка 6 всегда locale-specific</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B05 · HOW IT WORKS
+═══════════════════════ -->
+<div id="b05" class="bw">
+  <div class="bh">
+    <div class="bn">05</div>
+    <div><div class="bname">Как это работает — Механика торговли</div>
+    <div class="bnote">3 ключевые концепции. Не «что такое Forex» — только механика. Контент значительно меняется по продукту. Скриншот платформы на польском языке</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Acciones</div><div class="prod-tab">Bonos</div><div class="prod-tab">Futuros</div>
+      <span class="prod-tab-hint">✏ 3 концепции полностью меняются — механика разная для каждого продукта</span>
+    </div>
+    <div class="s-darkblue">
+      <div class="ey-w">Как это работает</div>
+      <h2 class="h2w">Mecánica del trading en Forex</h2>
+      <p class="subw">Tres conceptos que todo trader debe entender antes de su primera operación.</p>
+      <div class="how3">
+        <div class="how" data-n="01">
+          <div class="how-n">01</div>
+          <div class="how-t">Posiciones largas y cortas</div>
+          <div class="how-d">Compras EUR/USD cuando esperas que el euro se aprecie frente al dólar. Vendes cuando anticipas depreciación. Gana tanto en mercados alcistas como bajistas — 24/5.</div>
+          <a href="#" class="how-lnk">Guía Long vs Short →</a>
+        </div>
+        <div class="how" data-n="02">
+          <div class="how-n">02</div>
+          <div class="how-t">Apalancamiento financiero (máx. 1:30)</div>
+          <div class="how-d">Controla una posición de $30,000 con solo $1,000 de margen. Para clientes minoristas CySEC/ESMA: máx. 1:30 en pares principales. Cuenta profesional — límites superiores.</div>
+          <a href="#" class="how-lnk">Normas de apalancamiento ESMA →</a>
+        </div>
+        <div class="how" data-n="03">
+          <div class="how-n">03</div>
+          <div class="how-t">Gestión del riesgo</div>
+          <div class="how-d">Stop Loss, Take Profit y Trailing Stop disponibles nativamente en MT4/MT5. Protección de saldo negativo garantizada por CySEC. Cierre automático al llegar al 50% del margen.</div>
+          <a href="#" class="how-lnk">Tipos de órdenes — guía →</a>
+        </div>
+      </div>
+      <div class="how-vis">
+        📱 Captura de pantalla MT4/MT5 en español — vista de gráfico Forex<br>
+        <span style="font-size:11px;color:rgba(255,255,255,.2);display:block;margin-top:4px">✏ Только реальный скриншот из терминала j2t с вотермарком. Acciones → MT5 Global, Futuros → CQG, Bonos → MT5 Bond view</span>
+      </div>
+      <div class="prod-ann" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.22);color:#FCD34D">Forex: Long/Short · Apalancamiento · Riesgo · Acciones: Dividendos · Margen · Routing de órdenes · Bonos: Rendimiento vs Precio · Cupón · Duración · Futuros: Especificaciones · Rollover · DMA</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B06 · COMPARISON
+═══════════════════════ -->
+<div id="b06" class="bw">
+  <div class="bh">
+    <div class="bn">06</div>
+    <div><div class="bname">Сравнение брокеров — Рыночное позиционирование</div>
+    <div class="bnote">ES конкуренты: Pepperstone + Admirals. J2T всегда строка №1. Данные проверяются ежеквартально. Ключевой отличитель: пары LATAM + soporte en español</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="ey">Comparativa</div>
+      <h2 class="h2">Just2Trade vs. la competencia</h2>
+      <p class="sub">Datos verificados. Actualización trimestral. Spreads obtenidos de las plataformas oficiales de cada bróker en condiciones normales de mercado.</p>
+      <div class="comp-wrap">
+        <table class="comp-tbl">
+          <thead><tr><th>Criterio</th><th>Just2Trade</th><th>Pepperstone</th><th>Admirals</th></tr></thead>
+          <tbody>
+            <tr class="j2t"><td>Spread EUR/USD (prom.)</td><td>0.2 pip</td><td>0.6 pip</td><td>0.4 pip</td></tr>
+            <tr><td>Depósito mínimo</td><td><strong>$100</strong></td><td>$0</td><td>$100</td></tr>
+            <tr class="j2t"><td>MT4 disponible (2025+)</td><td class="ck">✓ Sí</td><td class="ck">✓ Sí</td><td class="ck">✓ Sí</td></tr>
+            <tr><td>MT5 disponible</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr class="j2t"><td>Plataforma CQG</td><td class="ck">✓</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+            <tr><td>Acciones reales (no CFD)</td><td class="ck">✓</td><td class="cx">✗</td><td class="cx">✗</td></tr>
+            <tr class="j2t"><td>Apalancamiento máx. (retail UE)</td><td><strong>1:30</strong></td><td>1:30</td><td>1:30</td></tr>
+            <tr><td>Pares LATAM (MXN, ARS)</td><td class="ck">✓</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+            <tr class="j2t"><td>Soporte en español 24/5</td><td class="ck">✓</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+            <tr><td>Regulación</td><td><strong>CySEC N.° 281/15</strong></td><td>FCA, ASIC, CySEC</td><td>CySEC, ASIC</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="comp-note">Datos de abril de 2026. Spreads de plataformas oficiales en condiciones normales de mercado.</p>
+      <div class="prod-ann">Структура сравнения идентична для всех продуктов. Строки адаптируются: для Acciones добавить «Acciones reales» · для Bonos — «Eurobonos» · для Futuros — «Bolsas DMA». Конкуренты для ES всегда Pepperstone + Admirals</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B07 · PLATFORMS
+═══════════════════════ -->
+<div id="b07" class="bw">
+  <div class="bh">
+    <div class="bn">07</div>
+    <div><div class="bname">Торговые платформы</div>
+    <div class="bnote">Платформы меняются по продукту: Forex → MT4+MT5+CQG · Akcje → MT5 Global+Sterling · Obligacje → MT5 · Futures → CQG (основная)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Acciones</div><div class="prod-tab">Bonos</div><div class="prod-tab">Futuros</div>
+      <span class="prod-tab-hint">✏ Набор платформ меняется по продукту</span>
+    </div>
+    <div class="s-navy2">
+      <div class="ey-w">Платформы</div>
+      <h2 class="h2w">Opera en la plataforma que prefieras</h2>
+      <p class="subw">MT4, MT5, CQG y Sterling Trader Pro — herramientas profesionales para cada estilo de trading.</p>
+      <div class="plat3">
+        <div class="plat feat">
+          <div class="plat-top">
+            <div><div class="plat-tag-b">FOREX · CFD</div><div class="plat-name">MetaTrader 4</div><div class="plat-sub">Totalmente disponible — cuando XTB lo retiró en 2025</div></div>
+            <div class="pop-badge">Popular</div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>30+ indicadores técnicos integrados</li>
+              <li>Expert Advisors (trading automático)</li>
+              <li>Desktop, iOS, Android, WebTrader</li>
+              <li>Trading con un clic, scripts personalizados</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Descargar MT4</button>
+              <button class="btn-sm btn-sm-g">WebTrader</button>
+            </div>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-top">
+            <div><div class="plat-tag-b">MULTI-ASSET</div><div class="plat-name">MetaTrader 5</div><div class="plat-sub">Acciones, forex y futuros desde una sola cuenta</div></div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>80+ indicadores, 21 marcos temporales</li>
+              <li>Profundidad de mercado (DOM) y datos L2</li>
+              <li>Backtesting multidivisa avanzado</li>
+              <li>Versión Web + Mobile disponible</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Abrir cuenta MT5</button>
+              <button class="btn-sm btn-sm-g">WebTrader</button>
+            </div>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-top">
+            <div><div class="plat-tag-g">FUTURES · PRO</div><div class="plat-name">CQG</div><div class="plat-sub">DMA · CME, EUREX, 40+ bolsas</div></div>
+          </div>
+          <div class="plat-body">
+            <ul class="plat-feat">
+              <li>Acceso directo al mercado (DMA)</li>
+              <li>Datos Level 2 premium incluidos</li>
+              <li>API para estrategias algorítmicas</li>
+              <li>Ejecución desde 10ms</li>
+            </ul>
+            <div class="plat-btns">
+              <button class="btn-sm btn-sm-s">Descargar CQG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-ann" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.22);color:#FCD34D;margin-top:20px">Forex: MT4 + MT5 + CQG · Acciones: MT5 Global + Sterling Trader Pro · Bonos: MT5 (Bond Scanner) · Futuros: CQG (principal) + MT5. Sterling Trader Pro только для Acciones</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B08 · 3 STEPS
+═══════════════════════ -->
+<div id="b08" class="bw">
+  <div class="bh">
+    <div class="bn">08</div>
+    <div><div class="bname">3 шага — Конверсионный блок</div>
+    <div class="bnote">Заголовок и текст шага 1 меняются по продукту (тип счёта). Шаги 2–3 универсальные. Упоминание demo-счёта обязательно</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ krok 1</span></div>
+  </div>
+  <div class="bc">
+    <div class="prod-tab-bar">
+      <div class="prod-tab active">Forex</div><div class="prod-tab">Acciones</div><div class="prod-tab">Bonos</div><div class="prod-tab">Futuros</div>
+      <span class="prod-tab-hint">✏ Шаг 1 — название и текст меняются по типу счёта</span>
+    </div>
+    <div class="steps-split">
+      <div class="steps-left">
+        <div class="ey">Cómo empezar</div>
+        <h2 class="h2">Empieza a operar en Forex<br>en 3 sencillos pasos</h2>
+        <p class="sub">Sin papeleo. Todo el proceso online en menos de 10 minutos.</p>
+        <div class="step-list">
+          <div class="step-i">
+            <div class="step-c">01</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Abre tu cuenta Forex</div>
+              <div class="step-d">Completa el formulario online y verifica tu identidad. Todo el proceso en menos de 10 minutos. Sin documentos que imprimir.</div>
+              <div class="step-hint">Cuenta Forex y CFD · acceso a MT4 o MT5 · depósito mínimo desde [importe J2T]</div>
+            </div>
+          </div>
+          <div class="step-i">
+            <div class="step-c">02</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Realiza un depósito</div>
+              <div class="step-d">Ingresa fondos por transferencia bancaria, tarjeta o monedero electrónico. Depósito mínimo desde <strong>[importe J2T]</strong>. Cuenta en EUR, USD o GBP.</div>
+              <div class="step-hint">20+ métodos de pago · sin comisión de depósito</div>
+            </div>
+          </div>
+          <div class="step-i" style="padding-bottom:0">
+            <div class="step-c">03</div>
+            <div style="padding-top:4px">
+              <div class="step-t">Realiza tu primera operación</div>
+              <div class="step-d">Inicia sesión en MT4 o MT5, elige un par de divisas y ejecuta tu primera orden. O practica primero en demo.</div>
+              <div class="step-hint">Demo: $10,000 virtuales · sin límite de tiempo</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-p" style="margin-top:28px;padding:14px 32px;font-size:15px">Abrir Cuenta Ahora →</button>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">o <a href="#">prueba la cuenta demo gratis</a></div>
+        <div class="ann">✏ <strong>[importe J2T]</strong> — заполнить актуальным мин. депозитом от продуктовой команды · Шаг 1 по продуктам: <strong>Acciones</strong> → «Abre tu cuenta MT5 Global» · <strong>Futuros</strong> → «Abre tu cuenta CQG» · <strong>Bonos</strong> → «Abre tu cuenta MT5»</div>
+      </div>
+      <div class="steps-right">
+        <div class="steps-r-title">Practica sin riesgo</div>
+        <div class="steps-r-sub">Sin depósito. Sin límite de tiempo.</div>
+        <button class="btn-g" style="width:100%;padding:14px;font-size:15px;text-align:center">Abrir Cuenta Demo Gratuita →</button>
+        <div class="demo-box">
+          <div class="demo-box-t">La cuenta demo incluye:</div>
+          <div class="demo-box-d">
+            ✓ $10,000 en fondos virtuales<br>
+            ✓ Acceso completo a MT4 y MT5<br>
+            ✓ Condiciones reales de mercado<br>
+            ✓ Sin límite de tiempo — sin expiración<br>
+            ✓ Cambia a cuenta real cuando quieras
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:8px">No se requiere tarjeta de crédito para abrir la demo</div>
+        </div>
+        <div class="ann-dk">✏ Правая колонка — скриншот формы регистрации или анимация процесса. Только из интерфейса j2t с вотермарком</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B09 · TRUST & AWARDS
+═══════════════════════ -->
+<div id="b09" class="bw">
+  <div class="bh">
+    <div class="bn">09</div>
+    <div><div class="bname">Доверие и награды — Блок достоверности</div>
+    <div class="bnote">Статистика + 4 последние награды + объяснение CySEC для LATAM-аудитории — важно: испаноязычная аудитория не знает что такое CySEC, нужен контекст</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-navy">
+      <div class="ey-w">Confianza y regulación</div>
+      <h2 class="h2w">¿Por qué los traders eligen Just2Trade?</h2>
+      <div class="trust-g">
+        <div>
+          <div class="trust-stats">
+            <div class="t-stat"><div class="t-n">155K+</div><div class="t-l">Clientes activos</div></div>
+            <div class="t-stat"><div class="t-n">130</div><div class="t-l">Países</div></div>
+            <div class="t-stat"><div class="t-n">2016</div><div class="t-l">Año de fundación</div></div>
+            <div class="t-stat"><div class="t-n">€20K</div><div class="t-l">Protección ICF</div></div>
+          </div>
+          <div class="cysec-bx">
+            <div class="cysec-t">🛡 ¿Qué es CySEC y por qué protege a los traders de LATAM?</div>
+            <div class="cysec-d">CySEC es la Comisión de Valores de Chipre, supervisada por ESMA (UE). Proporciona las mismas protecciones que la FCA (Reino Unido) o la BaFin (Alemania): fondos segregados, protección de saldo negativo y compensación ICF hasta €20.000 por cliente — válida para clientes de México, Argentina y toda LATAM.</div>
+          </div>
+          <div class="ann-dk">✏ Объяснение CySEC критично для LATAM-аудитории, которая может не знать европейского регулятора. Подчеркнуть: та же защита что FCA/BaFin, действует для клиентов из Мексики, Аргентины, Колумбии</div>
+        </div>
+        <div>
+          <div class="awards">
+            <div class="award"><div class="award-yr">2025</div><div><div class="award-n">Best MT5 Broker</div><div class="award-o">WorldFinance.com</div></div></div>
+            <div class="award"><div class="award-yr">2024</div><div><div class="award-n">Best Mobile Trading Platform</div><div class="award-o">WorldFinance.com</div></div></div>
+            <div class="award"><div class="award-yr">2024</div><div><div class="award-n">Best Multi-Asset Broker</div><div class="award-o">BrokersView Expo</div></div></div>
+            <div class="award"><div class="award-yr">2023</div><div><div class="award-n">Top 10 FX Brokers Worldwide</div><div class="award-o">Forextop</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B10 · EDUCATIONAL TEXT
+═══════════════════════ -->
+<div id="b10" class="bw">
+  <div class="bh">
+    <div class="bn">10</div>
+    <div><div class="bname">Образовательный текст — SEO с ключами и интентами</div>
+    <div class="bnote">200–400 слов. 2–3 заголовка H3. Для опытных трейдеров, не для новичков. LATAM-контекст: Banxico, pares LATAM. 1–2 внутренних ссылки. Без инвестиционных советов</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="edu-g">
+        <div class="edu-body">
+          <div class="ey">Sobre el trading en Forex</div>
+          <h2 class="h2" style="margin-bottom:20px">¿Qué es el trading en Forex y cómo funciona?</h2>
+          <h3>¿Cómo funciona el mercado de divisas?</h3>
+          <p>El mercado Forex (Foreign Exchange) es el mayor y más líquido del mundo, con un volumen diario que supera los <strong>$6.6 billones</strong>. Los precios de los pares de divisas están determinados por las decisiones de bancos centrales (<strong>Fed, BCE, Banxico</strong>), datos de inflación, empleo y eventos geopolíticos. Opera 24/5, de forma descentralizada.</p>
+          <h3>¿Cómo funciona operar EUR/USD o USD/MXN en Just2Trade?</h3>
+          <p>Al operar EUR/USD en J2T, compras euros y vendes dólares simultáneamente. Si el euro se aprecia, tu posición larga gana valor. También puedes operar USD/MXN o USD/ARS para exposición directa al mercado latinoamericano. Acceso vía <strong>MT4 o MT5</strong> — disponibles en escritorio y móvil. <a href="#">Comparación MT4 vs MT5 — ¿cuál elegir? →</a></p>
+          <h3>¿Qué diferencia a Just2Trade en el mercado hispanohablante?</h3>
+          <p>J2T mantiene MT4 completamente disponible cuando competidores lo han retirado. Ofrece pares LATAM (USD/MXN, USD/ARS, USD/COP) poco comunes en brókers europeos regulados, soporte 24/5 en español y cuenta demo sin límite de tiempo. <a href="#">Ver todos los 70+ pares de divisas →</a></p>
+          <div class="ann">✏ PL tekst — skupiony na: PLN-konto, pary PLN, kontekst NBP, ochrona ESMA. Nie wymieniać XTB z nazwy w bezpośrednim porównaniu. 1–2 linki wewnętrzne do bloga j2t. Treść dla doświadczonego tradera, który zna terminologię</div>
+          <div class="prod-ann" style="margin-top:10px">Akcje: dywidendy, depozyt marginalny, typy zleceń, dostęp do GPW · Obligacje: rentowność vs cena, kupon, duration, Eurobondy · Futures: specyfikacje kontraktów, rollover, DMA na giełdę</div>
+        </div>
+        <div class="edu-side">
+          <div class="edu-vid">
+            <div class="play">▶</div>
+          </div>
+          <div class="edu-cta">
+            <div class="edu-cta-t">Practica sin riesgo con la cuenta demo</div>
+            <div class="edu-cta-d">$10,000 en fondos virtuales. Acceso completo a la plataforma. Sin depósito. Sin límite de tiempo.</div>
+            <button class="btn-p">Abrir Cuenta Demo →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B11 · PAYMENTS
+═══════════════════════ -->
+<div id="b11" class="bw">
+  <div class="bh">
+    <div class="bn">11</div>
+    <div><div class="bname">Методы оплаты — Депозиты и выводы</div>
+    <div class="bnote">ES: PayPal + Skrill выделить как приоритетные для LATAM. Без комиссии за депозит. Идентичный блок для всех продуктов</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-white">
+      <div class="ey">Depósitos y retiros</div>
+      <h2 class="h2">Deposita y retira con facilidad</h2>
+      <p class="sub">Más de 20 métodos de pago. Sin comisión de depósito. Retiros procesados en 1–3 días hábiles.</p>
+      <div class="pay-row">
+        <div class="pay-c"><span class="visa-t">VISA</span></div>
+        <div class="pay-c">
+          <div class="mc"><div class="mc-r"></div><div class="mc-b"></div><div class="mc-o"></div></div>
+          <span style="font-size:13px;font-weight:700;color:var(--text)">Mastercard</span>
+        </div>
+        <div class="pay-c"><span class="pp">Pay<span>Pal</span></span></div>
+        <div class="pay-c"><span class="sk">S</span><span style="font-size:13px;font-weight:800;color:#8B12AE">krill</span></div>
+        <div class="pay-c"><span style="font-size:13px;font-weight:900;color:#00457C">NET</span><span style="font-size:13px;font-weight:900;color:#C82B35">ELLER</span></div>
+        <div class="pay-c"><span style="font-size:20px">🏦</span><span style="font-size:11px;font-weight:700;color:var(--muted);line-height:1.2;text-align:center">Transferencia<br>bancaria</span></div>
+        <div class="pay-c"><span style="font-size:20px">💳</span><span style="font-size:11px;font-weight:700;color:var(--muted);line-height:1.2;text-align:center">Wire<br>Transfer</span></div>
+        <div class="pay-c more">+ 13 więcej →</div>
+      </div>
+      <div class="pay-info">
+        <strong>Sin comisión de depósito.</strong> Depósito mínimo desde <strong>[importe J2T]</strong>. Retiros por el mismo método usado para depositar. PayPal y Skrill son los métodos preferidos en LATAM. Tiempo de procesamiento: 1–3 días hábiles.
+      </div>
+      <div class="ann" style="margin-top:12px">✏ PL-wersja: przelew bankowy w PLN i Przelewy24 wyróżnić wizualnie jako preferowane metody · Przelewy24 — potwierdzić dostępność z zespołem produktu przed publikacją · Logotypy — ściśle oficjalne, bez zmian kolorów (brand guidelines)</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B12 · NEWS
+═══════════════════════ -->
+<div id="b12" class="bw">
+  <div class="bh">
+    <div class="bn">12</div>
+    <div><div class="bname">Новости и аналитика — Последние публикации</div>
+    <div class="bnote">3 последние статьи из блога j2t по теме продукта. ES: приоритет темам LATAM-рынка: USD/MXN, Banxico, BDL Argentina, перспективы ES/LATAM</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-offwhite">
+      <div class="ey">Análisis de mercado</div>
+      <h2 class="h2">Últimos análisis y noticias sobre Forex</h2>
+      <div class="news3">
+        <div class="news-c">
+          <div class="news-img">[ Zdjęcie artykułu ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Análisis</div>
+            <div class="news-t">USD/MXN: ¿Cómo afecta la política de Banxico al peso mexicano?</div>
+            <div class="news-d">15 de abril de 2026</div>
+          </div>
+        </div>
+        <div class="news-c">
+          <div class="news-img">[ Zdjęcie artykułu ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Estrategia</div>
+            <div class="news-t">EUR/USD: perspectivas ante la decisión del BCE y los datos de empleo en LATAM</div>
+            <div class="news-d">12 de abril de 2026</div>
+          </div>
+        </div>
+        <div class="news-c">
+          <div class="news-img">[ Zdjęcie artykułu ]</div>
+          <div class="news-body">
+            <div class="news-tag">Forex · Educación</div>
+            <div class="news-t">¿Cómo funcionan los swaps en Forex? Guía completa para traders activos</div>
+            <div class="news-d">10 de abril de 2026</div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="lnk-more">Ver todos los análisis y noticias →</a>
+      <div class="prod-ann" style="margin-top:12px">Forex: USD/MXN, Banxico, divisas LATAM · Acciones: informes empresariales, dividendos, resultados trimestrales · Bonos: tasas de interés, inflación, deuda soberana · Futuros: informe CFTC, fechas de rollover, vencimiento de contratos</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B13 · FAQ
+═══════════════════════ -->
+<div id="b13" class="bw">
+  <div class="bh">
+    <div class="bn">13</div>
+    <div><div class="bname">Часто задаваемые вопросы — FAQ</div>
+    <div class="bnote">5–8 вопросов на основе реальных поисковых запросов испаноязычной аудитории. FAQPage JSON-LD schema обязательна на всех 4 продуктовых страницах</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ продукт</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-midblue">
+      <div class="ey">Preguntas frecuentes</div>
+      <h2 class="h2">Preguntas frecuentes sobre el trading en Forex</h2>
+      <div class="faq-list">
+        <div class="faq-i open">
+          <div class="faq-q">¿Cuál es el depósito mínimo para operar Forex? <span class="faq-ico">−</span></div>
+          <div class="faq-a">Just2Trade ofrece varios tipos de cuentas. La cuenta estándar Forex y CFD requiere un depósito mínimo de <strong>[importe J2T]</strong>. La cuenta demo gratuita está disponible sin depósito — $10,000 en fondos virtuales, sin límite de tiempo, acceso completo a la plataforma.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">¿Es seguro operar con Just2Trade desde México o Argentina? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Sí. Just2Trade está regulado por CySEC (licencia N.° 281/15), bajo supervisión de ESMA. Los fondos de los clientes se mantienen en cuentas bancarias segregadas, separadas del capital operativo. Esta regulación europea protege a los clientes de todo el mundo, incluyendo México, Argentina, Colombia y Brasil.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">¿Qué apalancamiento máximo está disponible para traders de España y LATAM? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Para clientes minoristas bajo regulación CySEC/ESMA: el apalancamiento máximo en pares principales es 1:30, en pares menores 1:20, en materias primas 1:10. Los clientes clasificados como inversores profesionales pueden acceder a límites superiores previa evaluación de idoneidad.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">¿Qué plataformas de trading ofrece Just2Trade? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Just2Trade ofrece acceso a MetaTrader 4, MetaTrader 5, CQG Integrated Client y Sterling Trader Pro. MT4 permanece totalmente disponible para todos los clientes. Cada plataforma está disponible en escritorio, navegador web y dispositivos móviles (iOS/Android).</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">¿Puedo depositar y retirar fondos desde México o Argentina? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Sí. Just2Trade soporta depósitos y retiros via PayPal, Skrill y transferencia bancaria internacional desde México, Argentina, Colombia y Brasil. Los retiros se procesan en 1–3 días hábiles. No se cobra comisión por depósito en la mayoría de los métodos.</div>
+        </div>
+        <div class="faq-i">
+          <div class="faq-q">¿Just2Trade ofrece pares de divisas latinoamericanos como USD/MXN? <span class="faq-ico">+</span></div>
+          <div class="faq-a">Sí. Just2Trade ofrece spreads competitivos en USD/MXN (peso mexicano), USD/ARS (peso argentino), USD/COP (peso colombiano) y USD/BRL (real brasileño) — pares especialmente relevantes para traders latinoamericanos que desean operar con sus divisas locales.</div>
+        </div>
+      </div>
+      <p class="schema-note">✓ FAQPage JSON-LD schema — реализуется командой разработки на всех 4 продуктовых страницах. Обязательно для Featured Snippets в Google.es и Google LATAM</p>
+      <div class="prod-ann" style="margin-top:10px">FAQ pytania полностью różne per produkt. Forex: dźwignia, spread, pary PLN · Akcje: dywidendy, depozyt, dostęp do GPW · Obligacje: rentowność, kupon, minimalny lot · Futures: rollover, giełdy DMA, wezwanie do uzupełnienia depozytu</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B14 · CROSS-SELL
+═══════════════════════ -->
+<div id="b14" class="bw">
+  <div class="bh">
+    <div class="bn">14</div>
+    <div><div class="bname">Другие продукты — Перекрёстные продажи</div>
+    <div class="bnote">4 карточки — другие продуктовые страницы J2T. Anchor-тексты согласно правилам внутренней перелинковки (редполитика §4)</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="bc">
+    <div class="s-grad" style="padding:36px 48px">
+      <div class="ey-w" style="text-align:center;margin-bottom:6px">Explora más</div>
+      <h2 class="h2w" style="text-align:center;margin-bottom:28px">Otros productos en Just2Trade</h2>
+      <div class="cross4">
+        <div class="cross-c"><div class="cross-ico">📈</div><div class="cross-t">Acciones</div><div class="cross-d">Acciones reales en NYSE, NASDAQ, LSE y 20+ bolsas globales.</div><a href="#" class="cross-lnk">Descubre más →</a></div>
+        <div class="cross-c"><div class="cross-ico">🏦</div><div class="cross-t">Bonos</div><div class="cross-d">Bonos gubernamentales y corporativos. Eurobonos. Con pago de cupones.</div><a href="#" class="cross-lnk">Descubre más →</a></div>
+        <div class="cross-c"><div class="cross-ico">📊</div><div class="cross-t">Futuros</div><div class="cross-d">40+ bolsas globales vía CQG. CME, EUREX, NYMEX y más.</div><a href="#" class="cross-lnk">Descubre más →</a></div>
+        <div class="cross-c"><div class="cross-ico">⚡</div><div class="cross-t">MT5 Global</div><div class="cross-d">9.000+ instrumentos desde una sola cuenta multi-activo.</div><a href="#" class="cross-lnk">Descubre más →</a></div>
+      </div>
+      <div class="ann-dk" style="margin-top:20px;text-align:center">✏ Anchor-тексты строго по правилам внутренней перелинковки (редполитика §4). На каждой продуктовой странице — 3 других продукта + MT5 Global</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B15 · BOTTOM CTA
+═══════════════════════ -->
+<div id="b15" class="bw">
+  <div class="bh">
+    <div class="bn">15</div>
+    <div><div class="bname">Нижний CTA — Финальный конверсионный блок</div>
+    <div class="bnote">H2 специфичный для продукта. Подзаголовок = 1 предложение с ключевым USP. Присутствует у всех 5 основных конкурентов — критичен для конверсии</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-new">NEW</span><span class="pill p-note">↔ H2</span></div>
+  </div>
+  <div class="bc">
+    <div class="cta-s">
+      <h2 class="cta-h">Abre una cuenta de <em style="color:#5CC8FF;font-style:normal">Forex</em><br>y empieza a operar hoy</h2>
+      <p class="cta-d">Únete a más de 155,000 traders de 130 países. Cuenta abierta en menos de 10 minutos. Sin papeleo.</p>
+      <div class="cta-btns">
+        <button class="btn-p" style="padding:15px 36px;font-size:15px">Abrir Cuenta</button>
+        <button class="btn-g" style="padding:15px 36px;font-size:15px">Probar Demo →</button>
+      </div>
+      <div class="trust-chips">
+        <span class="trust-chip"><span class="td"></span>Regulado CySEC · 281/15</span>
+        <span class="trust-chip"><span class="td"></span>Fondos segregados</span>
+        <span class="trust-chip"><span class="td"></span>Protección de saldo negativo</span>
+        <span class="trust-chip"><span class="td"></span>Soporte 24/5 en español</span>
+      </div>
+      <div class="prod-ann" style="position:relative;z-index:1;margin-top:20px;background:rgba(217,119,6,.1);border-color:rgba(217,119,6,.2);color:#FCD34D">H2 меняется по продукту: Acciones → «Abre una cuenta de Acciones» · Bonos → «Empieza a invertir en Bonos» · Futuros → «Abre una cuenta de Futuros con CQG»</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════
+     B16 · DISCLAIMER
+═══════════════════════ -->
+<div id="b16" class="bw">
+  <div class="bh">
+    <div class="bn">16</div>
+    <div><div class="bname">Предупреждение о риске — Обязательный блок</div>
+    <div class="bnote">Текст строго из утверждённого шаблона редакционной политики. [X]% — подтверждение с юридическим отделом до публикации. Страницы Akcji/Obligacji: убрать оговорку CFD</div></div>
+    <div class="bpills"><span class="pill p-all">ALL</span><span class="pill p-req">⚠ REQUIRED</span></div>
+  </div>
+  <div class="bc">
+    <div class="disc-s">
+      <p class="disc-t"><strong>Ostrzeżenie o ryzyku (CFD):</strong> Kontrakty CFD są złożonymi instrumentami i wiążą się z wysokim ryzykiem szybkiej utraty pieniędzy z powodu dźwigni finansowej. <strong>[X]%</strong> rachunków inwestorów detalicznych traci pieniądze podczas handlu CFD z Just2Trade. Zastanów się, czy rozumiesz, jak działają CFD i czy możesz sobie pozwolić na podjęcie wysokiego ryzyka utraty pieniędzy. <strong>Lime Trading (CY) Ltd jest autoryzowana i regulowana przez Cypryjską Komisję Papierów Wartościowych i Giełd (CySEC) pod numerem licencji 281/15.</strong> Niniejszy materiał nie stanowi porady inwestycyjnej. Handel wiąże się z ryzykiem. Wyniki z przeszłości nie są wskaźnikiem przyszłych rezultatów.</p>
+      <div class="disc-reg">
+        <div class="disc-b"><span class="disc-d"></span>CySEC · Licencia N.° 281/15</div>
+        <div class="disc-b"><span class="disc-d"></span>Protección ICF hasta €20.000</div>
+        <div class="disc-b"><span class="disc-d"></span>Normativa ESMA aplicable</div>
+        <div class="disc-b"><span class="disc-d"></span>Protección de saldo negativo</div>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:#1A3040">✏ [X]% — заполнить актуальным процентом от compliance до публикации. Страницы Acciones/Bonos: убрать оговорку CFD и заменить общим инвестиционным дисклеймером. Текст без согласования с юристом не менять</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     ★ ES-ONLY BLOCK: LATAM TRUST / ONBOARDING
+══════════════════════════════════════════ -->
+<div style="margin:24px 24px 10px;padding:14px 18px;background:linear-gradient(90deg,#1A1000,#2D1F00);border-radius:10px;border:1px solid rgba(217,119,6,.25)">
+  <div style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#FCD34D;margin-bottom:3px">★ Структурный блок только для ES — нет аналога в версиях PL и EN</div>
+  <div style="font-size:12px;color:#5B7082;line-height:1.5">Этот блок существует <strong style="color:#FCD34D">только в испанской версии сайта</strong>. Закрывает барьеры доверия, специфичные для LATAM-аудитории: «Брокер из Европы — это далеко», «Не знаю что такое CySEC», «Смогу ли я вывести деньги из Мексики/Аргентины». Для PL и EN такого барьера нет — блок убирается полностью.</div>
+</div>
+
+<div id="u-es" class="es-unique-wrap">
+  <div class="es-bh">
+    <div class="es-bn">ES</div>
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:700;color:#78350F">🌎 ES Only — Bloque de confianza para traders de LATAM</div>
+      <div style="font-size:11px;color:var(--muted);max-width:500px;line-height:1.4;margin-top:2px">Касается барьеров доверия специфичных для LATAM — «безопасен ли европейский брокер?», «могу ли я вывести деньги?»</div>
+    </div>
+    <div style="display:flex;gap:5px"><span class="pill p-es">ES only</span><span class="pill p-new">NEW</span></div>
+  </div>
+  <div class="es-bc">
+    <div class="es-banner">
+      <span>🌎</span>
+      <strong>Este bloque existe solo en la versión española del sitio</strong> — cubre objeciones específicas del mercado LATAM que no existen para audiencias de PL o EN
+      <span>✏ Не нужен для PL и EN — у них нет этого барьера доверия</span>
+    </div>
+    <div class="s-white">
+      <div class="ey" style="color:var(--gold)">Para traders de LATAM</div>
+      <h2 class="h2">Operar con un bróker europeo desde LATAM — todo lo que necesitas saber</h2>
+      <p class="sub">Just2Trade lleva desde 2016 atendiendo a traders de más de 130 países, incluidos México, Argentina, Colombia y Brasil.</p>
+      <div class="latam-g">
+        <div class="latam-c">
+          <div class="latam-ico">🛡</div>
+          <div class="latam-t">¿Están seguros mis fondos?</div>
+          <div class="latam-d">La regulación CySEC significa que tus fondos se mantienen en cuentas bancarias europeas segregadas, protegidos hasta €20.000 por el ICF. La misma protección que FCA (Reino Unido) o BaFin (Alemania) — válida para clientes de todo LATAM.</div>
+        </div>
+        <div class="latam-c">
+          <div class="latam-ico">💸</div>
+          <div class="latam-t">¿Puedo retirar fondos desde México o Argentina?</div>
+          <div class="latam-d">Sí. Just2Trade permite retiros vía PayPal, Skrill y transferencia bancaria internacional a cuentas en México, Argentina, Colombia y Brasil. Procesados en 1–3 días hábiles. Sin comisiones de retiro en la mayoría de métodos.</div>
+        </div>
+        <div class="latam-c">
+          <div class="latam-ico">📞</div>
+          <div class="latam-t">¿Hay soporte en español?</div>
+          <div class="latam-d">Soporte completo en español 24/5 vía chat en vivo, correo electrónico y teléfono. Equipo especializado con experiencia en los mercados de España, México, Argentina y Colombia. Sin barreras idiomáticas.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--midblue);border:1px solid var(--border-b);border-radius:10px;padding:20px 24px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">🌎 Pares LATAM disponibles</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <span style="font-weight:700;width:80px">USD/MXN</span>
+              <span style="color:var(--muted)">Peso mexicano · spread competitivo</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <span style="font-weight:700;width:80px">USD/ARS</span>
+              <span style="color:var(--muted)">Peso argentino · spread competitivo</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <span style="font-weight:700;width:80px">USD/COP</span>
+              <span style="color:var(--muted)">Peso colombiano · disponible</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+              <span style="font-weight:700;width:80px">USD/BRL</span>
+              <span style="color:var(--muted)">Real brasileño · disponible</span>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:28px;font-weight:900;color:var(--blue);letter-spacing:-1px;margin-bottom:4px">155K+</div>
+          <div style="font-size:12px;color:var(--muted)">clientes en 130 países</div>
+          <div style="font-size:28px;font-weight:900;color:var(--blue);letter-spacing:-1px;margin:12px 0 4px">2016</div>
+          <div style="font-size:12px;color:var(--muted)">año de fundación</div>
+        </div>
+      </div>
+
+      <div class="ann" style="margin-top:16px">✏ Этот блок закрывает барьеры доверия специфичные для LATAM: «Европейский брокер — это далеко и ненадёжно», «Не знаю что такое CySEC», «Смогу ли я вывести деньги из Мексики/Аргентины». Контент формируется на основе реальных возражений LATAM-аудитории. Для PL и EN такого барьера нет — блок убирается полностью. Пары LATAM — уточнить актуальность спредов у команды продукта перед публикацией</div>
+      <div class="prod-ann">Acciones ES: добавить контекст инвестирования в международные акции из LATAM · Bonos ES: акцент на Eurobonos как инструмент для LATAM-инвесторов · Futuros ES: объяснить DMA для LATAM-трейдеров. Структура блока та же, примеры меняются по продукту</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="ft">Rush Agency · J2T ES Product Page Mockup · Abril 2026 · Aplicable a: Forex / Acciones / Bonos / Futuros</div>
+  <div style="display:flex;gap:6px"><span class="pill p-es">ES v1.0</span><span class="pill p-new">На согласование</span></div>
+</div>
+
+<script>
+const products = {
+  forex:      { bc:'Handel Forex', h1:'Opera en <em style="color:#5CC8FF;font-style:normal">Forex</em><br>con más de 70 pares de divisas', sub:'Just2Trade oferuje handel na rynku Forex przez MT4 i MT5. Niski spread od 0,1 pipsa, dźwignia do 1:30, realizacja od 10ms. Konto w PLN, EUR lub USD.', label:'Forex · Główne pary', tickers:`<div class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1,08462</span><span class="tk-up">▲ +0,34%</span></div><div class="tk"><span class="tk-sym">GBP/USD</span><span class="tk-val">1,26318</span><span class="tk-up">▲ +0,21%</span></div><div class="tk"><span class="tk-sym">USD/PLN</span><span class="tk-val">3,9412</span><span class="tk-dn">▼ −0,09%</span></div><div class="tk"><span class="tk-sym">EUR/PLN</span><span class="tk-val">4,2680</span><span class="tk-dn">▼ −0,14%</span></div>` },
+  acciones: { bc:'Acciones Globales', h1:'Invierte en <em style="color:#4ADE80;font-style:normal">Acciones</em><br>en 20+ bolsas globales', sub:'Trading real de acciones en NYSE, NASDAQ, LSE y más. Acceso DMA vía Sterling Trader Pro. Dividendos incluidos. Desde $0.01/acción en comisiones.', label:'Acciones · Top valores', tickers:`<div class="tk"><span class="tk-sym">AAPL</span><span class="tk-val">$182.40</span><span class="tk-up">▲ +1.2%</span></div><div class="tk"><span class="tk-sym">TSLA</span><span class="tk-val">$204.75</span><span class="tk-dn">▼ −0.8%</span></div><div class="tk"><span class="tk-sym">MSFT</span><span class="tk-val">$415.20</span><span class="tk-up">▲ +0.5%</span></div><div class="tk"><span class="tk-sym">NVDA</span><span class="tk-val">$867.10</span><span class="tk-up">▲ +2.1%</span></div>` },
+  bonos:    { bc:'Bonos y Eurobonos', h1:'Invierte en <em style="color:#FCD34D;font-style:normal">Bonos</em><br>y mercados de renta fija', sub:'Bonos gubernamentales y corporativos, Eurobonos. Pagos de cupón incluidos, spreads competitivos. Apalancamiento hasta 1:3 para clientes calificados.', label:'Bonos · Rendimientos', tickers:`<div class="tk"><span class="tk-sym">US 10Y</span><span class="tk-val">4.35%</span><span class="tk-dn">▼ −0.04%</span></div><div class="tk"><span class="tk-sym">Bund 10Y</span><span class="tk-val">2.28%</span><span class="tk-up">▲ +0.02%</span></div><div class="tk"><span class="tk-sym">UK Gilt</span><span class="tk-val">3.92%</span><span class="tk-dn">▼ −0.01%</span></div><div class="tk"><span class="tk-sym">EUR Bond</span><span class="tk-val">3.50%</span><span class="tk-up">▲ +0.03%</span></div>` },
+  futuros:  { bc:'Futuros Globales', h1:'Opera en <em style="color:#C4B5FD;font-style:normal">Futuros</em><br>en 40+ bolsas globales', sub:'Acceso a CME, EUREX, NYMEX y 40+ bolsas de derivados vía CQG. Acceso directo al mercado (DMA). Ejecución desde 10ms. Desde $1.50/lado en comisiones.', label:'Futuros · Contratos top', tickers:`<div class="tk"><span class="tk-sym">ES (S&P)</span><span class="tk-val">5,248.75</span><span class="tk-up">▲ +0.6%</span></div><div class="tk"><span class="tk-sym">NQ (Nasdaq)</span><span class="tk-val">18,142.50</span><span class="tk-up">▲ +0.9%</span></div><div class="tk"><span class="tk-sym">CL (Petróleo)</span><span class="tk-val">78.42</span><span class="tk-dn">▼ −0.4%</span></div><div class="tk"><span class="tk-sym">GC (Oro)</span><span class="tk-val">2,342.10</span><span class="tk-up">▲ +0.5%</span></div>` },
+};
+const tblLinks = { forex:'→ Ver todos los 70+ pares de divisas', acciones:'→ Ver todos los 30,000+ instrumentos de acciones', bonos:'→ Ver todos los instrumentos de bonos', futuros:'→ Ver todos los contratos de futuros' };
+const tblTitles = { forex:'Instrumentos Forex en Just2Trade', acciones:'Acciones Globales en Just2Trade', bonos:'Bonos en Just2Trade', futuros:'Contratos de Futuros en Just2Trade' };
+
+function switchProduct(prod, tab) {
+  const d = products[prod];
+  if(!d) return;
+  document.getElementById('bc-product').textContent = d.bc;
+  document.getElementById('hero-h1').innerHTML = d.h1;
+  document.getElementById('hero-sub').textContent = d.sub;
+  document.getElementById('hero-panel-label').textContent = d.label;
+  document.getElementById('hero-tickers').innerHTML = d.tickers;
+  if(tab){ tab.closest('.prod-tab-bar').querySelectorAll('.prod-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); }
+}
+
+function switchTable(prod, tab) {
+  ['forex','acciones','bonos','futuros'].forEach(p=>{
+    const el = document.getElementById('tbl-'+p);
+    if(el) el.style.display = p===prod ? 'block' : 'none';
+  });
+  const tt = document.getElementById('tbl-title');
+  if(tt) tt.textContent = tblTitles[prod];
+  const tl = document.getElementById('tbl-lnk');
+  if(tl) tl.textContent = tblLinks[prod];
+  if(tab){ tab.closest('.prod-tab-bar').querySelectorAll('.prod-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); }
+}
+
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const i = q.parentElement;
+    const isOpen = i.classList.contains('open');
+    document.querySelectorAll('.faq-i').forEach(x=>{x.classList.remove('open'); x.querySelector('.faq-ico').textContent='+';});
+    if(!isOpen){ i.classList.add('open'); q.querySelector('.faq-ico').textContent='−'; }
+  });
+});
+</script>
+</body>
+</html>
