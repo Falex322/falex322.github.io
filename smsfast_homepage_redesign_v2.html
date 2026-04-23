@@ -1,0 +1,387 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#F2F3F5;color:#04060C;font-size:13px}
+.accent{color:#1570EF}
+.gray{color:#7F8689}
+.card{background:#fff;border-radius:18px;padding:20px}
+.pill{background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:11px;white-space:nowrap}
+.pill-accent{background:#1570EF1A;color:#1570EF;border-radius:9999px;padding:4px 10px;font-size:11px}
+.btn{background:#1570EF;color:#fff;border-radius:9999px;padding:7px 16px;font-size:12px;font-weight:500;white-space:nowrap;display:inline-block}
+.btn-sm{background:#1570EF;color:#fff;border-radius:9999px;padding:5px 12px;font-size:11px;font-weight:500;white-space:nowrap;display:inline-block}
+.btn-ghost{background:#F2F3F5;color:#04060C;border-radius:9999px;padding:7px 16px;font-size:12px;font-weight:500;white-space:nowrap;display:inline-block}
+.btn-tg{background:#179CDE;color:#fff;border-radius:9999px;padding:7px 16px;font-size:12px;font-weight:500;white-space:nowrap;display:inline-block}
+.sec-title{font-size:18px;font-weight:700;margin-bottom:12px;line-height:1.3}
+.badge-num{background:#1570EF;color:#fff;border-radius:9999px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.star{color:#FF9F0A;font-size:12px}
+.arrow{color:#7F8689;font-size:10px}
+</style>
+
+<div style="max-width:680px;margin:0 auto;font-family:Inter,sans-serif">
+
+<!-- БЛОК 1: STICKY HEADER -->
+<div style="background:#fff;border-bottom:1px solid #E3E5E8;position:sticky;top:0;z-index:10">
+  <div style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between">
+    <!-- LOGO SVG — точный логотип SMSFAST -->
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="display:flex;align-items:center;gap:7px;flex-shrink:0">
+        <svg width="26" height="21" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lg1" x1="-15" y1="12" x2="8.41" y2="41.27" gradientUnits="userSpaceOnUse"><stop stop-color="#32ADE6"/><stop offset="1" stop-color="#007AFF"/></linearGradient></defs>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M26.22 8.27C26.93 8.97 27.57 9.61 28.09 10.12C29.94 11.96 30.83 14.41 28.98 16.26C28.02 17.22 27.06 18.17 26.1 19.13C24.91 20.31 23.72 21.49 22.53 22.68C21.65 23.57 20.61 24 19.36 24C18.32 23.996 16.73 23.45 15.15 22.91C13.55 22.36 11.95 21.81 10.91 21.81H4.41C3.64 21.81 3.14 21.38 2.92 20.72C2.71 20.09 2.88 19.49 3.46 19.08C3.8 18.83 4.2 18.82 4.59 18.81C5.1 18.81 5.61 18.8 6.11 18.8C6.79 18.8 7.47 18.8 8.14 18.79C9.32 18.76 9.99 18.17 9.99 17.18C9.99 16.21 9.27 15.57 8.14 15.55C7.53 15.55 6.92 15.55 6.3 15.55C5.7 15.55 5.1 15.55 4.51 15.54C3.52 15.53 2.89 14.98 2.84 14.14C2.78 13.24 3.38 12.64 4.4 12.54C5.53 12.42 6.17 11.81 6.14 10.87C6.11 9.91 5.39 9.31 4.24 9.29C3.86 9.29 3.49 9.29 3.11 9.29C2.61 9.29 2.12 9.3 1.62 9.29C0.64 9.27 0.02 8.69 0 7.83C-0.02 6.93 0.62 6.27 1.61 6.26C2.78 6.25 3.94 6.25 5.11 6.25C6.11 6.25 7.11 6.26 8.12 6.25C9.26 6.24 9.99 5.59 9.98 4.64C9.98 3.68 9.25 3.04 8.12 3.03C7.56 3.02 6.99 3.02 6.43 3.02C5.81 3.03 5.19 3.03 4.57 3.02C3.47 3.01 2.84 2.44 2.84 1.5C2.84 0.61 3.45 0.02 4.51 0.01C8.76 -0.003 11.97 -0.004 16.22 0.008C17.44 0.012 18.59 0.648 19.44 1.51C20.48 2.56 22.06 4.13 23.64 5.71C24.53 6.59 25.42 7.47 26.22 8.27ZM20.55 20.75L26.25 15.08C26.34 14.99 26.41 14.88 26.45 14.76C26.48 14.63 26.49 14.5 26.46 14.38C26.44 14.25 26.38 14.13 26.3 14.03C26.22 13.94 26.12 13.86 25.996 13.81C23.81 12.88 19.9 11.22 19.9 11.22C19.43 11.02 19.3 10.85 19.1 10.42C19.1 10.42 17.33 6.32 16.48 4.25C16.43 4.15 16.37 4.06 16.28 3.99C16.2 3.93 16.1 3.88 15.99 3.86C15.89 3.84 15.78 3.84 15.67 3.87C15.57 3.9 15.47 3.96 15.39 4.04L9.57 9.82C9.26 10.13 9.09 10.54 9.09 10.98C9.09 11.41 9.26 11.83 9.57 12.13L18.23 20.75C18.53 21.06 18.95 21.23 19.39 21.23C19.82 21.23 20.24 21.06 20.55 20.75Z" fill="url(#lg1)"/>
+        </svg>
+        <svg width="66" height="11" viewBox="0 0 75 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.61 12C2.86 12 2.18 11.95 1.55 11.84C0.94 11.73 0.42 11.57 0 11.37L0.45 9.22C0.93 9.43 1.47 9.61 2.06 9.74C2.65 9.87 3.24 9.94 3.83 9.94C4.67 9.94 5.3 9.86 5.72 9.7C6.16 9.55 6.43 9.19 6.55 8.64C6.63 8.29 6.6 8.01 6.46 7.81C6.34 7.6 6.09 7.42 5.7 7.27C5.33 7.1 4.79 6.91 4.08 6.7C2.94 6.37 2.17 5.95 1.77 5.44C1.38 4.93 1.29 4.23 1.48 3.34C1.71 2.27 2.24 1.45 3.07 0.87C3.91 0.29 5.15 0 6.79 0C7.49 0 8.12 0.048 8.7 0.145C9.29 0.241 9.75 0.356 10.09 0.488L9.62 2.64C8.73 2.27 7.74 2.08 6.66 2.08C5.9 2.08 5.29 2.16 4.82 2.33C4.35 2.49 4.06 2.83 3.95 3.34C3.89 3.64 3.92 3.89 4.03 4.07C4.15 4.25 4.38 4.41 4.73 4.55C5.09 4.7 5.59 4.86 6.23 5.04C7.13 5.3 7.8 5.6 8.23 5.95C8.68 6.3 8.95 6.69 9.06 7.14C9.17 7.58 9.17 8.08 9.04 8.64C8.9 9.31 8.64 9.9 8.25 10.41C7.88 10.92 7.32 11.31 6.57 11.58C5.84 11.86 4.85 12 3.61 12Z" fill="#04060C"/>
+          <path d="M10.09 11.82L12.54 0.18H14.91L16.84 7.17L21.73 0.18H24.26L21.8 11.82H19.37L20.97 4.25L17.07 9.81H15.66L14.13 4.25L12.52 11.82H10.09Z" fill="#04060C"/>
+          <path d="M27.43 12C26.68 12 25.997 11.95 25.37 11.84C24.76 11.73 24.24 11.57 23.82 11.37L24.27 9.22C24.75 9.43 25.29 9.61 25.88 9.74C26.47 9.87 27.06 9.94 27.65 9.94C28.49 9.94 29.12 9.86 29.54 9.7C29.97 9.55 30.25 9.19 30.37 8.64C30.44 8.29 30.41 8.01 30.28 7.81C30.16 7.6 29.91 7.42 29.52 7.27C29.15 7.1 28.61 6.91 27.9 6.7C26.76 6.37 25.98 5.95 25.59 5.44C25.2 4.93 25.11 4.23 25.3 3.34C25.53 2.27 26.06 1.45 26.89 0.87C27.73 0.29 28.97 0 30.61 0C31.3 0 31.94 0.048 32.52 0.145C33.11 0.241 33.57 0.356 33.91 0.488L33.44 2.64C32.55 2.27 31.56 2.08 30.48 2.08C29.72 2.08 29.11 2.16 28.64 2.33C28.17 2.49 27.88 2.83 27.77 3.34C27.71 3.64 27.74 3.89 27.84 4.07C27.96 4.25 28.2 4.41 28.55 4.55C28.91 4.7 29.41 4.86 30.05 5.04C30.95 5.3 31.62 5.6 32.05 5.95C32.5 6.3 32.77 6.69 32.88 7.14C32.99 7.58 32.98 8.08 32.86 8.64C32.72 9.31 32.45 9.9 32.07 10.41C31.7 10.92 31.14 11.31 30.39 11.58C29.66 11.86 28.67 12 27.43 12Z" fill="#04060C"/>
+          <path d="M33.9 11.82L36.36 0.18H44.54L44.14 2.08H38.4L37.77 5.06H42.84L42.44 6.94H37.37L36.34 11.82H33.9Z" fill="#04060C"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M48.67 0.18L41.78 11.82H44.41L46.07 9.02H50.35L50.87 11.82H53.31L51.34 0.18H48.67ZM50.4 7.14H46.85L49.61 2.46L50.4 7.14Z" fill="#04060C"/>
+          <path d="M57.77 12C57.02 12 56.34 11.95 55.71 11.84C55.1 11.73 54.58 11.57 54.16 11.37L54.61 9.22C55.09 9.43 55.63 9.61 56.22 9.74C56.81 9.87 57.4 9.94 57.99 9.94C58.83 9.94 59.46 9.86 59.88 9.7C60.32 9.55 60.59 9.19 60.71 8.64C60.78 8.29 60.75 8.01 60.62 7.81C60.5 7.6 60.25 7.42 59.86 7.27C59.49 7.1 58.95 6.91 58.24 6.7C57.1 6.37 56.33 5.95 55.93 5.44C55.54 4.93 55.45 4.23 55.64 3.34C55.87 2.27 56.4 1.45 57.23 0.87C58.07 0.29 59.31 0 60.95 0C61.65 0 62.28 0.048 62.86 0.145C63.45 0.241 63.91 0.356 64.25 0.488L63.78 2.64C62.89 2.27 61.9 2.08 60.82 2.08C60.06 2.08 59.45 2.16 58.98 2.33C58.51 2.49 58.22 2.83 58.11 3.34C58.05 3.64 58.08 3.89 58.19 4.07C58.31 4.25 58.54 4.41 58.89 4.55C59.25 4.7 59.75 4.86 60.39 5.04C61.29 5.3 61.96 5.6 62.39 5.95C62.84 6.3 63.11 6.69 63.22 7.14C63.33 7.58 63.32 8.08 63.2 8.64C63.06 9.31 62.79 9.9 62.41 10.41C62.04 10.92 61.48 11.31 60.73 11.58C59.996 11.86 59.01 12 57.77 12Z" fill="#04060C"/>
+          <path d="M66.55 11.82L68.61 2.06H65.03L65.43 0.18H75L74.6 2.06H71.05L68.99 11.82H66.55Z" fill="#04060C"/>
+        </svg>
+      </div>
+      <!-- Nav links in correct order -->
+      <nav style="display:flex;gap:14px;align-items:center">
+        <span style="font-size:11px;color:#7F8689;cursor:pointer;white-space:nowrap">Free numbers</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">Prices</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">Services</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">Countries</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">Loyalty</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">FAQ</span>
+        <span style="font-size:11px;color:#7F8689;cursor:pointer">Blog</span>
+      </nav>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
+      <span class="btn-ghost" style="padding:5px 12px;font-size:11px">Log in</span>
+      <span class="btn-sm">Get a number</span>
+    </div>
+  </div>
+  <!-- Trust Bar -->
+  <div style="background:#F2F3F5;padding:5px 16px;display:flex;gap:20px;overflow:hidden;border-top:1px solid #E3E5E8">
+    <span style="font-size:10px;color:#7F8689;white-space:nowrap">✓ <b style="color:#04060C">2,579,670</b> activations</span>
+    <span style="font-size:10px;color:#7F8689;white-space:nowrap">✓ <b style="color:#34C759">96.45%</b> delivery rate</span>
+    <span style="font-size:10px;color:#7F8689;white-space:nowrap">✓ <b style="color:#04060C">190+</b> countries</span>
+    <span style="font-size:10px;color:#7F8689;white-space:nowrap">✓ <b style="color:#04060C">REST API</b> available</span>
+    <span style="font-size:10px;color:#7F8689;white-space:nowrap">✓ <b style="color:#04060C">From $0.22</b></span>
+  </div>
+</div>
+
+<div style="background:#F2F3F5;padding:8px 0;display:flex;flex-direction:column;gap:4px">
+
+<!-- БЛОК 3: HERO -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;overflow:hidden">
+  <div style="display:flex">
+    <div style="flex:1;padding:24px 20px">
+      <div class="pill-accent" style="margin-bottom:10px;font-size:10px">No. 1 in SMS verification</div>
+      <h1 style="font-size:22px;font-weight:700;line-height:1.25;margin-bottom:8px">Receive SMS Online Instantly — Temporary Phone Numbers from <span class="accent">$0.22</span></h1>
+      <p style="font-size:12px;color:#7F8689;margin-bottom:14px;line-height:1.5">Real non-VoIP numbers from 190+ countries. Instant delivery, guaranteed refund if no SMS arrives.</p>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <span class="btn">Buy a number</span>
+        <span class="btn-ghost">Register free</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+        <span style="font-size:10px;color:#7F8689">✓ Pay on delivery</span>
+        <span style="font-size:10px;color:#7F8689">✓ Instant refund</span>
+        <span style="font-size:10px;color:#7F8689">✓ No subscription</span>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <div style="background:#F2F3F5;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;color:#7F8689">VISA</div>
+        <div style="background:#F2F3F5;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;color:#7F8689">MC</div>
+        <div style="background:#F2F3F5;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;color:#7F8689">PayPal</div>
+        <div style="background:#F2F3F5;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;color:#7F8689">USDT</div>
+        <div style="background:#F2F3F5;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;color:#7F8689">BTC</div>
+      </div>
+    </div>
+    <div style="width:240px;background:#F2F3F5;padding:12px;display:flex;flex-direction:column;gap:8px;flex-shrink:0">
+      <div style="background:#fff;border-radius:14px;padding:12px;border:2px solid #1570EF">
+        <div style="display:flex;background:#F2F3F5;border-radius:9999px;padding:2px;margin-bottom:8px">
+          <div style="flex:1;text-align:center;background:#1570EF;color:#fff;border-radius:9999px;padding:3px 0;font-size:10px;font-weight:500">Activations</div>
+          <div style="flex:1;text-align:center;color:#7F8689;padding:3px 0;font-size:10px">Rent</div>
+        </div>
+        <div style="margin-bottom:6px">
+          <div style="font-size:10px;color:#7F8689;margin-bottom:3px">Service</div>
+          <div style="border:1px solid #E3E5E8;border-radius:10px;padding:6px 8px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px">WhatsApp</span>
+            <span style="font-size:10px;color:#7F8689">▼</span>
+          </div>
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="font-size:10px;color:#7F8689;margin-bottom:3px">Country &amp; price</div>
+          <div style="border:1px solid #E3E5E8;border-radius:10px;padding:6px 8px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px">🇺🇸 USA (virtual)</span>
+            <span class="accent" style="font-size:11px;font-weight:600">$0.25</span>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#7F8689;margin-bottom:4px">289,000+ numbers</div>
+        <span class="btn" style="display:block;text-align:center;font-size:12px;padding:8px 0">Get number now</span>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:8px 10px;font-size:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-weight:500">WhatsApp</span>
+          <span style="color:#7F8689">now <span style="color:#1570EF;font-size:7px">●</span></span>
+        </div>
+        <span style="color:#7F8689">Your code: <b style="color:#04060C">847291</b></span>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:8px 10px;font-size:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-weight:500">Telegram</span>
+          <span style="color:#7F8689">3 sec ago</span>
+        </div>
+        <span style="color:#7F8689">Telegram code: <b style="color:#04060C">57834</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 4: SERVICES STRIP -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:12px 16px">
+  <div style="font-size:10px;color:#7F8689;margin-bottom:8px;text-align:center">Works with 500+ services</div>
+  <div style="display:flex;gap:8px;overflow:hidden;padding:0 4px;align-items:center">
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#25D366;border-radius:50%"></div>WhatsApp</div>
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#2196F3;border-radius:50%"></div>Telegram</div>
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#1565C0;border-radius:50%"></div>Facebook</div>
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#EA4335;border-radius:50%"></div>Google</div>
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#000;border-radius:50%"></div>X/Twitter</div>
+    <div style="background:#F2F3F5;border-radius:9999px;padding:4px 10px;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap"><div style="width:12px;height:12px;background:#FF9900;border-radius:50%"></div>Amazon</div>
+    <div style="font-size:10px;color:#1570EF;white-space:nowrap;flex-shrink:0">See all 500+ →</div>
+  </div>
+</div>
+
+<!-- БЛОК 5: STATS -->
+<div style="margin:0 12px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+  <div class="card" style="padding:14px;text-align:center">
+    <div style="font-size:16px;font-weight:700;color:#1570EF">2.6M+</div>
+    <div style="font-size:10px;color:#7F8689;margin-top:2px">Activations</div>
+    <div style="font-size:9px;color:#34C759;margin-top:2px">↗ +574k</div>
+  </div>
+  <div class="card" style="padding:14px;text-align:center">
+    <div style="font-size:16px;font-weight:700;color:#1570EF">96.45%</div>
+    <div style="font-size:10px;color:#7F8689;margin-top:2px">Delivery rate</div>
+    <div style="font-size:9px;color:#34C759;margin-top:2px">↗ +6.7%</div>
+  </div>
+  <div class="card" style="padding:14px;text-align:center">
+    <div style="font-size:16px;font-weight:700;color:#1570EF">190+</div>
+    <div style="font-size:10px;color:#7F8689;margin-top:2px">Countries</div>
+    <div style="font-size:9px;color:#34C759;margin-top:2px">↗ new</div>
+  </div>
+  <div class="card" style="padding:14px;text-align:center">
+    <div style="font-size:16px;font-weight:700;color:#1570EF">~3 sec</div>
+    <div style="font-size:10px;color:#7F8689;margin-top:2px">Delivery speed</div>
+    <div style="font-size:9px;color:#34C759;margin-top:2px">↗ avg</div>
+  </div>
+</div>
+
+<!-- БЛОК 6: HOW IT WORKS -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div class="sec-title">How to receive SMS online fast</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+    <div style="background:#F2F3F5;border-radius:14px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div class="badge-num">1</div>
+        <span style="font-size:10px;color:#7F8689;background:#fff;border-radius:9999px;padding:2px 6px">~10 sec</span>
+      </div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Buy a number</div>
+      <div style="font-size:11px;color:#7F8689">Choose service + country, pay from $0.22</div>
+    </div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div class="badge-num">2</div>
+        <span style="font-size:10px;color:#7F8689;background:#fff;border-radius:9999px;padding:2px 6px">~5 sec</span>
+      </div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Enter number</div>
+      <div style="font-size:11px;color:#7F8689">Use it in the registration field</div>
+    </div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <div class="badge-num">3</div>
+        <span style="font-size:10px;color:#7F8689;background:#fff;border-radius:9999px;padding:2px 6px">~3 sec</span>
+      </div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Get the code</div>
+      <div style="font-size:11px;color:#7F8689">SMS arrives in your account instantly</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px"><span class="btn-sm">Try it now →</span></div>
+</div>
+
+<!-- БЛОК 7: BENEFITS -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div class="sec-title">Why choose SMSFAST</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">🌍</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">190+ countries</div><div style="font-size:10px;color:#7F8689">Any country, any service</div></div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">⚡</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">~3 sec delivery</div><div style="font-size:10px;color:#7F8689">SMS arrives almost instantly</div></div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">💰</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">From $0.22</div><div style="font-size:10px;color:#7F8689">Pay only on delivery</div></div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">🔒</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">Full privacy</div><div style="font-size:10px;color:#7F8689">Real SIM, not VoIP</div></div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">🔌</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">REST API</div><div style="font-size:10px;color:#7F8689">Full developer support</div></div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px"><div style="font-size:18px;margin-bottom:6px">↩️</div><div style="font-size:11px;font-weight:600;margin-bottom:3px">Refund guarantee</div><div style="font-size:10px;color:#7F8689">Instant refund if no SMS</div></div>
+  </div>
+</div>
+
+<!-- БЛОК 8: PRICING TEASER -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div class="sec-title" style="margin:0">Price example</div>
+    <div style="display:flex;gap:4px">
+      <span class="pill" style="cursor:pointer">WhatsApp</span>
+      <span class="pill-accent">Telegram</span>
+      <span class="pill">Google</span>
+    </div>
+  </div>
+  <table style="width:100%;border-collapse:separate;border-spacing:0;font-size:11px">
+    <thead><tr style="background:#F2F3F5">
+      <th style="text-align:left;padding:7px 10px;font-weight:500;border-radius:10px 0 0 0;color:#7F8689;font-size:10px">Country</th>
+      <th style="text-align:center;padding:7px 6px;color:#7F8689;font-size:10px">Telegram</th>
+      <th style="text-align:center;padding:7px 6px;color:#7F8689;font-size:10px">WhatsApp</th>
+      <th style="text-align:center;padding:7px 6px;color:#7F8689;font-size:10px">Google</th>
+      <th style="text-align:center;padding:7px 6px;color:#7F8689;font-size:10px">Facebook</th>
+      <th style="text-align:center;padding:7px 10px;color:#7F8689;font-size:10px;border-radius:0 10px 0 0">Amazon</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #F2F3F5"><td style="padding:7px 10px">🇺🇸 USA</td><td style="text-align:center;padding:7px 6px;color:#1570EF;font-weight:600">$0.25</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.53</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.21</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.21</td><td style="text-align:center;padding:7px 10px;color:#1570EF">$0.21</td></tr>
+      <tr style="border-bottom:1px solid #F2F3F5"><td style="padding:7px 10px">🇬🇧 UK</td><td style="text-align:center;padding:7px 6px;color:#1570EF;font-weight:600">$0.39</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.39</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.39</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.39</td><td style="text-align:center;padding:7px 10px;color:#1570EF">$0.39</td></tr>
+      <tr style="border-bottom:1px solid #F2F3F5"><td style="padding:7px 10px">🇩🇪 Germany</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.35</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.35</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.35</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.35</td><td style="text-align:center;padding:7px 10px;color:#1570EF">$0.35</td></tr>
+      <tr><td style="padding:7px 10px">🇮🇩 Indonesia</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.22</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.22</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.22</td><td style="text-align:center;padding:7px 6px;color:#1570EF">$0.22</td><td style="text-align:center;padding:7px 10px;color:#1570EF">$0.22</td></tr>
+    </tbody>
+  </table>
+  <div style="text-align:center;margin-top:10px"><span class="accent" style="font-size:11px;cursor:pointer">See full price list (500+ services) →</span></div>
+</div>
+
+<!-- БЛОК 9: USE CASES -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div class="sec-title">Who uses SMSFAST</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="border:1px solid #E3E5E8;border-radius:14px;padding:14px"><div style="font-size:18px;margin-bottom:6px">👤</div><div style="font-size:12px;font-weight:600;margin-bottom:4px">Regular user</div><div style="font-size:10px;color:#7F8689;margin-bottom:8px">Sign up for any service without giving your real number</div><span class="btn-sm">Buy activation</span></div>
+    <div style="border:1px solid #E3E5E8;border-radius:14px;padding:14px"><div style="font-size:18px;margin-bottom:6px">📊</div><div style="font-size:12px;font-weight:600;margin-bottom:4px">Marketer</div><div style="font-size:10px;color:#7F8689;margin-bottom:8px">Create multiple accounts, test campaigns and promo codes</div><span class="btn-sm">Buy activation</span></div>
+    <div style="border:1px solid #E3E5E8;border-radius:14px;padding:14px"><div style="font-size:18px;margin-bottom:6px">👨‍💻</div><div style="font-size:12px;font-weight:600;margin-bottom:4px">Developer</div><div style="font-size:10px;color:#7F8689;margin-bottom:8px">Automate account creation via REST API with full docs</div><span class="btn-sm">View API docs</span></div>
+    <div style="border:1px solid #E3E5E8;border-radius:14px;padding:14px"><div style="font-size:18px;margin-bottom:6px">🏢</div><div style="font-size:12px;font-weight:600;margin-bottom:4px">Business</div><div style="font-size:10px;color:#7F8689;margin-bottom:8px">Bulk activations, dedicated support, white-label options</div><span class="btn-sm">Contact sales</span></div>
+  </div>
+</div>
+
+<!-- БЛОК 10: SOCIAL PROOF — без Trustpilot -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div class="sec-title" style="margin:0">What our users say</div>
+    <div style="display:flex;align-items:center;gap:5px">
+      <div style="display:flex;gap:1px"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <span style="font-size:11px;font-weight:600">4.9 / 5</span>
+      <span style="font-size:10px;color:#7F8689">based on 1,200+ reviews</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px">
+      <div style="display:flex;gap:1px;margin-bottom:6px"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div style="font-size:11px;margin-bottom:6px;line-height:1.5">"Works perfectly. Got my Telegram code in 3 seconds. Amazing service!"</div>
+      <div style="font-size:10px;color:#7F8689">Alex K. · verified purchase</div>
+    </div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px">
+      <div style="display:flex;gap:1px;margin-bottom:6px"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div style="font-size:11px;margin-bottom:6px;line-height:1.5">"Best price for US numbers. Refund worked instantly when SMS didn't arrive."</div>
+      <div style="font-size:10px;color:#7F8689">Maria S. · verified purchase</div>
+    </div>
+    <div style="background:#F2F3F5;border-radius:14px;padding:12px">
+      <div style="display:flex;gap:1px;margin-bottom:6px"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span style="color:#D0D7DE">★</span></div>
+      <div style="font-size:11px;margin-bottom:6px;line-height:1.5">"API docs are clear. Integrated in 30 min. Using it for bulk activations."</div>
+      <div style="font-size:10px;color:#7F8689">Dev Team · verified purchase</div>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 11: LOYALTY/TELEGRAM BANNER -->
+<div style="margin:0 12px;border-radius:18px;overflow:hidden;background:linear-gradient(291.9deg,#1570EF,#32ADE6);padding:16px 20px;display:flex;justify-content:space-between;align-items:center">
+  <div>
+    <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">🎁 $0.25 Gift + Loyalty Program</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.85);margin-bottom:12px">Subscribe to Telegram → get $0.25 free. Earn cashback on every order from Level Basic to Diamond.</div>
+    <div style="display:flex;gap:8px">
+      <span class="btn-tg" style="font-size:11px;padding:6px 12px">Claim $0.25 via Telegram</span>
+      <span style="background:rgba(255,255,255,0.2);color:#fff;border-radius:9999px;padding:6px 12px;font-size:11px;font-weight:500">Loyalty Program →</span>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 12: FAQ -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div class="sec-title">Frequently Asked Questions</div>
+  <div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">What is a temporary phone number?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">How does SMSFAST work?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">What if the SMS doesn't arrive?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">How does SMSFAST compare to Quackr.io?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">Do you have an API for developers?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">How fast is SMS delivery?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;border-bottom:1px solid #F2F3F5;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">Are these real SIM numbers (not VoIP)?</span><span class="arrow">▼</span></div>
+    <div style="padding:10px 0;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:500">Can I get a free temporary number?</span><span class="arrow">▼</span></div>
+  </div>
+</div>
+
+<!-- БЛОК 13: SEO TEXT -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div style="font-size:15px;font-weight:700;margin-bottom:8px">What are temporary phone numbers?</div>
+  <div style="font-size:12px;color:#7F8689;line-height:1.6;margin-bottom:8px">A temporary phone number is a disposable virtual number used to receive SMS verification codes online. Unlike free public numbers, SMSFAST assigns each number exclusively to one user — your codes stay private. Numbers are attached to real physical SIM cards, ensuring maximum compatibility with <span class="accent">WhatsApp</span>, <span class="accent">Telegram</span>, <span class="accent">Google</span>, and 500+ other services.</div>
+  <div style="font-size:12px;color:#7F8689;line-height:1.6;margin-bottom:10px">We cover <span class="accent">190+ countries</span> with instant number availability. If a code doesn't arrive within the activation window, you get a full refund — no questions asked.</div>
+  <div style="display:flex;gap:8px">
+    <span class="accent" style="font-size:11px;cursor:pointer">View full price list →</span>
+    <span class="accent" style="font-size:11px;cursor:pointer">Browse all services →</span>
+  </div>
+</div>
+
+<!-- НОВЫЙ БЛОК: BLOG (для перелинковки) -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div class="sec-title" style="margin:0">Useful articles</div>
+    <span class="accent" style="font-size:11px;cursor:pointer">All articles →</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+    <!-- Card 1 -->
+    <a style="display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;cursor:pointer">
+      <div style="background:#F2F3F5;border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1570EF22,#32ADE622);display:flex;align-items:center;justify-content:center;font-size:28px">💬</div>
+      </div>
+      <div>
+        <div style="background:#1570EF1A;color:#1570EF;border-radius:9999px;padding:2px 8px;font-size:9px;display:inline-block;margin-bottom:4px">Online Services</div>
+        <div style="font-size:11px;font-weight:600;line-height:1.4;margin-bottom:3px">How to Create a Viber Account Without a Phone Number</div>
+        <div style="font-size:10px;color:#7F8689">Feb 03, 2026 · 8 min read</div>
+      </div>
+    </a>
+    <!-- Card 2 -->
+    <a style="display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;cursor:pointer">
+      <div style="background:#F2F3F5;border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1565C022,#1570EF22);display:flex;align-items:center;justify-content:center;font-size:28px">👤</div>
+      </div>
+      <div>
+        <div style="background:#1570EF1A;color:#1570EF;border-radius:9999px;padding:2px 8px;font-size:9px;display:inline-block;margin-bottom:4px">Online Services</div>
+        <div style="font-size:11px;font-weight:600;line-height:1.4;margin-bottom:3px">How to Create a Facebook Account Without a Phone Number</div>
+        <div style="font-size:10px;color:#7F8689">Jan 19, 2026 · 12 min read</div>
+      </div>
+    </a>
+    <!-- Card 3 -->
+    <a style="display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;cursor:pointer">
+      <div style="background:#F2F3F5;border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#FF9F0A22,#1570EF11);display:flex;align-items:center;justify-content:center;font-size:28px">🔐</div>
+      </div>
+      <div>
+        <div style="background:#1570EF1A;color:#1570EF;border-radius:9999px;padding:2px 8px;font-size:9px;display:inline-block;margin-bottom:4px">Online Services</div>
+        <div style="font-size:11px;font-weight:600;line-height:1.4;margin-bottom:3px">How to Create a Grindr Account Without a Phone Number</div>
+        <div style="font-size:10px;color:#7F8689">Jan 18, 2026 · 14 min read</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- БЛОК 14: FOOTER -->
+<div style="margin:0 12px;background:#fff;border-radius:18px;padding:16px">
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:12px">
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+        <svg width="18" height="14" viewBox="0 0 30 24" fill="none"><defs><linearGradient id="lg2" x1="-15" y1="12" x2="8.41" y2="41.27" gradientUnits="userSpaceOnUse"><stop stop-color="#32ADE6"/><stop offset="1" stop-color="#007AFF"/></linearGradient></defs><path fill-rule="evenodd" clip-rule="evenodd" d="M26.22 8.27C26.93 8.97 27.57 9.61 28.09 10.12C29.94 11.96 30.83 14.41 28.98 16.26C28.02 17.22 27.06 18.17 26.1 19.13C24.91 20.31 23.72 21.49 22.53 22.68C21.65 23.57 20.61 24 19.36 24C18.32 23.996 16.73 23.45 15.15 22.91C13.55 22.36 11.95 21.81 10.91 21.81H4.41C3.64 21.81 3.14 21.38 2.92 20.72C2.71 20.09 2.88 19.49 3.46 19.08C3.8 18.83 4.2 18.82 4.59 18.81C5.1 18.81 5.61 18.8 6.11 18.8C6.79 18.8 7.47 18.8 8.14 18.79C9.32 18.76 9.99 18.17 9.99 17.18C9.99 16.21 9.27 15.57 8.14 15.55C7.53 15.55 6.92 15.55 6.3 15.55C5.7 15.55 5.1 15.55 4.51 15.54C3.52 15.53 2.89 14.98 2.84 14.14C2.78 13.24 3.38 12.64 4.4 12.54C5.53 12.42 6.17 11.81 6.14 10.87C6.11 9.91 5.39 9.31 4.24 9.29C3.86 9.29 3.49 9.29 3.11 9.29C2.61 9.29 2.12 9.3 1.62 9.29C0.64 9.27 0.02 8.69 0 7.83C-0.02 6.93 0.62 6.27 1.61 6.26C2.78 6.25 3.94 6.25 5.11 6.25C6.11 6.25 7.11 6.26 8.12 6.25C9.26 6.24 9.99 5.59 9.98 4.64C9.98 3.68 9.25 3.04 8.12 3.03C7.56 3.02 6.99 3.02 6.43 3.02C5.81 3.03 5.19 3.03 4.57 3.02C3.47 3.01 2.84 2.44 2.84 1.5C2.84 0.61 3.45 0.02 4.51 0.01C8.76 -0.003 11.97 -0.004 16.22 0.008C17.44 0.012 18.59 0.648 19.44 1.51C20.48 2.56 22.06 4.13 23.64 5.71C24.53 6.59 25.42 7.47 26.22 8.27ZM20.55 20.75L26.25 15.08C26.34 14.99 26.41 14.88 26.45 14.76C26.48 14.63 26.49 14.5 26.46 14.38C26.44 14.25 26.38 14.13 26.3 14.03C26.22 13.94 26.12 13.86 25.996 13.81C23.81 12.88 19.9 11.22 19.9 11.22C19.43 11.02 19.3 10.85 19.1 10.42C19.1 10.42 17.33 6.32 16.48 4.25C16.43 4.15 16.37 4.06 16.28 3.99C16.2 3.93 16.1 3.88 15.99 3.86C15.89 3.84 15.78 3.84 15.67 3.87C15.57 3.9 15.47 3.96 15.39 4.04L9.57 9.82C9.26 10.13 9.09 10.54 9.09 10.98C9.09 11.41 9.26 11.83 9.57 12.13L18.23 20.75C18.53 21.06 18.95 21.23 19.39 21.23C19.82 21.23 20.24 21.06 20.55 20.75Z" fill="url(#lg2)"/></svg>
+        <span style="font-weight:700;font-size:12px">SMSFAST</span>
+      </div>
+      <div style="font-size:10px;color:#7F8689;line-height:1.6;margin-bottom:8px">Real phone numbers for SMS verification. 190+ countries, instant delivery, guaranteed refund.</div>
+      <div style="display:flex;gap:6px">
+        <div style="width:22px;height:22px;background:#F2F3F5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px">✈</div>
+        <div style="width:22px;height:22px;background:#F2F3F5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px">𝕏</div>
+        <div style="width:22px;height:22px;background:#F2F3F5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px">▶</div>
+        <div style="width:22px;height:22px;background:#F2F3F5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px">📸</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;margin-bottom:8px">Product</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span style="font-size:10px;color:#7F8689">Free numbers</s
