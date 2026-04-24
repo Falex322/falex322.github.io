@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMSFAST — Receive SMS Online Instantly</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue: #1a6fff;
+    --blue-dark: #1558d6;
+    --text: #1a1f36;
+    --text-muted: #6b7280;
+    --bg: #f4f6fb;
+    --white: #ffffff;
+    --border: #e5e9f2;
+    --green: #22c55e;
+    --radius: 10px;
+    --shadow: 0 1px 4px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.04);
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── STICKY WRAPPER (header + trust bar scroll together) ── */
+  .sticky-header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    box-shadow: 0 1px 0 var(--border);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 32px;
+    padding: 0 24px; height: 56px;
+  }
+  /* Logo: matches actual SMSFAST — blue rounded square + arrow icon + bold text */
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 17px; color: var(--text); flex-shrink: 0; letter-spacing: -.2px; }
+  .logo-icon {
+    width: 34px; height: 34px; background: var(--blue); border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(26,111,255,.35);
+  }
+  .logo-icon svg { width: 20px; height: 20px; }
+  nav { display: flex; gap: 4px; flex: 1; }
+  nav a { padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-muted); font-weight: 500; transition: color .15s, background .15s; }
+  nav a:hover { color: var(--text); background: var(--bg); }
+  .header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
+  .btn-login { padding: 7px 14px; border-radius: 7px; font-size: 14px; font-weight: 500; color: var(--text); border: 1px solid var(--border); background: var(--white); cursor: pointer; transition: border-color .15s; }
+  .btn-login:hover { border-color: #aab; }
+  .btn-primary { padding: 7px 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: #fff; background: var(--blue); border: none; cursor: pointer; transition: background .15s; }
+  .btn-primary:hover { background: var(--blue-dark); }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 8px 24px;
+  }
+  .trust-bar-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-muted); font-weight: 500;
+  }
+  .trust-item { display: flex; align-items: center; gap: 5px; }
+  .trust-item::before { content: '✓'; color: var(--blue); font-weight: 700; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2f4e 60%, #0f2540 100%);
+    padding: 56px 24px 48px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(26,111,255,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(26,111,255,.15); border: 1px solid rgba(26,111,255,.3);
+    color: #7eb6ff; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 18px; letter-spacing: .3px;
+  }
+  .hero h1 {
+    font-size: 40px; font-weight: 800; line-height: 1.2; color: #fff;
+    margin-bottom: 12px; letter-spacing: -.5px;
+  }
+  .hero h1 span { color: #4d9fff; }
+  .hero-sub {
+    font-size: 16px; color: #94adc8; margin-bottom: 28px; line-height: 1.6;
+  }
+  .hero-ctas { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .btn-buy {
+    padding: 13px 28px; border-radius: 8px; font-size: 16px; font-weight: 700;
+    color: #fff; background: var(--blue); border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 16px rgba(26,111,255,.4); transition: background .15s, transform .1s;
+  }
+  .btn-buy:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .btn-ghost {
+    padding: 12px 24px; border-radius: 8px; font-size: 15px; font-weight: 600;
+    color: #94adc8; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+    cursor: pointer; transition: background .15s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  .hero-micro { display: flex; gap: 16px; font-size: 12px; color: #7896b2; flex-wrap: wrap; }
+  .hero-micro span::before { content: '✓ '; color: #4d9fff; font-weight: 700; }
+  .hero-payments { display: flex; align-items: center; gap: 8px; margin-top: 20px; }
+  .pay-badge {
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+    border-radius: 5px; padding: 4px 10px; font-size: 11px; font-weight: 700; color: #94adc8;
+  }
+
+  /* Widget */
+  .hero-widget {
+    background: var(--white); border-radius: 14px;
+    padding: 20px; box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  }
+  .widget-tabs { display: flex; gap: 0; background: var(--bg); border-radius: 8px; padding: 3px; margin-bottom: 16px; }
+  .widget-tab {
+    flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; transition: all .15s;
+  }
+  .widget-tab.active { background: var(--blue); color: #fff; box-shadow: 0 2px 8px rgba(26,111,255,.3); }
+  .widget-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .widget-select {
+    width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 12px;
+    background: var(--white); appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 36px;
+  }
+  .widget-country-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; margin-bottom: 6px;
+  }
+  .widget-country-name { font-size: 14px; font-weight: 500; }
+  .widget-price { font-size: 16px; font-weight: 700; color: var(--blue); }
+  .widget-numbers { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+  .btn-get-number {
+    width: 100%; padding: 13px; border-radius: 9px; font-size: 15px; font-weight: 700;
+    color: #fff; background: var(--blue); border: none; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(26,111,255,.3); transition: background .15s;
+  }
+  .btn-get-number:hover { background: var(--blue-dark); }
+  .widget-live { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; }
+  .live-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+  .live-svc { font-size: 13px; font-weight: 600; }
+  .live-code { font-size: 13px; font-weight: 700; color: var(--blue); font-family: monospace; }
+  .live-time { font-size: 11px; color: var(--text-muted); }
+
+  /* ── SECTION WRAPPER ── */
+  .section { padding: 48px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  /* ── SERVICES STRIP ── */
+  .services-strip { background: var(--white); padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+  .strip-label { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 14px; font-weight: 500; }
+  .marquee-track { display: flex; gap: 24px; overflow: hidden; }
+  .marquee-inner { display: flex; gap: 24px; animation: marquee 30s linear infinite; white-space: nowrap; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .svc-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 20px;
+    padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--text);
+    flex-shrink: 0;
+  }
+  .svc-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── STATS ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px 24px; box-shadow: var(--shadow);
+  }
+  .stat-number { font-size: 30px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+  .stat-delta { font-size: 12px; color: var(--green); font-weight: 600; margin-top: 6px; }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .how-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 24px; box-shadow: var(--shadow); position: relative;
+  }
+  .how-num {
+    width: 32px; height: 32px; background: var(--blue); color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; margin-bottom: 12px;
+  }
+  .how-time { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; }
+  .how-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .how-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .how-cta { text-align: center; margin-top: 28px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    color: var(--blue); border: 1.5px solid var(--blue); background: transparent; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .btn-outline:hover { background: var(--blue); color: #fff; }
+
+  /* ── SERVICES & COUNTRIES (NEW BLOCK) ── */
+  .sc-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 24px 28px; box-shadow: var(--shadow);
+  }
+  .sc-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+  }
+  .sc-title { font-size: 22px; font-weight: 800; color: var(--text); }
+  .sc-all-link { font-size: 14px; font-weight: 600; color: var(--blue); display: flex; align-items: center; gap: 4px; }
+  .sc-all-link:hover { text-decoration: underline; }
+  .sc-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .sc-tab {
+    padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--text-muted);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color .15s, border-color .15s;
+  }
+  .sc-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .sc-tab:hover:not(.active) { color: var(--text); }
+  .countries-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .country-card {
+    border: 1px solid var(--border); border-radius: 8px; padding: 14px 12px;
+    background: var(--white); transition: border-color .15s, box-shadow .15s;
+    cursor: pointer;
+  }
+  .country-card:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(26,111,255,.12); }
+  .country-flag { font-size: 20px; margin-bottom: 7px; display: block; }
+  .country-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+  .country-link { font-size: 12px; font-weight: 600; color: var(--blue); display: flex; align-items: center; gap: 3px; }
+  .country-link::after { content: '↗'; font-size: 11px; }
+
+  /* ── BENEFITS ── */
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .benefit-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 22px; box-shadow: var(--shadow);
+  }
+  .benefit-icon { font-size: 26px; margin-bottom: 12px; display: block; }
+  .benefit-title { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .benefit-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── PRICE EXAMPLE ── */
+  .pricing-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    box-shadow: var(--shadow); overflow: hidden; margin-top: 28px;
+  }
+  .pricing-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+  }
+  .pricing-tabs { display: flex; gap: 8px; }
+  .price-tab {
+    padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .price-tab.active { background: var(--blue); color: #fff; }
+  .price-tab:hover:not(.active) { border-color: var(--border); }
+  .pricing-table { width: 100%; border-collapse: collapse; }
+  .pricing-table th { 
+    padding: 12px 16px; font-size: 12px; font-weight: 600; color: var(--text-muted);
+    text-align: left; border-bottom: 1px solid var(--border); background: #fafbfc;
+  }
+  .pricing-table td { padding: 13px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+  .pricing-table tr:last-child td { border-bottom: none; }
+  .pricing-table .flag { margin-right: 6px; }
+  .price-val { font-weight: 700; color: var(--blue); }
+  .pricing-footer { padding: 14px 24px; border-top: 1px solid var(--border); text-align: center; }
+  .pricing-footer a { font-size: 13px; font-weight: 600; color: var(--blue); }
+  .pricing-footer a:hover { text-decoration: underline; }
+
+  /* ── WHO USES ── */
+  .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+  .who-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;
+  }
+  .who-icon { font-size: 28px; }
+  .who-title { font-size: 15px; font-weight: 700; }
+  .who-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .who-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 8px 16px; border-radius: 7px; font-size: 13px; font-weight: 600;
+    color: #fff; background: var(--blue); width: fit-content; cursor: pointer; transition: background .15s;
+  }
+  .who-cta:hover { background: var(--blue-dark); }
+
+  /* ── REVIEWS ── */
+  .reviews-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .reviews-rating { display: flex; align-items: center; gap: 8px; }
+  .stars { color: #f59e0b; font-size: 16px; letter-spacing: 1px; }
+  .rating-text { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .review-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px; box-shadow: var(--shadow);
+  }
+  .review-stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; }
+  .review-text { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+  .review-author { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+
+  /* ── LOYALTY BANNER ── */
+  .loyalty-banner {
+    background: linear-gradient(135deg, var(--blue) 0%, #1558d6 50%, #0f46b8 100%);
+    border-radius: 14px; padding: 32px 36px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 8px 24px rgba(26,111,255,.3);
+  }
+  .loyalty-left { max-width: 580px; }
+  .loyalty-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.15); border-radius: 20px; padding: 4px 12px;
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,.9); margin-bottom: 12px;
+  }
+  .loyalty-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .loyalty-sub { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.5; }
+  .loyalty-ctas { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .btn-white {
+    padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700;
+    color: var(--blue); background: #fff; border: none; cursor: pointer; transition: opacity .15s;
+  }
+  .btn-white:hover { opacity: .9; }
+  .btn-white-outline {
+    padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3);
+    cursor: pointer; transition: background .15s;
+  }
+  .btn-white-outline:hover { background: rgba(255,255,255,.2); }
+  .loyalty-right { font-size: 56px; }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 24px; }
+  .faq-item {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 8px; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .faq-q {
+    padding: 16px 20px; font-size: 15px; font-weight: 600; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q::after { content: '▾'; font-size: 12px; color: var(--text-muted); transition: transform .2s; }
+  .faq-item.open .faq-q::after { transform: rotate(-180deg); }
+  .faq-a {
+    padding: 0 20px; font-size: 14px; color: var(--text-muted); line-height: 1.7;
+    max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
+
+  /* ── SEO TEXT ── */
+  .seo-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 28px; box-shadow: var(--shadow); margin-top: 28px;
+  }
+  .seo-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 14px; }
+  .seo-card p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+  .seo-card a { color: var(--blue); font-weight: 500; }
+  .seo-card a:hover { text-decoration: underline; }
+
+  /* ── BLOG ── */
+  .blog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .blog-card {
+    background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
+    overflow: hidden; box-shadow: var(--shadow);
+  }
+  .blog-thumb {
+    background: var(--bg); height: 120px;
+    display: flex; align-items: center; justify-content: center; font-size: 40px;
+  }
+  .blog-body { padding: 16px; }
+  .blog-tag {
+    display: inline-block; background: #e8f0ff; color: var(--blue);
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .blog-title { font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 6px; }
+  .blog-meta { font-size: 12px; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--white); border-top: 1px solid var(--border); padding: 40px 24px 24px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .footer-brand-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 12px 0 16px; }
+  .footer-payments { display: flex; gap: 8px; flex-wrap: wrap; }
+  .footer-pay {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
+    padding: 4px 10px; font-size: 11px; font-weight: 700; color: var(--text-muted);
+  }
+  .footer-col h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+  .footer-col a {
+    display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; transition: color .15s;
+  }
+  .footer-col a:hover { color: var(--blue); }
+  .footer-bottom {
+    border-top: 1px solid var(--border); padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--text-muted);
+  }
+
+  /* ── SECTION HEADINGS ── */
+  .section-h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+  .section-sub { font-size: 15px; color: var(--text-muted); }
+  .all-link { font-size: 14px; font-weight: 600; color: var(--blue); }
+  .all-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ── STICKY WRAPPER: header + trust bar ── -->
+<div class="sticky-header">
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">
+        <!-- Actual SMSFAST logo: blue square + white send/arrow icon -->
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 3.5C2 2.672 2.672 2 3.5 2h13C17.328 2 18 2.672 18 3.5v9C18 13.328 17.328 14 16.5 14H7l-4 4V3.5z" fill="white" fill-opacity="0.95"/>
+          <path d="M5.5 7h9M5.5 10h5.5" stroke="#1a6fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      SMSFAST
+    </div>
+    <nav>
+      <a href="#">Free numbers</a>
+      <a href="#">Prices</a>
+      <a href="#">Services</a>
+      <a href="#">Countries</a>
+      <a href="#">Loyalty</a>
+      <a href="#">FAQ</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login">Log in</button>
+      <button class="btn-primary">Get a number</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── TRUST BAR (sticky together with header) ── -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <span class="trust-item">2,579,670 activations</span>
+    <span class="trust-item">96.45% delivery rate</span>
+    <span class="trust-item">190+ countries</span>
+    <span class="trust-item">REST API available</span>
+    <span class="trust-item">From $0.22</span>
+  </div>
+</div>
+
+</div><!-- end .sticky-header -->
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">🏆 No. 1 in SMS verification</div>
+      <h1>Receive SMS Online Instantly —<br>Temporary Phone Numbers from <span>$0.22</span></h1>
+      <p class="hero-sub">Real non-VoIP numbers from 190+ countries. Instant delivery,<br>guaranteed refund if no SMS arrives.</p>
+      <div class="hero-ctas">
+        <button class="btn-buy">Buy a number →</button>
+        <button class="btn-ghost">Register free</button>
+      </div>
+      <div class="hero-micro">
+        <span>Pay on delivery</span>
+        <span>Instant refund</span>
+        <span>No subscription</span>
+      </div>
+      <div class="hero-payments">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">MC</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">USDT</span>
+        <span class="pay-badge">BTC</span>
+      </div>
+    </div>
+
+    <div class="hero-widget">
+      <div class="widget-tabs">
+        <div class="widget-tab active">Activations</div>
+        <div class="widget-tab">Rent</div>
+      </div>
+      <div class="widget-label">Service</div>
+      <select class="widget-select">
+        <option>WhatsApp</option>
+        <option>Telegram</option>
+        <option>Google</option>
+      </select>
+      <div class="widget-label">Country &amp; price</div>
+      <div class="widget-country-row">
+        <span class="widget-country-name">🇺🇸 USA (virtual)</span>
+        <span class="widget-price">$0.25</span>
+      </div>
+      <div class="widget-numbers">289,000+ numbers</div>
+      <button class="btn-get-number">Get number now</button>
+      <div class="widget-live">
+        <div class="live-item">
+          <span class="live-svc">WhatsApp</span>
+          <span class="live-code">847291</span>
+          <span class="live-time">now ●</span>
+        </div>
+        <div class="live-item">
+          <span class="live-svc">Telegram</span>
+          <span class="live-code">57834</span>
+          <span class="live-time">3 sec ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES MARQUEE ── -->
+<div class="services-strip">
+  <p class="strip-label">Works with 500+ services</p>
+  <div class="marquee-track">
+    <div class="marquee-inner" id="marqueeInner">
+      <span class="svc-badge"><span class="svc-dot" style="background:#25d366"></span>WhatsApp</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#2ca5e0"></span>Telegram</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#1877f2"></span>Facebook</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ea4335"></span>Google</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#000"></span>X/Twitter</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff9900"></span>Amazon</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#5865f2"></span>Discord</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff0050"></span>TikTok</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e1306c"></span>Instagram</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e91e8c"></span>Tinder</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#fffc00"></span>Snapchat</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#0070ba"></span>PayPal</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e53238"></span>eBay</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff5f00"></span>Airbnb</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#25d366"></span>WhatsApp</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#2ca5e0"></span>Telegram</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#1877f2"></span>Facebook</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ea4335"></span>Google</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#000"></span>X/Twitter</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff9900"></span>Amazon</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#5865f2"></span>Discord</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff0050"></span>TikTok</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e1306c"></span>Instagram</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e91e8c"></span>Tinder</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#fffc00"></span>Snapchat</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#0070ba"></span>PayPal</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#e53238"></span>eBay</span>
+      <span class="svc-badge"><span class="svc-dot" style="background:#ff5f00"></span>Airbnb</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── STATS ── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">2.6M+</div>
+        <div class="stat-label">Activations</div>
+        <div class="stat-delta">↗ +574k</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">96.45%</div>
+        <div class="stat-label">Delivery rate</div>
+        <div class="stat-delta">↗ +6.7%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">190+</div>
+        <div class="stat-label">Countries</div>
+        <div class="stat-delta">↗ new</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~3 sec</div>
+        <div class="stat-label">Delivery speed</div>
+        <div class="stat-delta">↗ avg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES AND COUNTRIES ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="sc-card">
+      <div class="sc-header">
+        <h2 class="sc-title">Services and Countries</h2>
+        <a href="#" class="sc-all-link">All countries ›</a>
+      </div>
+      <div class="sc-tabs">
+        <div class="sc-tab active" onclick="scSwitch(this,'countries')">Countries</div>
+        <div class="sc-tab" onclick="scSwitch(this,'services')">Services</div>
+      </div>
+      <!-- Countries tab -->
+      <div id="sc-countries" class="countries-grid">
+        <div class="country-card">
+          <span class="country-flag">🇬🇧</span>
+          <div class="country-name">United Kingdom</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇺🇸</span>
+          <div class="country-name">USA</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇹🇭</span>
+          <div class="country-name">Thailand</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇳🇱</span>
+          <div class="country-name">Netherlands</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇮🇩</span>
+          <div class="country-name">Indonesia</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇪🇸</span>
+          <div class="country-name">Spain</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇭🇰</span>
+          <div class="country-name">Hong Kong</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇨🇦</span>
+          <div class="country-name">Canada</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇩🇪</span>
+          <div class="country-name">Germany</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇵🇭</span>
+          <div class="country-name">Philippines</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇮🇳</span>
+          <div class="country-name">India</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇦🇺</span>
+          <div class="country-name">Australia</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇹🇷</span>
+          <div class="country-name">Turkey</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇨🇳</span>
+          <div class="country-name">China</div>
+          <span class="country-link">Take a number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🇹🇼</span>
+          <div class="country-name">Taiwan</div>
+          <span class="country-link">Take a number</span>
+        </div>
+      </div>
+      <!-- Services tab (hidden by default) -->
+      <div id="sc-services" class="countries-grid" style="display:none">
+        <div class="country-card">
+          <span class="country-flag">💬</span>
+          <div class="country-name">WhatsApp</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">✈️</span>
+          <div class="country-name">Telegram</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🔵</span>
+          <div class="country-name">Facebook</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🔴</span>
+          <div class="country-name">Google</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🐦</span>
+          <div class="country-name">X/Twitter</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">📦</span>
+          <div class="country-name">Amazon</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🎮</span>
+          <div class="country-name">Discord</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🎵</span>
+          <div class="country-name">TikTok</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">📸</span>
+          <div class="country-name">Instagram</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🏡</span>
+          <div class="country-name">Airbnb</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">💳</span>
+          <div class="country-name">PayPal</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">🛒</span>
+          <div class="country-name">eBay</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">👻</span>
+          <div class="country-name">Snapchat</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">💝</span>
+          <div class="country-name">Tinder</div>
+          <span class="country-link">Get number</span>
+        </div>
+        <div class="country-card">
+          <span class="country-flag">📱</span>
+          <div class="country-name">See all 500+</div>
+          <span class="country-link">View all</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <h2 class="section-h2">How to receive SMS online fast</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div class="how-time">~10 sec</div>
+        <div class="how-title">Buy a number</div>
+        <div class="how-desc">Choose service + country, pay from $0.22</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div class="how-time">~5 sec</div>
+        <div class="how-title">Enter number</div>
+        <div class="how-desc">Use it in the registration field</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div class="how-time">~3 sec</div>
+        <div class="how-title">Get the code</div>
+        <div class="how-desc">SMS arrives in your account instantly</div>
+      </div>
+    </div>
+    <div class="how-cta">
+      <button class="btn-outline">Try it now →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY SMSFAST ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <h2 class="section-h2">Why choose SMSFAST</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">🌍</span>
+        <div class="benefit-title">190+ countries</div>
+        <div class="benefit-desc">Any country, any service</div>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">⚡</span>
+        <div class="benefit-title">~3 sec delivery</div>
+        <div class="benefit-desc">SMS arrives almost instantly</div>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">💰</span>
+        <div class="benefit-title">From $0.22</div>
+        <div class="benefit-desc">Pay only on delivery</div>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🔒</span>
+        <div class="benefit-title">Full privacy</div>
+        <div class="benefit-desc">Real SIM, not VoIP</div>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🔗</span>
+        <div class="benefit-title">REST API</div>
+        <div class="benefit-desc">Full developer support</div>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🛡️</span>
+        <div class="benefit-title">Refund guarantee</div>
+        <div class="benefit-desc">Instant refund if no SMS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICE EXAMPLE ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <h2 class="section-h2">Price example</h2>
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div></div>
+        <div class="pricing-tabs">
+          <div class="price-tab">WhatsApp</div>
+          <div class="price-tab active">Telegram</div>
+          <div class="price-tab">Google</div>
+        </div>
+      </div>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Telegram</th>
+            <th>WhatsApp</th>
+            <th>Google</th>
+            <th>Facebook</th>
+            <th>Amazon</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">🇺🇸</span> USA</td>
+            <td class="price-val">$0.25</td>
+            <td class="price-val">$0.53</td>
+            <td class="price-val">$0.21</td>
+            <td class="price-val">$0.21</td>
+            <td class="price-val">$0.21</td>
+          </tr>
+          <tr>
+            <td><span class="flag">🇬🇧</span> UK</td>
+            <td class="price-val">$0.39</td>
+            <td class="price-val">$0.39</td>
+            <td class="price-val">$0.39</td>
+            <td class="price-val">$0.39</td>
+            <td class="price-val">$0.39</td>
+          </tr>
+          <tr>
+            <td><span class="flag">🇩🇪</span> Germany</td>
+            <td class="price-val">$0.35</td>
+            <td class="price-val">$0.35</td>
+            <td class="price-val">$0.35</td>
+            <td class="price-val">$0.35</td>
+            <td class="price-val">$0.35</td>
+          </tr>
+          <tr>
+            <td><span class="flag">🇮🇩</span> Indonesia</td>
+            <td class="price-val">$0.22</td>
+            <td class="price-val">$0.22</td>
+            <td class="price-val">$0.22</td>
+            <td class="price-val">$0.22</td>
+            <td class="price-val">$0.22</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pricing-footer">
+        <a href="#">See full price list (500+ services) →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO USES ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <h2 class="section-h2">Who uses SMSFAST</h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="who-icon">👤</span>
+        <div class="who-title">Regular user</div>
+        <div class="who-desc">Sign up for any service without giving your real number</div>
+        <span class="who-cta">Buy activation</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">📊</span>
+        <div class="who-title">Marketer</div>
+        <div class="who-desc">Create multiple accounts, test campaigns and promo codes</div>
+        <span class="who-cta">Buy activation</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">💻</span>
+        <div class="who-title">Developer</div>
+        <div class="who-desc">Automate account creation via REST API with full docs</div>
+        <span class="who-cta">View API docs</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">🏢</span>
+        <div class="who-title">Business</div>
+        <div class="who-desc">Bulk activations, dedicated support, white-label options</div>
+        <span class="who-cta">Contact sales</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="reviews-header">
+      <h2 class="section-h2">What our users say</h2>
+      <div class="reviews-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.9 / 5 based on 1,200+ reviews</span>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Works perfectly. Got my Telegram code in 3 seconds. Amazing service!"</p>
+        <div class="review-author">Alex K. · verified purchase</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Best price for US numbers. Refund worked instantly when SMS didn't arrive."</p>
+        <div class="review-author">Maria S. · verified purchase</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"API docs are clear. Integrated in 30 min. Using it for bulk activations."</p>
+        <div class="review-author">Dev Team · verified purchase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOYALTY BANNER ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="loyalty-banner">
+      <div class="loyalty-left">
+        <div class="loyalty-badge">🎁 Loyalty Program</div>
+        <div class="loyalty-title">$0.25 Gift + Loyalty Program</div>
+        <div class="loyalty-sub">Subscribe to Telegram → get $0.25 free. Earn cashback on every order from Level Basic to Diamond.</div>
+        <div class="loyalty-ctas">
+          <button class="btn-white">Claim $0.25 via Telegram</button>
+          <button class="btn-white-outline">Loyalty Program →</button>
+        </div>
+      </div>
+      <div class="loyalty-right">🎁</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <h2 class="section-h2">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">What is a temporary phone number?</div>
+        <div class="faq-a">A temporary phone number is a disposable virtual number used to receive SMS verification codes online. Unlike free public numbers, SMSFAST assigns each number exclusively to one user — your codes stay private. Numbers are attached to real physical SIM cards, ensuring maximum compatibility with WhatsApp, Telegram, Google, and 500+ other services.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does SMSFAST work?</div>
+        <div class="faq-a">Select a service and country, pay from $0.22, and you'll get a real phone number instantly. Use it to register on any platform — your SMS code arrives in ~3 seconds. If the SMS doesn't arrive, you get a full refund.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if the SMS doesn't arrive?</div>
+        <div class="faq-a">You get an instant refund — no questions asked. The balance is returned to your SMSFAST account immediately and is available for your next purchase.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does SMSFAST compare to Quackr.io?</div>
+        <div class="faq-a">SMSFAST uses real SIM cards (not VoIP), offers 190+ countries, and provides a guaranteed refund. Our 96.45% delivery rate outperforms most competitors. We also offer a Loyalty Program with up to 20% cashback — a feature no direct competitor currently offers.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you have an API for developers?</div>
+        <div class="faq-a">Yes. Full REST API with documentation, SDK examples, and webhook support. Integrate in minutes. Available for all account levels.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How fast is SMS delivery?</div>
+        <div class="faq-a">Average delivery time is ~3 seconds. 96.45% of SMS messages arrive within the activation window.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Are these real SIM numbers (not VoIP)?</div>
+        <div class="faq-a">Yes. All numbers are attached to real physical SIM cards. This guarantees acceptance by services that block VoIP numbers, including WhatsApp, Instagram, Tinder and others.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I get a free temporary number?</div>
+        <div class="faq-a">Yes — subscribe to our Telegram channel and get $0.25 free credit instantly, which covers most standard activations. Check the Free numbers section for currently available no-cost numbers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEO TEXT ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="seo-card">
+      <h2>What are temporary phone numbers?</h2>
+      <p>A <strong>temporary phone number</strong> is a disposable virtual number used to receive SMS verification codes online. Unlike free public numbers, SMSFAST assigns each number exclusively to one user — your codes stay private. Numbers are attached to real physical SIM cards, ensuring maximum compatibility with <a href="#">WhatsApp</a>, <a href="#">Telegram</a>, <a href="#">Google</a>, and 500+ other services.</p>
+      <p>We cover <a href="#">190+ countries</a> with instant number availability. If a code doesn't arrive within the activation window, you get a full refund — no questions asked.</p>
+      <p>Temporary phone numbers are widely used to protect privacy during sign-ups, run multi-account marketing campaigns, test OTP flows during development, and access regional promotions. With prices starting from $0.22 and delivery in ~3 seconds, SMSFAST provides the fastest and most reliable way to <a href="#">receive SMS online</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ── -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="blog-header">
+      <h2 class="section-h2">Useful articles</h2>
+      <a href="#" class="all-link">All articles →</a>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-thumb">💬</div>
+        <div class="blog-body">
+          <span class="blog-tag">Online Services</span>
+          <div class="blog-title">How to Create a Viber Account Without a Phone Number</div>
+          <div class="blog-meta">Feb 03, 2026 · 8 min read</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">👤</div>
+        <div class="blog-body">
+          <span class="blog-tag">Online Services</span>
+          <div class="blog-title">How to Create a Facebook Account Without a Phone Number</div>
+          <div class="blog-meta">Jan 19, 2026 · 12 min read</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">🔒</div>
+        <div class="blog-body">
+          <span class="blog-tag">Online Services</span>
+          <div class="blog-title">How to Create a Grindr Account Without a Phone Number</div>
+          <div class="blog-meta">Jan 18, 2026 · 14 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:var(--text);font-weight:800;font-size:17px;display:flex;align-items:center;gap:9px;margin-bottom:8px;letter-spacing:-.2px;">
+          <div class="logo-icon" style="width:28px;height:28px;border-radius:7px;">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 3.5C2 2.672 2.672 2 3.5 2h13C17.328 2 18 2.672 18 3.5v9C18 13.328 17.328 14 16.5 14H7l-4 4V3.5z" fill="white" fill-opacity=".95"/><path d="M5.5 7h9M5.5 10h5.5" stroke="#1a6fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          SMSFAST
+        </div>
+        <p class="footer-brand-desc">Real phone numbers for SMS verification. 190+ countries, instant delivery, guaranteed refund.</p>
+        <div class="footer-payments">
+          <span class="footer-pay">VISA</span>
+          <span class="footer-pay">MC</span>
+          <span class="footer-pay">PayPal</span>
+          <span class="footer-pay">USDT</span>
+          <span class="footer-pay">BTC</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Free numbers</a>
+        <a href="#">Services</a>
+        <a href="#">Countries</a>
+        <a href="#">Prices</a>
+        <a href="#">Loyalty Program</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <a href="#">API Documentation</a>
+        <a href="#">SDK</a>
+        <a href="#">Status page</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SMSFAST · All rights reserved</span>
+      <span>🌐 English</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+  function scSwitch(tab, panel) {
+    document.querySelectorAll('.sc-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sc-countries').style.display = panel === 'countries' ? 'grid' : 'none';
+    document.getElementById('sc-services').style.display = panel === 'services' ? 'grid' : 'none';
+  }
+</script>
+</body>
+</html>
